@@ -39,8 +39,8 @@ npm start
 You should be able to access the application in [http://localhost:3000](http://localhost:3000) and the documentation in [http://localhost:3000/docs](http://localhost:3000/docs)
 
 Colaboradores:
--Israel Méndez Rodríguez UO263845
--Rubén Pardiño Iglesias UO271397
--Álvaro de la Fuente Fernández UO251950
--Miguel Menéndez Rodríguez UO269871
--Ramón Vila Ferreres UO272582
+- Israel Méndez Rodríguez UO263845
+- Rubén Pardiño Iglesias UO271397
+- Álvaro de la Fuente Fernández UO251950
+- Miguel Menéndez Rodríguez UO269871
+- Ramón Vila Ferreres UO272582

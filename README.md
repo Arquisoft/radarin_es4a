@@ -40,3 +40,4 @@ You should be able to access the application in [http://localhost:3000](http://l
 
 Colaboradores:
 -Israel Méndez Rodríguez UO263845
+-Rubén Pardiño Iglesias UO271397

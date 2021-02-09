@@ -5,9 +5,13 @@
 [role="arc42help"]
 ****
 .Contenido
-Cualquier requerimiento que restrinja a los arquitectos de software en la libertad de diseño y la toma de decisiones
-sobre la implementación o el proceso de desarrollo. Estas restricciones a veces van más allá de sistemas individuales
-y son validos para organizaciones y compañías enteras.
+Las principales restricciones son:
+
+ . Emplear el proyecto https://solid.mit.edu/[SOLID]
+ . Desarrollar el proyecto dentro de un periodo de tiempo determinado
+ . Emplear _Docker_ para el despliegue del proyecto
+ . Emplear un _framework_ de JavaScript para el desarrollo del __frontend__
+ . Emplear mecanismos de Integración Continua y Pruebas de Carga, Unitarias...
 
 .Motivación
 Los arquitectos deben saber exactamente sus libertades respecto a las decisiones de diseño y en donde deben apegarse

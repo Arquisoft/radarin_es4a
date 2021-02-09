@@ -30,7 +30,16 @@ If requirements documents exist this overview should refer to these documents.
 Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
 ****
 
-=== Quality Goals
+=== Objetivos de Calidad
+ 
+
+[options="header",cols="1,2"]
+|===
+|Objetivos|Escenarios
+| Seguridad de datos de los usuarios | _La aplicación mantendrá segura los datos de los usuarios, tales como la localización utlizada al usar esta._
+| Facilidad de uso | _prueba_
+| Facilidad de uso | _prueba_
+|===
 
 [role="arc42help"]
 ****

@@ -1,34 +1,41 @@
 [[section-introduction-and-goals]]
-== Introduction and Goals
+== Introducción y Metas
 
-[role="arc42help"]
-****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
+Radarin es un sistema de geolocalización web/móvil descentralizado que pretende acercar a las personas a través de las nuevas tecnologías.
 
-* underlying business goals, essential features and functional requirements for the system
-* quality goals for the architecture
-* relevant stakeholders and their expectations
-****
+El sistema provee al cliente la facilidad de localizar por posicionamiento y cercanía a los amigos que tenga agregados en la aplicación (previa aceptación por parte del otro usuario). Cuando la aplicación detecte que un amigo del usuario está dentro de cierto margen, el sistema lanzará una notificación. 
 
-=== Requirements Overview
+Con esto, facilitamos el encuentro entre gente conocida priorizando la privacidad y la seguridad del sistema.
 
-[role="arc42help"]
-****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+=== Vista de Requerimientos
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+Radarin contempla unos requisitos mínimos de funcionamiento que pretenden ser la base desde la cual se pueda ofrecer al cliente la funcionalidad descrita, además de servir para futuras ampliaciones.
 
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
+==== Requisitos funcionales:
+- Un usuario será capaz de ver qué otros usuarios conocidos tiene cerca.
 
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-****
+- Un usuario podrá añadir a otros usuarios a su lista de amigos.
+
+- El sistema ofrecerá al usuario notificaciones de amigos cerca.
+
+- Cada cliente podrá gestionar y visualizar sus localizaciones.
+
+- El administrador del servicio tendrá opción de gestionar usuarios y monitorizar el estado del servidor.
+
+==== Requisitos no funcionales:
+- Soporte completo con el proyecto SOLID.
+
+- La aplicación estará alojada en un servidor web que únicamente almacenará localizaciones del usuario, con previa solicitud al mismo para acceder a la suya. 
+
+- Toda información que no sea una localización será almacenada en el pod del usuario.
+
+- El servicio debe ser soportado por los dispositivos móviles de los usuarios, tomando los datos de geolocalización provenientes del smartphone.
+
+- El sistema se desplegará desde contenedores docker y utlizará el servicio en la nube heroku.
+
+- La aplicación móvil tendrá un sistema de monitorización.
+
+- Se deberá desarrollar pruebas unitarias, de aceptación y de carga para su ejecución automática en un servidor de integración continua.
 
 === Objetivos de Calidad
  

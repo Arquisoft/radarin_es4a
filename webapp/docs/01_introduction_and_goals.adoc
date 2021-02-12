@@ -38,54 +38,24 @@ Radarin contempla unos requisitos mínimos de funcionamiento que pretenden ser l
 - Se deberá desarrollar pruebas unitarias, de aceptación y de carga para su ejecución automática en un servidor de integración continua.
 
 === Objetivos de Calidad
- 
 
 [options="header",cols="1,2"]
 |===
-|Objetivos|Escenarios
-| Seguridad de datos de los usuarios | _La aplicación mantendrá segura los datos de los usuarios, tales como la localización utlizada al usar esta._
-| Facilidad de uso | _prueba_
-| Facilidad de uso | _prueba_
+|Objetivos|Motivación
+| Seguridad de datos de los usuarios | _La aplicación mantendrá seguros los datos de los usuarios, tales como la localización utlizada al usar esta._
+| Facilidad de uso | _Enfoque sencillo para poder ser utilizado por todo tipo de usuarios._
+| Consistente | _La aplicación debe ser consistente._
+| Eficiente | _La aplicación tendrá que ser eficiente, es decir, debe funcionar de forma fluida._
 |===
-
-[role="arc42help"]
-****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
-
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
-
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-****
 
 === Stakeholders
 
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-
 [options="header",cols="1,2,2"]
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+|Rol/Nombre|Contacto|Expectativas
+| Paulino Álvarez Ondina | Evaluará el resultado del trabajo del equipo de desarrollo.
+ | _Aplicación bien desarrollada según los requerimentos pedidos._
+| Equipo de desarrollo | Se encargará de desarrollar la aplicación. | _Aplicación funcional, fácil de usar, segura y siguiendo los principios SOLID._
+| Usuarios | Usarán la aplicación de forma continuada | Poder enviar mensajes a otros usuarios cerca de su posición y que estén en su lista de amigos.
 |===
+

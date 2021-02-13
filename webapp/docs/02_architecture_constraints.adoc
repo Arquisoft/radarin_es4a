@@ -14,11 +14,16 @@ Las principales restricciones son:
  . Emplear mecanismos de Integración Continua y Pruebas de Carga, Unitarias...
 
 .Motivación
-Los arquitectos deben saber exactamente sus libertades respecto a las decisiones de diseño y en donde deben apegarse
-a restricciones. Las restricciones siempre deben ser acatadas, aunque en algunos casos pueden ser negociables.
+Disponemos de libertad a la hora de elegir el framework de JavaScript a utilizar, pero debe estar comunicado con el proyecto SOLID y sus PODs donde el usuario guardará sus datos de una manera descentralizada.
 
-.Forma
-Tablas de restricciones con sus explicaciones.
-Si se requiere, se pueden subdividir en restricciones técnicas, organizacionales y/o políticas y convenciones
-(por ejemplo, guías de versionado o programación, convenciones de documentación o nombrado)
+
+
+[options="header",cols="1,2"]
+|===
+| Restricción | Explicación
+| SOLID | Es un proyecto de descentralización de datos en la web que tiene como objetivo que el usuario sea quien decida dónde almacenar sus datos.
+| GitHub | Es una plataforma de desarrollo de software colaborativo que almacena proyectos usando el sistema de control de versiones de Git.
+| Periodo de tiempo | Disponemos de 3 meses para desarrollar todo el proyecto.
+| Docker | Es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software
+|===
 ****

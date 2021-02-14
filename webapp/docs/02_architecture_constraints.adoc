@@ -1,19 +1,29 @@
 [[section-architecture-constraints]]
-== Architecture Constraints
+== Restricciones de la Arquitectura
 
 
 [role="arc42help"]
 ****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+.Contenido
+Las principales restricciones son:
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+ . Emplear el proyecto https://solid.mit.edu/[SOLID]
+ . Desarrollar el proyecto dentro de un periodo de tiempo determinado
+ . Emplear _Docker_ para el despliegue del proyecto
+ . Emplear un _framework_ de JavaScript para el desarrollo del __frontend__
+ . Emplear mecanismos de Integración Continua y Pruebas de Carga, Unitarias...
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+.Motivación
+Disponemos de libertad a la hora de elegir el framework de JavaScript a utilizar, pero debe estar comunicado con el proyecto SOLID y sus PODs donde el usuario guardará sus datos de una manera descentralizada.
+
+
+
+[options="header",cols="1,2"]
+|===
+| Restricción | Explicación
+| SOLID | Es un proyecto de descentralización de datos en la web que tiene como objetivo que el usuario sea quien decida dónde almacenar sus datos.
+| GitHub | Es una plataforma de desarrollo de software colaborativo que almacena proyectos usando el sistema de control de versiones de Git.
+| Periodo de tiempo | Disponemos de 3 meses para desarrollar todo el proyecto.
+| Docker | Es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software
+|===
 ****

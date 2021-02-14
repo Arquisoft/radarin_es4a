@@ -1,25 +1,13 @@
 [[section-system-scope-and-context]]
-== System Scope and Context
+== Alcance del sistema y Contexto
 
+El alcance del proyecto a desarrollar abarca un sitio web/móvil en el que los usuarios podrán geolocalizar a sus amigos y viceversa. Haciendo uso de SOLID para asegurar la privacidad de cada usuario (con sus respectivos PODs).
 
-[role="arc42help"]
-****
-.Contents
-System scope and context - as the name suggests - delimits your system (i.e. your scope) from all its communication partners
-(neighboring systems and users, i.e. the context of your system). It thereby specifies the external interfaces.
+La aplicación enviará un aviso cuando algún amigo se encuentre dentro de un determinado rango ("Tu amigo Pepito está a 1.7km de ti" ó "Tu amigo Pepito está a 10 minutos de ti")
 
-If necessary, differentiate the business context (domain specific inputs and outputs) from the technical context (channels, protocols, hardware).
+Se podrán gestionar amigos (listar, agregar, borrar).
 
-.Motivation
-The domain interfaces and technical interfaces to communication partners are among your system's most critical aspects. Make sure that you completely understand them.
-
-.Form
-Various options:
-
-* Context diagrams
-* Lists of communication partners and their interfaces.
-****
-
+// Ampliable
 
 === Business Context
 

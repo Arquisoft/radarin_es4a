@@ -18,24 +18,10 @@ El usuario puede guardar su información personal en su POD. El sistema podrá s
 * Servidor: recibe la localización del usuario
 
 
-=== Technical Context
+=== Contexto Tecnológico
 
-[role="arc42help"]
-****
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
-
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
-
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
-
-****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
+Para este proyecto vamos a usar algunas tecnologías como son el caso de SOLID o de REACT. 
+La idea principal de nuestro proyecto es construir una aplicación que con la ayuda de alguna API de geolocalización
+nos permita establecer una clase de red que nos permita almacenar con que personas estuvo en contacto la persona que posee
+la aplicación, para realizar esto utilizamos SOLID para almacenar su localizacion y compartirla de forma segura.
+Utilizaremos REACT para desarrollar tanto la aplicación web como la aplicación móvil, mientras que dejamos a SOLID la parte de la comunicación.

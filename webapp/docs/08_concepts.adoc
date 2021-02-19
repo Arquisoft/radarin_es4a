@@ -1,67 +1,31 @@
 [[section-concepts]]
-== Cross-cutting Concepts
+== Conceptos transversales
+En esta sección se tratarán los conceptos transversales inherentes al proyecto, describiendo las principales normativas generales y las ideas de soluciones que son relevantes en múltiples partes del sistema.
 
+image:images/mindmap.jpg["Mapa mental sobre los conceptos transversales del proyecto"]
 
-[role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are
-relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+=== Conceptos del dominio
+Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del problema, facilitando así el desarrollo del sistema. En este caso se cubre:
 
-* domain models
-* architecture patterns or design patterns
-* rules for using specific technology
-* principal, often technical decisions of overall decisions
-* implementation rules
+- Amigo
+- Usuario
+- Mapeado
+- Localización
 
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
-of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
+=== Patrones de arquitectura y diseño
+Se estima que el patrón MVC será el utilizado para el desarrollo web de la aplicación, aunque por el momento se está discutiendo.
 
-Some of these concepts cannot be assigned to individual building blocks
-(e.g. security or safety). This is the place in the template that we provided for a
-cohesive specification of such concepts.
+Por otro lado, el sistema móvil hará uso de la web y no se desarrollará una aplicación individual por el coste de tiempo que tendría.
 
-.Form
-The form can be varied:
+=== Experiencia de usuario
+La aplicación es un sistema de gestión de amigos y localizaciones, destinado a acercar a las personas. Mostrará un mapa donde se podrá observar los amigos que se encuentran cerca del usuario y permitirá añadir amigos para poder interactuar con ellos, entre otras funciones que se irán implementando como gestionar tus amistades, comunicarse con ellas, etc.
 
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
+La interfaz desarrollada será amigable y accesible a cualquier persona, evitando que un cliente no pueda usar nuestra aplicación.
 
-.Structure
-A potential (but not mandatory) structure for this section could be:
+=== Seguridad y protección
+Es de vital importancia que la aplicación sea segura en todo momento, almacenando correctamente los datos necesarios del usuario final.
 
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
+Hará uso de pods siguiendo el proyecto SOLID donde cada usuario será el propietario del mismo, teniendo total control sobre sus datos. Los únicos datos que se tratará directamente la aplicación será la localización del cliente previa aprovación por su parte.
 
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
-
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-****
-
-
-=== Domain model
-
-image:UmlDiagram.png["Example UML Diagram"]
-
-
-
-=== _<Concept 2>_
-
-_<explanation>_
-
-...
-
-=== _<Concept n>_
-
-_<explanation>_
+=== Conceptos de desarrollo
+El sistema que se deasrrollará usando la tecnología React, Docker y basándose en el proyecto SOLID. Se está probando y decidiendo qué otras herramientas utilizar durante el desarrollo, así como si implantar alguna metodología de trabajo ágil.

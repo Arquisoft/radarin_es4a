@@ -1,24 +1,31 @@
 [[section-solution-strategy]]
-== Solution Strategy
+== Estrategia de solución
 
 
 [role="arc42help"]
 ****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+.Contenido
+Para construir esta aplicación, elegimos el lenguaje de programación JavaScript, ya que este es uno de los lenguajes más utilizados en la web y lo vemos adecuado para desarrollar aplicaciones solidas dado que soporta módulos y es consistente con las aplicaciones web.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+Usamos React, una biblioteca de JavaScript para crear interfaces de usuario. Con React podemos hacer esta aplicación web de una forma más ordenada y con menos código que si usas Javascript puro u otras bibliotecas. 
+Sin embargo, queremos que nuestra aplicación se comunique con los POD, eliminando cualquier servidor intermedio innecesario.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+También usamos Node.js para aprovechar el modelo entrada salida sin bloqueo y controlado por eventos para seguir siendo liviano y eficiente frente a aplicaciones de uso de datos en tiempo real que se ejecutan en dispositivos.
+El repositorio utilizado es github, el cual es muy útil, ya que tiene una sección para asignar tareas, así como incidencias (issues) que son muy útiles para reportar errores. El control de versiones de Github es una de las mejores opciones que ofrece, ya que te permite realizar cambios de manera controlada, y deshacerlos, asi como observar las modificaciones de tus compañeros de una forma rápida y sencilla.
 
-.Form
-Keep the explanation of these key decisions short.
+Para mostrar el mapa vamos a usar la API de google maps.
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
+
+.Consideraciones
+* Las decisiones que se han tomado han sido para realizar el proyecto lo más cerca posible de seguir los principios de SOLID.
+* Va a haber tecnologías que vamos a tener que aprender a usar desde cero pero que tienen muy buen potencial.
+
+.Decisiones Tecnológicas
+* Solid: por requisito de la asignatura
+* Node.js 
+* Github: requisito de la asignatura, pero sigue siendo una muy buena tecnología para controlar las versiones de nuestra aplicación.
+* React: este año no es requisito de la asignatura pero lo consideramos altamente recomendable y vamos a utilizarlo para realizar nuestra aplicación.
+
+
 ****
+

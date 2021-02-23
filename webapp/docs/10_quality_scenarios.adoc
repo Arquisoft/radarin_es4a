@@ -2,8 +2,7 @@
 == Escenarios de calidad
 
 
-[role="arc42help"]
-****
+
 
 .Usable
 Intentamos hacer la aplicación de una forma fácil de entender y usar sin tener que aprender muchos conceptos.
@@ -23,9 +22,8 @@ Intentamos que no se pongan en riesgo los datos personales de los usuarios.
 .Modulable
 Intentamos construir una aplicación bien diferenciada en sus partes y sin dependencias entre ellas, para así hacerla más mantenible.
 
-****
 
-== Árbol de cualidades
+=== Árbol de calidad
 
 image::../images/ArbolDeCualidades.png[]
 

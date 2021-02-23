@@ -1,5 +1,7 @@
 [[section-technical-risks]]
-== Riesgos
+== Riesgos y Deudas Técnicas
+
+=== Riesgos
 
 [options="header",cols="1,2,2"]
 |===
@@ -10,5 +12,5 @@
 | Manejo del tiempo empleado | Pérdidas de tiempo centrándonos en aspectos en los que no había que profundizar tanto.| Detectar bien las principales claves del desarrollo para perder el menor tiempo posible en cosas secundarias.
 |===
 
-== Deudas Técnicas
+=== Deudas Técnicas
 Cosas mejorables en la aplicación:

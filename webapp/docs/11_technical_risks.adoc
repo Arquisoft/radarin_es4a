@@ -1,17 +1,16 @@
 [[section-technical-risks]]
-== Risks and Technical Debts
+== Riesgos y Deudas Técnicas
 
+=== Riesgos
 
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
+[options="header",cols="1,2,2"]
+|===
+|Riesgos|Consecuencias|Posibles soluciones
+| Desconocimiento entre el equipo | Puede existir un cierto miedo o vergüenza por desconocimiento entre los miembros del equipo, lo que puede provocas una mala comunicación.| Hacer reuniones entre todos para ir hablando del trabajo e ir conociéndonos.
+| Uso de nuevas tecnologías| Mal uso de las nuevas tecnologías al no tener ninguna experiencia previa.| Búsqueda y estudio de las nuevas tecnologías antes de empezar el desarrollo.
+| Organización del equipo | Mala organización debido a una pobre comunicación, o al no saber en que puede ser mejor un miembro u otro del equipo a la hora de desarrollar.| Reuniones del equipo para planificar el desarrollo.
+| Manejo del tiempo empleado | Pérdidas de tiempo centrándonos en aspectos en los que no había que profundizar tanto.| Detectar bien las principales claves del desarrollo para perder el menor tiempo posible en cosas secundarias.
+|===
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
-
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
-
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-****
+=== Deudas Técnicas
+Cosas mejorables en la aplicación:

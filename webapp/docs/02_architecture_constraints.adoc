@@ -1,8 +1,6 @@
 [[section-architecture-constraints]]
 == Restricciones de la Arquitectura
 
-
-[role="arc42help"]
 ****
 .Contenido
 Las principales restricciones son:

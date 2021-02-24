@@ -1,8 +1,6 @@
 [[section-solution-strategy]]
 == Estrategia de solución
 
-
-[role="arc42help"]
 ****
 .Contenido
 Para construir esta aplicación, elegimos el lenguaje de programación JavaScript, ya que este es uno de los lenguajes más utilizados en la web y lo vemos adecuado para desarrollar aplicaciones solidas dado que soporta módulos y es consistente con las aplicaciones web.
@@ -20,11 +18,9 @@ Para mostrar el mapa vamos a usar la API de google maps.
 * Las decisiones que se han tomado han sido para realizar el proyecto lo más cerca posible de seguir los principios de SOLID.
 * Va a haber tecnologías que vamos a tener que aprender a usar desde cero pero que tienen muy buen potencial.
 
-.Decisiones Tecnológicas
-* Solid: por requisito de la asignatura
-* Node.js 
-* Github: requisito de la asignatura, pero sigue siendo una muy buena tecnología para controlar las versiones de nuestra aplicación.
-* React: este año no es requisito de la asignatura pero lo consideramos altamente recomendable y vamos a utilizarlo para realizar nuestra aplicación.
+.Decisiones Tecnológicas (decisiones que tomamos nosotros)
+* Node.js: 
+* React: La hemos escogido debido a que ya tenemos ejemplos de otros años y pensamos que sería más simple de aprender.
 
 
 ****

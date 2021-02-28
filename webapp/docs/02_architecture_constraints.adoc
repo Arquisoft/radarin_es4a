@@ -6,7 +6,6 @@
 |====================
 | Restricción | Explicación 
 | Solid | La aplicación debe desarrollarse siguiendo especificaciones SOLID con un control descentralizado de los datos del usuario.
-| Heroku | La aplicación estará en la plataforma Heroku
 | Docker | La aplicación se deberá desplegar sobre contenedores Docker
 |====================
 
@@ -26,4 +25,5 @@
 | Restricción | Explicación 
 | Control de versiones | Debe realizarse con Git, utilizando el repositorio alojado en el servicio GitHub
 | Documentacion | Utilizando la plantilla de estructura Arc42 y usando AsciiDoctor
+| Codecov | Se utilizará para validar el alcance de los tests
 |====================

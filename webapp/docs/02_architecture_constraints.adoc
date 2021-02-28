@@ -5,24 +5,25 @@
 [width="100%",options="header"]
 |====================
 | Restricción | Explicación 
-| React | 
-| Solid | 
+| Solid | La aplicación debe desarrollarse siguiendo especificaciones SOLID con un control descentralizado de los datos del usuario.
+| Heroku | La aplicación estará en la plataforma Heroku
+| Docker | La aplicación se deberá desplegar sobre contenedores Docker
 |====================
 
 === Restricciones organizativas
 [width="100%",options="header"]
 |====================
 | Restricción | Explicación 
-| Límite de tiempo |
-| Presupuesto del proyecto |
-| Testing | 
-| Organización del equipo | 
+| Límite de tiempo | La aplicación tendrá que estar terminada para el 4 de mayo de 2021
+| Presupuesto del proyecto | No disponemos de presupuesto, asi que los recursos son limitados.
+| Testing | La aplicación será probada durante su desarrollo para asegurar su correcto funcionamiento
+| Organización del equipo | Los equipos serán de unas 6-7 personas
 |====================
 
 === Restricciones de las convenciones
 [width="100%",options="header"]
 |====================
 | Restricción | Explicación 
-| Control de versiones | 
-| Documentacion | 
+| Control de versiones | Debe realizarse con Git, utilizando el repositorio alojado en el servicio GitHub
+| Documentacion | Utilizando la plantilla de estructura Arc42 y usando AsciiDoctor
 |====================

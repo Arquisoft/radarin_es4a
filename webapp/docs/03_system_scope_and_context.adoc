@@ -25,3 +25,5 @@ La idea principal de nuestro proyecto es construir una aplicación que con la ay
 nos permita establecer una clase de red que nos permita almacenar con que personas estuvo en contacto la persona que posee
 la aplicación, para realizar esto utilizamos SOLID para almacenar su localizacion y compartirla de forma segura.
 Utilizaremos REACT para desarrollar tanto la aplicación web como la aplicación móvil, mientras que dejamos a SOLID la parte de la comunicación.
+
+image::../images/contexto_tecnologico_diagrama.png[]

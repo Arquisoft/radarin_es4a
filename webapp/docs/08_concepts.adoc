@@ -5,12 +5,9 @@ En esta sección se tratarán los conceptos transversales inherentes al proyecto
 image::../images/mindmap.jpg["Mapa mental sobre los conceptos transversales del proyecto"]
 
 === Conceptos del dominio
-Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del problema, facilitando así el desarrollo del sistema. En este caso se cubre:
+Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del problema desde el nivel más abstracto posible:
 
-- Amigo
-- Usuario
-- Mapeado
-- Localización
+image:images/dominio.png["Dominio del problema"]
 
 === Patrones de arquitectura y diseño
 Se estima que el patrón MVC será el utilizado para el desarrollo web de la aplicación, aunque por el momento se está discutiendo.
@@ -26,6 +23,3 @@ La interfaz desarrollada será amigable y accesible a cualquier persona, evitand
 Es de vital importancia que la aplicación sea segura en todo momento, almacenando correctamente los datos necesarios del usuario final.
 
 Hará uso de pods siguiendo el proyecto SOLID donde cada usuario será el propietario del mismo, teniendo total control sobre sus datos. Los únicos datos que se tratará directamente la aplicación será la localización del cliente previa aprovación por su parte.
-
-=== Conceptos de desarrollo
-El sistema que se deasrrollará usando la tecnología React, Docker y basándose en el proyecto SOLID. Se está probando y decidiendo qué otras herramientas utilizar durante el desarrollo, así como si implantar alguna metodología de trabajo ágil.

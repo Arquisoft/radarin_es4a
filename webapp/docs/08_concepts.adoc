@@ -2,7 +2,7 @@
 == Conceptos transversales
 En esta sección se tratarán los conceptos transversales inherentes al proyecto, describiendo las principales normativas generales y las ideas de soluciones que son relevantes en múltiples partes del sistema.
 
-image:images/mindmap.jpg["Mapa mental sobre los conceptos transversales del proyecto"]
+image::../images/mindmap.jpg["Mapa mental sobre los conceptos transversales del proyecto"]
 
 === Conceptos del dominio
 Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del problema desde el nivel más abstracto posible:

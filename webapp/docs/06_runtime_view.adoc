@@ -1,5 +1,5 @@
 [[section-runtime-view]]
-== Runtime View
+== Vista de tiempo de ejecución
 
 
 [role="arc42help"]
@@ -30,28 +30,31 @@ There are many notations for describing scenarios, e.g.
 
 ****
 
-=== <Runtime Scenario 1>
+En esta sección vamos a desarrollar la mayoría de las situaciones de tiempo de ejecución en las que se puede llegar a ver envuelta nuestra aplicación.
+Algún ejemplo de ello puede ser como se añade y se gestionan los amigos, o como se actualiza la ubicación dentro de la aplicación gracias a la API de geolocalización. 
+
+=== Registrarse
+
+* _El usuario ha de registrarse en la aplicación Radarín siguiendo unos pasos:_
+1. El usuario abre la aplicación y accede a la pantalla de Inicio de Sesión/Registro.
+2. El usuario usa sus credenciales para iniciar sesión.
+3. Se comprueba que las credenciales sean correctas.
+4. El servidor rechaza la petición de autenticación.
+5. El servidor acepta la petición de autenticación.
 
 
-* _<insert runtime diagram or textual description of the scenario>_
-* _<insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.>_
 
-It is possible to use a sequence diagram:
+=== Mis Amigos
+Nuestra aplicación permitirá que el usuario disponga de una lista de amigos dentro de la aplicación una vez se inicia sesión, de la misma manera permitiremos
+la opción de añadir o eliminar amigos de la lista, la cual desembocará en una actualización de la página que nos permitirá ver los cambios.
 
-[plantuml,"Sequence diagram",png]
-----
-actor Alice
-actor Bob
-database Pod as "Bob's Pod"
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-Alice  --> Pod: Store route
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
-----
-=== <Runtime Scenario 2>
+=== Añadir Nuevos Amigos
+Nuestra aplicación dispondrá de una opción para añadir amigos.
+
+=== Eliminar Amigos
+Nuestra aplicación dispondrá de una opción para eliminar amigos.
 
 === ...
 
-=== <Runtime Scenario n>
+=== Notificaciones
+Nuestra aplicación dispondrá de un sistema de notificaciones que nos avise de las novedades que nos incumban dentro de la aplicación.

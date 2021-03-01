@@ -7,7 +7,7 @@ image::../images/mindmap.jpg["Mapa mental sobre los conceptos transversales del 
 === Conceptos del dominio
 Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del problema desde el nivel más abstracto posible:
 
-image:images/dominio.png["Dominio del problema"]
+image::../images/dominio.png["Dominio del problema"]
 
 === Patrones de arquitectura y diseño
 Se estima que el patrón MVC será el utilizado para el desarrollo web de la aplicación, aunque por el momento se está discutiendo.

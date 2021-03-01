@@ -1,14 +1,19 @@
 [[section-technical-risks]]
-== Riesgos
+== Riesgos y Deudas Técnicas
 
-[options="header",cols="1,2,2"]
+=== Riesgos
+
+[options="header",cols="1,1,2,2"]
 |===
-|Riesgos|Consecuencias|Posibles soluciones
-| Desconocimiento entre el equipo | Puede existir un cierto miedo o vergüenza por desconocimiento entre los miembros del equipo, lo que puede provocas una mala comunicación.| Hacer reuniones entre todos para ir hablando del trabajo e ir conociéndonos.
-| Uso de nuevas tecnologías| Mal uso de las nuevas tecnologías al no tener ninguna experiencia previa.| Búsqueda y estudio de las nuevas tecnologías antes de empezar el desarrollo.
-| Organización del equipo | Mala organización debido a una pobre comunicación, o al no saber en que puede ser mejor un miembro u otro del equipo a la hora de desarrollar.| Reuniones del equipo para planificar el desarrollo.
-| Manejo del tiempo empleado | Pérdidas de tiempo centrándonos en aspectos en los que no había que profundizar tanto.| Detectar bien las principales claves del desarrollo para perder el menor tiempo posible en cosas secundarias.
+|Prioridad|Riesgos|Consecuencias|Posibles soluciones
+| 1 | Uso de nuevas tecnologías| Mal uso de las nuevas tecnologías al no tener ninguna experiencia previa.| Búsqueda y estudio de las nuevas tecnologías antes de empezar el desarrollo.
+| 2 | Uso de principios SOLID | Es una tecnología poco madura por lo que es dificil de usar correctamente.| Leer la documentación de SOLID y ayudarse de otros trabajos que usen esta tecnología.
+| 3 | Organización del equipo | Mala organización debido a una pobre comunicación y desconocimiento del resto de miembros del equipo, o al no saber en que puede ser mejor un miembro u otro del equipo a la hora de desarrollar.| Reuniones del equipo para planificar el desarrollo, ir actualizando los progresos y debatir sobre posibles cambios.
+| 4 | Manejo del tiempo empleado | Pérdidas de tiempo centrándonos en aspectos en los que no había que profundizar tanto.| Detectar bien las principales claves del desarrollo para perder el menor tiempo posible en cosas secundarias.
 |===
 
-== Deudas Técnicas
+=== Deudas Técnicas
 Cosas mejorables en la aplicación:
+
+* Penalización de rendimiento al acceder a los POD
+* Aplicación no adaptable al usar la API de Google Maps

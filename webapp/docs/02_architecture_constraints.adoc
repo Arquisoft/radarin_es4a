@@ -1,27 +1,29 @@
 [[section-architecture-constraints]]
 == Restricciones de la Arquitectura
 
-****
-.Contenido
-Las principales restricciones son:
+=== Restricciones técnicas
+[width="100%",options="header"]
+|====================
+| Restricción | Explicación 
+| Solid | La aplicación debe desarrollarse siguiendo especificaciones SOLID con un control descentralizado de los datos del usuario.
+| Docker | La aplicación se deberá desplegar sobre contenedores Docker
+|====================
 
- . Emplear el proyecto https://solid.mit.edu/[SOLID]
- . Desarrollar el proyecto dentro de un periodo de tiempo determinado
- . Emplear _Docker_ para el despliegue del proyecto
- . Emplear un _framework_ de JavaScript para el desarrollo del __frontend__
- . Emplear mecanismos de Integración Continua y Pruebas de Carga, Unitarias...
+=== Restricciones organizativas
+[width="100%",options="header"]
+|====================
+| Restricción | Explicación 
+| Límite de tiempo | La aplicación tendrá que estar terminada para el 4 de mayo de 2021
+| Presupuesto del proyecto | No disponemos de presupuesto, asi que los recursos son limitados.
+| Testing | La aplicación será probada durante su desarrollo para asegurar su correcto funcionamiento
+| Organización del equipo | Los equipos serán de unas 6-7 personas
+|====================
 
-.Motivación
-Disponemos de libertad a la hora de elegir el framework de JavaScript a utilizar, pero debe estar comunicado con el proyecto SOLID y sus PODs donde el usuario guardará sus datos de una manera descentralizada.
-
-
-
-[options="header",cols="1,2"]
-|===
-| Restricción | Explicación
-| SOLID | Es un proyecto de descentralización de datos en la web que tiene como objetivo que el usuario sea quien decida dónde almacenar sus datos.
-| GitHub | Es una plataforma de desarrollo de software colaborativo que almacena proyectos usando el sistema de control de versiones de Git.
-| Periodo de tiempo | Disponemos de 3 meses para desarrollar todo el proyecto.
-| Docker | Es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software
-|===
-****
+=== Restricciones de las convenciones
+[width="100%",options="header"]
+|====================
+| Restricción | Explicación 
+| Control de versiones | Debe realizarse con Git, utilizando el repositorio alojado en el servicio GitHub
+| Documentacion | Utilizando la plantilla de estructura Arc42 y usando AsciiDoctor
+| Codecov | Se utilizará para validar el alcance de los tests
+|====================

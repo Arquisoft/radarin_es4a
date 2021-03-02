@@ -2,16 +2,17 @@
 == Decisiones de Diseño
 
 .Restricciones
-* Uso de SOLID
+* Uso de SOLID para crear un programa basado en el almacenamiento de datos de forma descentralizada, al contrario que la mayoría de aplicaciones.
+* El programa tiene que poder ser utilizado en móviles.
 
 .Problemas
-* Decisión sobre las librerías a usar
-* Tecnologías que miembros del equipo no sabían usar
+* Decisión sobre las librerías a usar. 
+* Tecnologías que miembros del equipo no sabían usar.
 
 .Consecuencias
-* Aprendizaje de nuevas tecnologías
+* Aprendizaje de nuevas tecnologías, por lo que parte del tiempo de desarrollo se basará en el aprendizaje de dichas tecnologías.
 
 .Decisiones
-* Uso de React
-* Uso de la API de Google Maps para ver la ubicación de los amigos
-* Usar LDflex para los listados de amigos
+* Uso de React como framework debido a la facilidad de uso y la cantidad de documentación disponible.
+* Uso de la API de Google Maps para ver la ubicación de los amigos por su extendido uso.
+* Usar LDflex para los listados de amigos.

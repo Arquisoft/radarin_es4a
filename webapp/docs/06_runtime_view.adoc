@@ -1,57 +1,143 @@
 [[section-runtime-view]]
-== Runtime View
+== Vistas en tiempo de ejecución
 
 
-[role="arc42help"]
-****
-.Contents
-The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:
 
-* important use cases or features: how do building blocks execute them?
-* interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?
-* operation and administration: launch, start-up, stop
-* error and exception scenarios
+// [role="arc42help"]
+// ****
+// .Contents
+// The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:
 
-Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their *architectural relevance*. It is *not* important to describe a large number of scenarios. You should rather document a representative selection.
+// * important use cases or features: how do building blocks execute them?
+// * interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?
+// * operation and administration: launch, start-up, stop
+// * error and exception scenarios
 
-.Motivation
-You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
-You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).
+// Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their *architectural relevance*. It is *not* important to describe a large number of scenarios. You should rather document a representative selection.
 
-.Form
-There are many notations for describing scenarios, e.g.
+// .Motivation
+// You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
+// You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).
 
-* numbered list of steps (in natural language)
-* activity diagrams or flow charts
-* sequence diagrams
-* BPMN or EPCs (event process chains)
-* state machines
-* ...
+// .Form
+// There are many notations for describing scenarios, e.g.
 
-****
+// * numbered list of steps (in natural language)
+// * activity diagrams or flow charts
+// * sequence diagrams
+// * BPMN or EPCs (event process chains)
+// * state machines
+// * ...
 
-=== <Runtime Scenario 1>
+// ****
 
 
-* _<insert runtime diagram or textual description of the scenario>_
-* _<insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.>_
+En esta sección vamos a desarrollar la mayoría de las situaciones de tiempo de ejecución en las que se puede llegar a ver envuelta nuestra aplicación. 
+Algún ejemplo de ello puede ser como se añade y se gestionan los amigos, o como se actualiza la ubicación dentro de la aplicación gracias a la API de geolocalización. 
 
-It is possible to use a sequence diagram:
+=== Inicio de Sesión
 
-[plantuml,"Sequence diagram",png]
+* _El usuario ha de registrarse en la aplicación Radarín siguiendo unos pasos:_
+1. El usuario abre la aplicación y accede a la pantalla de Inicio de Sesión/Registro.
+2. El usuario usa sus credenciales para iniciar sesión.
+3. Se comprueba que las credenciales sean correctas.
+4. El servidor acepta/rechaza la petición de autenticación.
+
+[plantuml,"inicio_de_sesion",png]
 ----
-actor Alice
-actor Bob
-database Pod as "Bob's Pod"
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-Alice  --> Pod: Store route
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+actor Pablo
+participant  "Radarín"
+participant "LoginManager"
+participant "POD"
+Pablo -> "Radarín": Envía solicitud para registrarse.
+Pablo -> "LoginManager": Introduce sus credenciales
+"LoginManager" -> "POD": Verifica las credenciales
+"POD" -> "Radarín": acepta/rechaza la petición de autenticación.
 ----
-=== <Runtime Scenario 2>
 
-=== ...
+=== Mis amigos
+Nuestra aplicación permitirá que el usuario disponga de una lista de amigos dentro de la aplicación una vez se inicia sesión, de la misma manera permitiremos
+la opción de añadir o eliminar amigos de la lista, la cual desembocará en una actualización de la página que nos permitirá ver los cambios.
 
-=== <Runtime Scenario n>
+[plantuml,"mostrar_amigos",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "Base de datos"
+Pablo -> "Radarín": Pide su lista de amigos
+"Radarín" -> "Base de datos": Consulta los amigos de ese usuario
+"Base de datos" -> "Radarín": Devuelve la lista de amigos de ese usuario
+"Radarín" -> "Radarín": Muestra los amigos
+----
+
+=== Añadir nuevos amigos
+Nuestra aplicación dispondrá de una opción para añadir amigos.
+
+[plantuml,"anadir_amigos",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "FriendsManager"
+participant "Base de datos"
+Pablo -> "Radarín": Pide añadir un amigo
+"Radarín" -> "FriendsManager": Pide añadir un amigo
+"FriendsManager" -> "Base de datos": Pide añadir el usuario a la lista de amigos
+"Base de datos" -> "Base de datos": Lo añade
+"Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
+"Radarín" -> "Radarín": Muestra los amigos
+----
+
+=== Eliminar amigos
+Nuestra aplicación dispondrá de una opción para eliminar amigos.
+
+[plantuml,"eliminar_amigos",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "FriendsManager"
+participant "Base de datos"
+Pablo -> "Radarín": Pide eliminar un amigo
+"Radarín" -> "FriendsManager": Pide eliminar un amigo
+"FriendsManager" -> "Base de datos": Pide eliminar el usuario a la lista de amigos
+"Base de datos" -> "Base de datos": Lo elimina
+"Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
+"Radarín" -> "Radarín": Muestra los amigos
+----
+
+=== Compartir ubicación
+
+Debemos poder permitir a la aplicación conocer nuestra ubicación.
+
+[plantuml,"compartir_ubicacion",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "API Localización"
+participant "Base de datos"
+"Radarín" -> Pablo: Pide permiso para usar su localizacion
+Pablo -> "Radarín": Concede permiso a su localización
+"Radarín" -> "API Localización": envía la localización
+"API Localización" -> "Base de datos": almacena la localización
+----
+
+=== Ver los amigos en el mapa
+
+Vamos a poder ver a nuestros amigos en el mapa.
+
+[plantuml,"ver_amigos_mapa",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "API Localización"
+participant "Base de datos"
+"Radarín" -> "API Localización": pide las ubicaciones de los amigos cercanos
+"API Localización" -> "Base de datos": solicita la lista de amigos
+"Base de datos" -> "API Localización": devuelve la lista de amigos
+"API Localización" -> "Base de datos": pide las localizaciones
+"Base de datos" -> "API Localización": devuelve las localizaciones
+"API Localización" -> "Radarín": envía la lista de localizaciones de amigos cercanos
+"Radarín" -> "Pablo": notifica done estan los amigos que tiene
+----
+
+=== Notificaciones
+Nuestra aplicación dispondrá de un sistema de notificaciones que nos avise de las novedades que nos incumban dentro de la aplicación.

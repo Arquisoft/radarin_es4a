@@ -1,24 +1,28 @@
 [[section-solution-strategy]]
-== Solution Strategy
+== Estrategia de solución
 
+=== *Decisiones tecnológicas*
+- Para construir esta aplicación, elegimos el lenguaje de programación *JavaScript*, ya que este es uno de los lenguajes más utilizados en la web y lo vemos adecuado para desarrollar aplicaciones solidas, dado que soporta módulos y es consistente con las aplicaciones web.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+- Usamos *React*, una biblioteca de JavaScript para crear interfaces de usuario. La utilizamos porque tenemos ejemplos de otros años que nos sirven de guía y la vemos muy preparada para realizar trabajos en web.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+- A su vez utilizaremos la librería *React Native* para poder hacer que nuestra aplicación se reproduzca a través de dispositivos móviles.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+- También usamos *Node.js* para aprovechar el modelo entrada salida sin bloqueo y controlado por eventos, para seguir siendo liviano y eficiente frente a aplicaciones de uso de datos en tiempo real que se ejecutan en dispositivos.
 
-.Form
-Keep the explanation of these key decisions short.
+- *Google Maps API* es la api que hemos escogido para realizar la parte de localización de la aplicación, ya que tenemos experiencia pasada con ella y la conocemos la mayoría.
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
-****
+- *LDFlex*: lo utilizaremos para la comunicación entre usuarios mediante sus PODs.
+
+=== *Metas de calidad*
+
+- *Usabilidad:* queremos que la aplicación sea sencilla de aprender a utilizar, hasta para alguien fuera del sector.
+
+- *Testabilidad*: se realizarán pruebas para garantizar la correcta funcionalidad de la aplicación.
+
+- *Privacidad:* La aplicación solamente almacenará la localización del usuario cuando éste lo permita, y no guardará ninguna otra información del usuario.
+
+=== *Organización*
+
+- Se utilizará *Jira*,  una herramienta en línea para la administración de tareas de un proyecto, el seguimiento de errores e incidencias y para la gestión operativa de proyectos, asi como *Github* para el control de versiones del proyecto, y dejar constancia de las tareas a realizar por cada miembro del grupo con los *issues*. A demás, realizaremos reuniones semanales, sea una o varias para ir viendo el avance de cada uno.
+

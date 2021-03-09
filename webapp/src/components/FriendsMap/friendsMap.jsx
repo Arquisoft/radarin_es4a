@@ -1,7 +1,7 @@
 import React from 'react'
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
-import './friendsMap.css'
+//import './friendsMap.css'
 
 export class FriendsMap extends React.Component {
   state = { userLocation: { lat: 32, lng: 32 }, loading: true };
@@ -31,7 +31,7 @@ export class FriendsMap extends React.Component {
     }
 
     return (
-      <Map google={google} initialCenter={userLocation} zoom={15} >
+      <Map google={google} initialCenter={userLocation} zoom={15} style={{ height: '70%' }} >
         <Marker
           id={1}
           title={'La posición del usuario.'}

@@ -27,4 +27,11 @@ const client = new MongoClient(uri);
         return usuariosEncontrados;
     }
 
+    async function findByWebId(webid) {
+        const database = client.db('baseDatosRadarin');
+        const users = database.collection('usuarios');
+        var usuario = users.find({ "webid" : webid });
+        return usuario;
+    }
+
 module.exports = {init, userList}

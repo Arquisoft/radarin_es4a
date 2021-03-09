@@ -13,6 +13,12 @@ export const NavigationItems = [
     icon: '/img/icon/apps.svg',
     label: 'navBar.myFriends',
     to: '/myFriends'
+  },
+  {
+    id: 'friendsMap',
+    icon: '/img/icon/apps.svg',
+    label: 'navBar.friendsMap',
+    to: '/friendsMap'
   }
 ];
 

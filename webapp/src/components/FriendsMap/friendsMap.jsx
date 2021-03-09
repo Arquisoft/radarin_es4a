@@ -1,55 +1,47 @@
 import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import { Icon } from '@iconify/react'
-import locationIcon from '@iconify/icons-mdi/map-marker'
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 import './friendsMap.css'
 
-const LocationPin = ({ text }) => (
-  <div className="pin">
-    <Icon icon={locationIcon} className="pin-icon" />
-    <p className="pin-text">{text}</p>
-  </div>
-)
+export class FriendsMap extends React.Component {
+  state = { userLocation: { lat: 32, lng: 32 }, loading: true };
 
-const coordinates = {
-  lat: 59.955413,
-  lng: 30.337844
-};
+  componentDidMount(props) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
 
-class FriendsMap extends React.Component {
-  static defaultProps = {
-    center: {
-      lat: coordinates.lat,
-      lng: coordinates.lng
-    },
-    zoom: 10
-  };
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      coordinates.lat = position.coords.latitude;
-      coordinates.lng = position.coords.longitude;
-    });
+        this.setState({
+          userLocation: { lat: latitude, lng: longitude },
+          loading: false
+        });
+      },
+      () => {
+        this.setState({ loading: false });
+      }
+    );
   }
 
   render() {
+    const { loading, userLocation } = this.state;
+    const { google } = this.props;
+
+    if (loading) {
+      return null;
+    }
+
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyDgbW_ScqYdmd8fQL7TKoOU4MCtAfvXOgo' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <LocationPin
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
-        </GoogleMapReact>
-      </div>
-    );
+      <Map google={google} initialCenter={userLocation} zoom={15} >
+        <Marker
+          id={1}
+          title={'La posición del usuario.'}
+          name={'User'}
+          position={{lat: userLocation.lat, lng: userLocation.lng}} />
+      </Map>
+      );
   }
 }
 
-export default FriendsMap
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY"
+})(FriendsMap);

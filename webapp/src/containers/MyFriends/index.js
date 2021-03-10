@@ -1,3 +1,3 @@
-import MyFriends from './myFriends.container';
+import MyFriends from './myFriends.component';
 
 export default MyFriends;

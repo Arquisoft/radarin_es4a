@@ -1,9 +1,8 @@
-import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
-it('App renders without crashing', () => {
-  afterAll(cleanup);
-  const { container } = render(<App />);
-  expect(container).toBeTruthy();
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/Source code/i);
+  expect(linkElement).toBeInTheDocument();
 });

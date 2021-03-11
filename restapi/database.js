@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const { db } = require("./models/users");
     
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri);
@@ -34,4 +35,17 @@ const client = new MongoClient(uri);
         return usuario;
     }
 
-module.exports = {init, userList}
+    async function updateUser(webid, data) {
+        const database = client.db('baseDatosRadarin');
+        const users = database.collection('usuarios');
+        users.updateOne({"webid" : webid }, { $set: {"data" : data} });
+    }
+
+    async function addUser(webid, data) {
+        const database = client.db('baseDatosRadarin');
+        const users = database.collection('usuarios');
+        const user = { "webid": webid, "data": data };
+        await users.insertOne(user);
+    }
+
+module.exports = {init, userList, findByWebId, updateUser, addUser}

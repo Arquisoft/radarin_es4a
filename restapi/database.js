@@ -7,6 +7,7 @@ const client = new MongoClient(uri);
     async function init() {
         await client.connect();
         const database = client.db('baseDatosRadarin');
+        
         database.dropCollection('usuarios');
         const users = database.collection('usuarios');
 
@@ -17,6 +18,8 @@ const client = new MongoClient(uri);
         const user5 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat":43.355331492910125, "lon": -5.863415983665659, "timestamp": Date.now() } };
         const user6 = { "webid": "https://uo269871.inrupt.net/profile/card#me", "data": { "lat": 43.36683582828603, "lon": -5.843256887954077, "timestamp": Date.now() } };
         const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": Date.now() } };
+        const user8 = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me", "data": { "lat": 43.36478446185927, "lon": -5.851569590408885, "timestamp": Date.now() } };
+        
         await users.insertMany([user1, user2, user3, user4, user5, user6, user7]);
         console.log("Datos insertados");
     }

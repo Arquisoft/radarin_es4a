@@ -4,19 +4,19 @@
 export const NavigationItems = [
   {
     id: 'welcome',
-    icon: '/img/icon/apps.svg',
+    icon: '/img/icon/r.png',
     label: 'navBar.welcome',
     to: '/welcome'
   },
   {
     id: 'myFriends',
-    icon: '/img/icon/apps.svg',
+    icon: '/img/icon/r.png',
     label: 'navBar.myFriends',
     to: '/myFriends'
   },
   {
     id: 'friendsMap',
-    icon: '/img/icon/apps.svg',
+    icon: '/img/icon/r.png',
     label: 'navBar.friendsMap',
     to: '/friendsMap'
   }

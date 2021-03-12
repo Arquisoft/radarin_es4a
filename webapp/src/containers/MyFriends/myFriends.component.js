@@ -4,6 +4,7 @@ import { Button, FormControl, Container} from "react-bootstrap";
 import { addFriend } from './friends.service';
 import  InfoFriends from "./InfoFriends";
 
+
 class MyFriends extends Component {
  
     
@@ -15,6 +16,10 @@ class MyFriends extends Component {
         };
     }
     
+    /*    
+           
+                    */
+                    
 
     render(){
         return (
@@ -26,15 +31,18 @@ class MyFriends extends Component {
             <Button variant="outline-primary"onClick={()=> addFriend(this.state.enteredWebId, this.props.webId)}>   
             </Button>
                 <h1>Lista de amigos:</h1>
+
             {<List src="user.friends">
             {(item, i) => (
-						<InfoFriends
-              key={i}
-							name={getUserName(`${item}`)}
-							webidFriend={`${item}`}
-            />
-					)}
-            </List>}
+				<InfoFriends
+                    key={i}
+				    name={getUserName(`${item}`)}
+					webidFriend={`${item}`}
+                />
+			)}
+            </List>
+            }
+            
             </div>
             </Container>
         );

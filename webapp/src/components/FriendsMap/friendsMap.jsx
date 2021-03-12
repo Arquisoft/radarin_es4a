@@ -6,64 +6,76 @@ import axios from 'axios';
 
 //import './friendsMap.css'
 
-export class FriendsMap extends React.Component {
-  state = { userLocation: { lat: 32, lng: 32 }, loading: true, webId: "", friendUserList: [] };
+export function FriendsMap(props) {
+  const [userLocation, setUserLocation] = useState( { lat: 32, lng: 32 } );
+  const [loading, setLoading] = useState( true );
+  const [userFriendsList, setUserFriendsList] = useState( [] );
+  const [serverResponse, setServerResponse] = useState( {} );
 
-  componentDidMount(props) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
+  // useEffect llama a la función que se le pasa como
+  // parámetro cada vez que se modifica alguno de los estados (declarados arriba)
+  // dentro del array del final.
+  // Como ahora mismo está vacio, solo obtenemos la ubicación del usuario una vez:
+  // cuando se crea el componente.
+  useEffect(
+    // Recibe 2 funciones:
+    // - La primera se ejecuta si la ubicación se ha podido 
+    //   obtener sin problemas.
+    // - La segunda lo hace si hay problemas y por lo tanto
+    //   no ha sido posible obtener la ubicación.
+    navigator.geolocation.getCurrentPosition( position => { 
+        // Extraer los valores de position
         const { latitude, longitude } = position.coords;
 
-        this.setState({
-          userLocation: { lat: latitude, lng: longitude },
-          loading: false
-        });
-      },
-      () => {
-        this.setState({ loading: false });
-      }
-    );
-    //const friends = useLDflexList('user.friends');
-    this.guardarUbicacionUsuarioEnBBDD(this.state.userLocation.lat,this.state.userLocation.lng);
-  }
+        // Actualizar el estado de la ubicación.
+        setUserLocation( { lat: latitude, lng: longitude } );
 
-  guardarUbicacionUsuarioEnBBDD(latitudeUser, longitudeUser){
-    var infoUser = 
-    {
-      "webid" : useWebId(), 
-      "data" : { 
-          "friends" : <List src="user.friends"></List>, 
-          "last_location": {
-              "lat": latitudeUser, 
-              "lon": longitudeUser, 
-              "timestamp" : Date.now()
-          } 
-      } 
-  }
-  axios.post(`https://localhost:8888`, infoUser).then(res => {console.log(res);console.log(res.data);})
-  }
+        // Actualizar el estado de carga (ya ha terminado)
+        setLoading( false );
 
-  
-  render() {
-    const { loading, userLocation } = this.state;
-    const { google } = this.props;
+      }, () => { /*En caso de error: */ setLoading( false ); }
+    ), [] 
+    // Si, parece raro eso de poner un array vacio aquí, pero no lo es:
+    // https://medium.com/@timtan93/states-and-componentdidmount-in-functional-components-with-hooks-cac5484d22ad
+  );
 
-    if (loading) {
-      return null;
+  // Obtener la lista de amigos
+  setUserFriendsList( useLDflexList('user.friends').forEach( item => item.value ) );
+
+  // Datos que se van a enviar al servidor
+  var userInfo = {
+    "webid" : useWebId(), 
+    "data": {
+      "friends" : userFriendsList,
+      "last_location": {
+          "lat": userLocation.lat, 
+          "lon": userLocation.lng, 
+          "timestamp" : Date.now() } } }
+
+  // Enviar datos al servidor (la url es de prueba)
+  axios.post( 'https://localhost:8888', userInfo )
+    .then( res => {
+      // Guardar la respuesta del servidor en un estado
+      setServerResponse(res.data);
     }
-
+  );
+  
+  // Mostrar la vista
+  if (loading) { return null; } 
+  else { // Si no...
+    // ... devolver el mapa!
     return (
-      <Map google={google} initialCenter={userLocation} zoom={15} style={{ height: '70%' }} >
+      <Map google={ props.google } initialCenter={ userLocation } zoom={ 15 } style={ { height: '70%' } } >
         <Marker
-          id={1}
-          title={'La posición del usuario.'}
-          name={'User'}
-          position={{lat: userLocation.lat, lng: userLocation.lng}} />
+          id={ 1 }
+          title={ 'La posición del usuario.' }
+          name={ 'User' }
+          position={ {lat: userLocation.lat, lng: userLocation.lng} } />
       </Map>
-      );
+    );
   }
 }
 
-export default GoogleApiWrapper({
+export default GoogleApiWrapper ({
   apiKey: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY"
 })(FriendsMap);

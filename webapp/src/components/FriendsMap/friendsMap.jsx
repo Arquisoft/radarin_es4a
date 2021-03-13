@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
-import {useWebId, List} from  '@solid/react';
+import { useWebId, List } from  '@solid/react';
 import { useLDflexValue, useLDflexList } from '@solid/react';
 import axios from 'axios'; 
 
 //import './friendsMap.css'
 
-export function FriendsMap(props) {
+export default function FriendsMap( props ) {
   const [userLocation, setUserLocation] = useState( { lat: 32, lng: 32 } );
   const [loading, setLoading] = useState( true );
   const [userFriendsList, setUserFriendsList] = useState( [] );
@@ -65,17 +65,20 @@ export function FriendsMap(props) {
   else { // Si no...
     // ... devolver el mapa!
     return (
-      <Map google={ props.google } initialCenter={ userLocation } zoom={ 15 } style={ { height: '70%' } } >
-        <Marker
-          id={ 1 }
-          title={ 'La posición del usuario.' }
-          name={ 'User' }
-          position={ {lat: userLocation.lat, lng: userLocation.lng} } />
-      </Map>
+      <div style={{ height: '70%', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
+            defaultCenter={ userLocation }
+            defaultZoom={ 15 } >
+              
+            { /* Falta recorrer la lista de amigos y crear un marcador para cada uno */ }
+            <Marker
+              id={ 1 }
+              title={ 'La posición del usuario.' }
+              name={ 'User' }
+              position={ userLocation } />
+          </GoogleMapReact>
+      </div>
     );
   }
 }
-
-export default GoogleApiWrapper ({
-  apiKey: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY"
-})(FriendsMap);

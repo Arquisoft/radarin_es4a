@@ -1,84 +1,82 @@
 import React, { useEffect, useState } from "react";
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+import GoogleMapReact from 'google-map-react';
+import { usePosition } from 'use-position';
+
 import { useWebId, List } from  '@solid/react';
 import { useLDflexValue, useLDflexList } from '@solid/react';
 import axios from 'axios'; 
 
 //import './friendsMap.css'
 
-export default function FriendsMap( props ) {
-  const [userLocation, setUserLocation] = useState( { lat: 32, lng: 32 } );
-  const [loading, setLoading] = useState( true );
+const Marker = ({ text }) => (
+  <div style={{
+    color: 'white', 
+    background: 'grey',
+    padding: '15px 15px',
+    display: 'inline-flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '100%',
+    transform: 'translate(-50%, -50%)'
+  }}>
+    {text}
+  </div>
+);
+
+// Use React.Memo
+function FriendsMap( props ) {
   const [userFriendsList, setUserFriendsList] = useState( [] );
   const [serverResponse, setServerResponse] = useState( {} );
+  const [userWebID, setUserWebID] = useState( useWebId() );
 
-  // useEffect llama a la función que se le pasa como
-  // parámetro cada vez que se modifica alguno de los estados (declarados arriba)
-  // dentro del array del final.
-  // Como ahora mismo está vacio, solo obtenemos la ubicación del usuario una vez:
-  // cuando se crea el componente.
-  useEffect(
-    // Recibe 2 funciones:
-    // - La primera se ejecuta si la ubicación se ha podido 
-    //   obtener sin problemas.
-    // - La segunda lo hace si hay problemas y por lo tanto
-    //   no ha sido posible obtener la ubicación.
-    navigator.geolocation.getCurrentPosition( position => { 
-        // Extraer los valores de position
-        const { latitude, longitude } = position.coords;
-
-        // Actualizar el estado de la ubicación.
-        setUserLocation( { lat: latitude, lng: longitude } );
-
-        // Actualizar el estado de carga (ya ha terminado)
-        setLoading( false );
-
-      }, () => { /*En caso de error: */ setLoading( false ); }
-    ), [] 
-    // Si, parece raro eso de poner un array vacio aquí, pero no lo es:
-    // https://medium.com/@timtan93/states-and-componentdidmount-in-functional-components-with-hooks-cac5484d22ad
-  );
-
-  // Obtener la lista de amigos
-  setUserFriendsList( useLDflexList('user.friends').forEach( item => item.value ) );
-
-  // Datos que se van a enviar al servidor
-  var userInfo = {
-    "webid" : useWebId(), 
-    "data": {
-      "friends" : userFriendsList,
-      "last_location": {
-          "lat": userLocation.lat, 
-          "lon": userLocation.lng, 
-          "timestamp" : Date.now() } } }
-
-  // Enviar datos al servidor (la url es de prueba)
-  axios.post( 'https://localhost:8888', userInfo )
-    .then( res => {
-      // Guardar la respuesta del servidor en un estado
-      setServerResponse(res.data);
-    }
-  );
+  const { latitude, longitude } = usePosition( false );
   
-  // Mostrar la vista
-  if (loading) { return null; } 
-  else { // Si no...
-    // ... devolver el mapa!
-    return (
-      <div style={{ height: '70%', width: '100%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
-            defaultCenter={ userLocation }
-            defaultZoom={ 15 } >
-              
-            { /* Falta recorrer la lista de amigos y crear un marcador para cada uno */ }
-            <Marker
-              id={ 1 }
-              title={ 'La posición del usuario.' }
-              name={ 'User' }
-              position={ userLocation } />
-          </GoogleMapReact>
-      </div>
-    );
+  const fetchedList = useLDflexList('user.friends');
+
+  useEffect(() => {
+    let friend_list = [];
+    fetchedList.forEach(item => friend_list.push( item.toString() ) );
+    setUserFriendsList( friend_list );
+  }, []);
+
+  console.log( userWebID );
+  
+  let userInfo = { 
+    "webid": userWebID,
+    "data": {
+      "friends": userFriendsList, 
+      "last_location": {
+        "lat": latitude, 
+        "lon": longitude, 
+        "timestamp": Date.now() 
+      }
+    }
   }
+
+  useEffect(() => {
+    // URL de prueba
+    fetch( 'https://a661ffc8a0b6903e4b6821c7ec99ac9d.m.pipedream.net', {
+      method: "POST", 
+      body: JSON.stringify( userInfo )
+    
+    }).then(res => { console.log("Request complete! response:", res.body) });
+  }, []);
+
+  return (
+    <div style={{ height: '80vh', width: '100%' }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
+        center={ { lat: latitude, lng: longitude } }
+        defaultZoom={ 15 }>
+          
+          <Marker 
+          // @ts-ignore
+          lat={ latitude } lng={ longitude } text="Tú" />
+
+      </GoogleMapReact>
+    </div>
+  );
 }
+
+export default FriendsMap;

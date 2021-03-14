@@ -6,8 +6,6 @@ import  InfoFriends from "./InfoFriends";
 
 
 class MyFriends extends Component {
- 
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -16,10 +14,7 @@ class MyFriends extends Component {
         };
     }
     
-    /*    
-           
-                    */
-                    
+    updateFriendWebId = (evt) => { this.setState( {enteredWebId: evt.target.value}); };
 
     render(){
         return (

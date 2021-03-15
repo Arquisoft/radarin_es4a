@@ -72,7 +72,9 @@ function FriendsMap( props ) {
           
           <Marker 
           // @ts-ignore
-          lat={ latitude } lng={ longitude } text="Tú" />
+          lat={ latitude } lng={ longitude } text="Tú"/>
+          <Marker
+          lat={43.3605835} lng={-5.846822} text="vitusuarez" />
 
       </GoogleMapReact>
     </div>

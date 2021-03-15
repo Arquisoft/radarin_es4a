@@ -129,10 +129,11 @@ Vamos a poder ver a nuestros amigos en el mapa.
 actor Pablo
 participant  "Radarín"
 participant "API Localización"
+participant "LDFlex"
 participant "Base de datos"
 "Pablo" -> "Radarín": envía su ubicación
-"Radarín" -> "Base de datos": solicita la lista de amigos
-"Base de datos" -> "Radarín": devuelve la lista de amigos
+"Radarín" -> "LDFlex": solicita la lista de amigos
+"LDFlex" -> "Radarín": devuelve la lista de amigos
 "Radarín" -> "Base de datos": solicita la lista de localizaciones
 "Base de datos" -> "Radarín": devuelve la lista de localizaciones
 "Radarín" -> "API Localización": envia los amigos y las localizaciones

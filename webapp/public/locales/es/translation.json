@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "Hola! Bienvenido a RADARIN.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "Qué es una identidad Solid?",
@@ -246,5 +246,8 @@
     "load": "Cargar",
     "save": "Guardar",
     "grantAccess": "Dar Acceso"
+  },
+  "button": {
+    "enviar":"Enviar"
   }
 }

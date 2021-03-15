@@ -81,7 +81,7 @@ export const WelcomePageContent = props => {
             <h3>
               title
               <a
-                href="https://github.com/inrupt/solid-react-sdk"
+                href="https://github.com/Arquisoft/radarin_es4a"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -138,7 +138,7 @@ export const WelcomePageContent = props => {
             <p>
               The SDK is continually evolving. Take a look at the
               <a
-                href="https://github.com/inrupt/solid-react-sdk/tree/master#release-timeline"
+                href="https://solidproject.org/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

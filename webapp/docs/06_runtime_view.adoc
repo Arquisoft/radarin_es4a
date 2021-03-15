@@ -32,8 +32,8 @@
 // ****
 
 
-En esta sección vamos a desarrollar la mayoría de las situaciones de tiempo de ejecución en las que se puede llegar a ver envuelta nuestra aplicación. 
-Algún ejemplo de ello puede ser como se añade y se gestionan los amigos, o como se actualiza la ubicación dentro de la aplicación gracias a la API de geolocalización. 
+En esta sección vamos a desarrollar la mayoría de las situaciones de tiempo de ejecución en las que se puede llegar a ver envuelta nuestra aplicación.
+Algún ejemplo de ello puede ser como se añade y se gestionan los amigos, o como se actualiza la ubicación dentro de la aplicación gracias a la API de geolocalización.
 
 === Inicio de Sesión
 
@@ -63,10 +63,10 @@ la opción de añadir o eliminar amigos de la lista, la cual desembocará en una
 ----
 actor Pablo
 participant  "Radarín"
-participant "Base de datos"
+participant "LDFlex"
 Pablo -> "Radarín": Pide su lista de amigos
-"Radarín" -> "Base de datos": Consulta los amigos de ese usuario
-"Base de datos" -> "Radarín": Devuelve la lista de amigos de ese usuario
+"Radarín" -> "LDFlex": Consulta los amigos de ese usuario
+"LDFlex" -> "Radarín": Devuelve la lista de amigos de ese usuario
 "Radarín" -> "Radarín": Muestra los amigos
 ----
 
@@ -77,13 +77,13 @@ Nuestra aplicación dispondrá de una opción para añadir amigos.
 ----
 actor Pablo
 participant  "Radarín"
-participant "FriendsManager"
-participant "Base de datos"
+participant "FriendsService"
+participant "LDFlex"
 Pablo -> "Radarín": Pide añadir un amigo
-"Radarín" -> "FriendsManager": Pide añadir un amigo
-"FriendsManager" -> "Base de datos": Pide añadir el usuario a la lista de amigos
-"Base de datos" -> "Base de datos": Lo añade
-"Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
+"Radarín" -> "FriendsService": Pide añadir un amigo
+"FriendsService" -> "LDFlex": Pide añadir el usuario a la lista de amigos
+"LDFlex" -> "LDFlex": Lo añade
+"LDFlex" -> "Radarín" : Devuelve los amigos de Pablo
 "Radarín" -> "Radarín": Muestra los amigos
 ----
 
@@ -94,13 +94,13 @@ Nuestra aplicación dispondrá de una opción para eliminar amigos.
 ----
 actor Pablo
 participant  "Radarín"
-participant "FriendsManager"
-participant "Base de datos"
+participant "FriendsService"
+participant "LDFlex"
 Pablo -> "Radarín": Pide eliminar un amigo
-"Radarín" -> "FriendsManager": Pide eliminar un amigo
-"FriendsManager" -> "Base de datos": Pide eliminar el usuario a la lista de amigos
-"Base de datos" -> "Base de datos": Lo elimina
-"Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
+"Radarín" -> "FriendsService": Pide eliminar un amigo
+"FriendsService" -> "LDFlex": Pide eliminar el usuario a la lista de amigos
+"LDFlex" -> "LDFlex": Lo elimina
+"LDFlex" -> "Radarín" : Devuelve los amigos de Pablo
 "Radarín" -> "Radarín": Muestra los amigos
 ----
 
@@ -117,7 +117,7 @@ participant "Base de datos"
 "Radarín" -> Pablo: Pide permiso para usar su localizacion
 Pablo -> "Radarín": Concede permiso a su localización
 "Radarín" -> "API Localización": envía la localización
-"API Localización" -> "Base de datos": almacena la localización
+"Radarín" -> "Base de datos": almacena la localización
 ----
 
 === Ver los amigos en el mapa
@@ -130,13 +130,14 @@ actor Pablo
 participant  "Radarín"
 participant "API Localización"
 participant "Base de datos"
-"Radarín" -> "API Localización": pide las ubicaciones de los amigos cercanos
-"API Localización" -> "Base de datos": solicita la lista de amigos
-"Base de datos" -> "API Localización": devuelve la lista de amigos
-"API Localización" -> "Base de datos": pide las localizaciones
-"Base de datos" -> "API Localización": devuelve las localizaciones
-"API Localización" -> "Radarín": envía la lista de localizaciones de amigos cercanos
-"Radarín" -> "Pablo": notifica done estan los amigos que tiene
+"Pablo" -> "Radarín": envía su ubicación
+"Radarín" -> "Base de datos": solicita la lista de amigos
+"Base de datos" -> "Radarín": devuelve la lista de amigos
+"Radarín" -> "Base de datos": solicita la lista de localizaciones
+"Base de datos" -> "Radarín": devuelve la lista de localizaciones
+"Radarín" -> "API Localización": envia los amigos y las localizaciones
+"API Localización" -> "API Localización": muestra los amigos en sus localizaciones
+"Radarín" -> "Pablo": notifica dónde están sus amigos
 ----
 
 === Notificaciones

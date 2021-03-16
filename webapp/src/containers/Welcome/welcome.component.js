@@ -12,6 +12,7 @@ import {
 } from './welcome.style';
 import { ImageProfile } from '@components';
 import { errorToaster } from '@utils';
+import { getUserName } from '../MyFriends/myFriends.component';
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page
@@ -30,7 +31,7 @@ export const WelcomePageContent = props => {
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
-            {t('welcome.welcome')}, <WelcomeName>{name}</WelcomeName>
+            {t('welcome.welcome')}, <WelcomeName>{getUserName(name)}</WelcomeName>
           </h3>
           <ImageWrapper>
             <Uploader

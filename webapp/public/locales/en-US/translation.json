@@ -39,7 +39,7 @@
     }
   },
   "register": {
-    "title": "Hi! Welcome to Solid.",
+    "title": "Hi! Welcome to RADARIN.",
     "step1Title": "Select your Provider",
     "whatIsAProvider": "What is a provider, and how should I choose one?",
     "alreadySolid": "I already have a Solid identity",
@@ -246,5 +246,8 @@
     "load": "Load",
     "save": "Save",
     "grantAccess": "Grant Access"
+  },
+  "button": {
+    "enviar":"Send"
   }
 }

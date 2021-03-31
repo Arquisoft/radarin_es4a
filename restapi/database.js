@@ -10,6 +10,7 @@ const client = new MongoClient(uri);
         
         database.dropCollection('usuarios');
         const users = database.collection('usuarios');
+        const admin = database.collection('admin');
 
         const user1 = { "webid": "https://israelmnrg.inrupt.net/profile/card#me", "data": { "lat": 43.3669759938579, "lon": -5.877764106417212, "timestamp": Date.now() } };
         const user2 = { "webid": "https://alvarofuente.inrupt.net/profile/card#me", "data": { "lat": 43.354767891444865, "lon": -5.851398652481771, "timestamp": Date.now() } };
@@ -18,9 +19,13 @@ const client = new MongoClient(uri);
         const user5 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat":43.355331492910125, "lon": -5.863415983665659, "timestamp": Date.now() } };
         const user6 = { "webid": "https://uo269871.inrupt.net/profile/card#me", "data": { "lat": 43.36683582828603, "lon": -5.843256887954077, "timestamp": Date.now() } };
         const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": Date.now() } };
-        const user8 = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me", "data": { "lat": 43.36478446185927, "lon": -5.851569590408885, "timestamp": Date.now() } };
+        
+        const userAdmin = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me" };
         
         await users.insertMany([user1, user2, user3, user4, user5, user6, user7]);
+        
+        await admin.insertOne(userAdmin);
+
         console.log("Datos insertados");
     }
 
@@ -36,6 +41,13 @@ const client = new MongoClient(uri);
         const users = database.collection('usuarios');
         var usuario = users.find({ "webid" : webid });
         return usuario;
+    }
+
+    async function getAdmin() {
+        const database = client.db('baseDatosRadarin');
+        const admin = database.collection('admin');
+        var userAdmin = admin.findOne();
+        return userAdmin;
     }
 
     async function updateUser(webid, data) {

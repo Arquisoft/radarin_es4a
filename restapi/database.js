@@ -68,6 +68,16 @@ const client = new MongoClient(uri);
         await bans.deleteOne({ "webid" : webid });
     }
 
+    async function isBanned(webid) {
+        const database = client.db('baseDatosRadarin');
+        const bans = database.collection('baneados');
+        var baneado = bans.findOne({ "webid" : webid });
+        if (baneado != null) {
+            return true;
+        }
+        return false;
+    }
+
     async function updateUser(webid, data) {
         const database = client.db('baseDatosRadarin');
         const users = database.collection('usuarios');
@@ -81,4 +91,4 @@ const client = new MongoClient(uri);
         await users.insertOne(user);
     }
 
-module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser}
+module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser, isBanned}

@@ -46,6 +46,7 @@ jobs:
     needs: [e2e-tests]
     runs-on: ubuntu-latest
     steps:
+      - run: git add -A && git commit -m "Updated code for deployment"
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
         with:

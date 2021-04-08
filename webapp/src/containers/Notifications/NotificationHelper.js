@@ -30,14 +30,13 @@ const Notifications = ({show, setshow }) => {
 		}
 	}
 
-	function showNotifications(friendWebId, e) { // Igual falta el object aquí
+	function showNotifications(friendWebId, e) {
 		e.preventDefault();
 		try {
 			const contentNotif = {
 				title: "Prueba notificación",
 				summary: getUserName(cadena) + " ha compartido su notificación contigo",
-				actor: cadena,
-				target: friendWebId
+				actor: cadena
 			};
             
 			publish(sendNotification, contentNotif, friendWebId, NotificationTypes.OFFER);
@@ -62,8 +61,7 @@ const Notifications = ({show, setshow }) => {
 					{
 						title: content.title,
 						summary: content.summary,
-						actor: content.actor,
-						target: content.target
+						actor: content.actor
 					},
 					to.path,
 					type,

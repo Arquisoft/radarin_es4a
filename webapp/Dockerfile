@@ -1,18 +1,19 @@
-FROM node:12.14.1
-COPY . /app
-WORKDIR /app
-#Install the dependencies
-RUN npm install --production
-#Create an enviroment variable to set where the api is (check src/api/api.js). 
-#When we deploy to heroku this will take a different value. Check .github/workflows/radarin.yml
-ARG API_URI="http://localhost:5000/api"
-ENV REACT_APP_API_URI=$API_URI
-#Create an optimized version of the webapp
+FROM node:14.1-alpine AS builder
+
+WORKDIR /opt/web
+COPY package.json package-lock.json ./
+RUN npm install
+
+ENV PATH="./node_modules/.bin:$PATH"
+
+COPY . ./
 RUN npm run build
-#Install software neccesary for generating the doc
-RUN apt-get update && apt-get -y install ruby openjdk-8-jre
-RUN gem install asciidoctor asciidoctor-diagram
-RUN npm install shx --save-dev
-#Generate the doc
-RUN npm run docs
-CMD [ "node", "server.js" ]
+
+FROM nginx:1.17-alpine
+RUN apk --no-cache add curl
+RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
+    chmod +x envsubst && \
+    mv envsubst /usr/local/bin
+COPY ./nginx.config /etc/nginx/nginx.template
+CMD ["/bin/sh", "-c", "envsubst < /etc/nginx/nginx.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+COPY --from=builder /opt/web/build /usr/share/nginx/html

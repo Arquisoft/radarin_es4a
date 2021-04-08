@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Uploader } from '@inrupt/solid-react-components';
 import { Trans, useTranslation } from 'react-i18next';
 import {
@@ -13,6 +13,9 @@ import {
 import { ImageProfile } from '@components';
 import { errorToaster } from '@utils';
 import { getUserName } from '../MyFriends/myFriends.component';
+import  Notifications from "../Notifications/NotificationHelper";
+
+import MyFriends from "../MyFriends/myFriends.component";
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page
@@ -23,6 +26,7 @@ export const WelcomePageContent = props => {
   const { webId, image, updatePhoto, name } = props;
   const { t } = useTranslation();
   const limit = 2100000;
+  const [ showFriends, setShowFriends ] = useState(false);
   return (
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">
@@ -89,6 +93,7 @@ export const WelcomePageContent = props => {
               </a>
             </h3>
           </Trans>
+          <Notifications show={showFriends} setshow={setShowFriends} />
           <Trans i18nKey="welcome.description">
             <p>
               text

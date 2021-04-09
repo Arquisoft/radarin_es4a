@@ -13,9 +13,6 @@ import {
 import { ImageProfile } from '@components';
 import { errorToaster } from '@utils';
 import { getUserName } from '../MyFriends/myFriends.component';
-import  Notifications from "../Notifications/NotificationHelper";
-
-import MyFriends from "../MyFriends/myFriends.component";
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page

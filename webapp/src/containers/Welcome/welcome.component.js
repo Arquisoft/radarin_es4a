@@ -93,7 +93,6 @@ export const WelcomePageContent = props => {
               </a>
             </h3>
           </Trans>
-          <Notifications show={showFriends} setshow={setShowFriends} />
           <Trans i18nKey="welcome.description">
             <p>
               text

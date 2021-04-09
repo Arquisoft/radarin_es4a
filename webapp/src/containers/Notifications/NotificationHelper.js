@@ -9,7 +9,7 @@ import { sharing } from "../../utils/permissions";
 import { Modal, Button } from "react-bootstrap";
 import i18n from "i18n";
 
-const Notifications = ({show, setshow }) => {
+const Notifications = ({mensaje, nombreBoton, friendsList, show, setshow }) => {
 	let cadena = null;
 
 	const { createNotification } = useNotification(cadena);
@@ -38,7 +38,7 @@ const Notifications = ({show, setshow }) => {
 		try {
 			const contentNotif = {
 				title: "Prueba notificación",
-				summary: getUserName(cadena) + " ha compartido su notificación contigo",
+				summary: getUserName(cadena) + mensaje,
 				actor: cadena
 			};
             
@@ -79,7 +79,7 @@ const Notifications = ({show, setshow }) => {
 
 	function shareWithFriends(e) {
 		e.preventDefault();
-        var friendsList = ["https://uo271397.inrupt.net/profile/card#me", "https://cuartasfabio.inrupt.net/profile/card#me"];
+        //var friendsList = ["https://uo271397.inrupt.net/profile/card#me", "https://cuartasfabio.inrupt.net/profile/card#me", "https://israelmnrg.inrupt.net/profile/card#me", "https://alvarofuente.inrupt.net/profile/card#me", "https://vitusuarez.inrupt.net/profile/card#me", "https://uo269871.inrupt.net/profile/card#me", "https://ramonvilafer.inrupt.net/profile/card#me"];
 		for (var key of friendsList) { 
 			showNotifications(key, e);
 		}
@@ -96,7 +96,7 @@ const Notifications = ({show, setshow }) => {
 	return (
 
 				<button id="shareRoute" onClick={(e) => shareWithFriends(e)}>
-					BotónNotificación
+					{ nombreBoton }
 				</button>
 
 	);

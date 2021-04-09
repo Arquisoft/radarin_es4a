@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { NotificationTypes, useNotification } from "@inrupt/solid-react-components";
-import { notification } from "@utils";
+import { notification, errorToaster, successToaster } from "@utils";
 import auth from "solid-auth-client";
 import { useLDflexList } from "@solid/react";
 import { getUserName } from "../MyFriends/myFriends.component";
@@ -9,6 +9,7 @@ import i18n from "i18n";
 
 const Notifications = ({mensaje, nombreBoton, amigo}) => {
 	let cadena = null;
+	var error = false;
 
 	const { createNotification } = useNotification(cadena);
 
@@ -26,7 +27,7 @@ const Notifications = ({mensaje, nombreBoton, amigo}) => {
 		try {
 			await createNotification(content, to, type, license);
 		} catch (error) {
-			alert("Error: sendNotification error");
+			error = true;
 		}
 	}
 
@@ -39,9 +40,10 @@ const Notifications = ({mensaje, nombreBoton, amigo}) => {
 				actor: cadena
 			};
             
-			publish(sendNotification, contentNotif, friendWebId, NotificationTypes.OFFER);
+			if (!publish(sendNotification, contentNotif, friendWebId, NotificationTypes.OFFER))
+				error = true;
 		} catch (error) {
-			alert("Could not share the route");
+			error = true;
 		}
 	}
 
@@ -84,7 +86,12 @@ const Notifications = ({mensaje, nombreBoton, amigo}) => {
 		} else {
 			showNotifications(amigo, e);
 		}
-        
+		
+		if (error)
+			errorToaster("Notificación no enviada", "ERROR");
+		else
+        	successToaster("Notificación enviada con éxito", "SUCCESS");
+
 		//givePermissions(checkedItems);
 		//setshow(!show);
 	}

@@ -5,12 +5,9 @@ const api = require("./api")
 const db = require("./database");
 
 async function connect(){
-    //The MONGO_URI variable is the connection string to MongoDB Atlas (for production). This env variable is created in heroku.
-    
-
     const app = express()
 
-    //Monitoring middleware
+    // Monitoring middleware
     const metricsMiddleware = promBundle({includeMethod: true});
     app.use(metricsMiddleware);
 

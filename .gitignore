@@ -19,3 +19,6 @@ restapi/node_modules
 restapi/data
 
 .eslintcache
+
+# IDE
+.vscode/

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NotificationTypes, useNotification } from "@inrupt/solid-react-components";
 import { notification } from "@utils";
 import auth from "solid-auth-client";
-import { FriendsList } from "../MyFriends/myfriends.style";
-import { List, useLDflexList } from "@solid/react";
-import { getUrl, getUserName } from "../MyFriends/myFriends.component";
-import { sharing } from "../../utils/permissions";
-import { Modal, Button } from "react-bootstrap";
+import { useLDflexList } from "@solid/react";
+import { getUserName } from "../MyFriends/myFriends.component";
+
 import i18n from "i18n";
 
-const Notifications = ({mensaje, nombreBoton, friendsList, show, setshow }) => {
+const Notifications = ({mensaje, nombreBoton, amigo}) => {
 	let cadena = null;
 
 	const { createNotification } = useNotification(cadena);
+
+	const friendsList = useLDflexList("user.friends");
 
 	useEffect(() => {
 		auth.trackSession((session) => {
@@ -21,9 +21,6 @@ const Notifications = ({mensaje, nombreBoton, friendsList, show, setshow }) => {
 			}
 		});
 	});
-
-    //console.log(cadena);
-    //console.log(useLDflexList( "[" + cadena + "].friends" ));
 
 	async function sendNotification(content, to, type, license) {
 		try {
@@ -80,12 +77,16 @@ const Notifications = ({mensaje, nombreBoton, friendsList, show, setshow }) => {
 	function shareWithFriends(e) {
 		e.preventDefault();
         //var friendsList = ["https://uo271397.inrupt.net/profile/card#me", "https://cuartasfabio.inrupt.net/profile/card#me", "https://israelmnrg.inrupt.net/profile/card#me", "https://alvarofuente.inrupt.net/profile/card#me", "https://vitusuarez.inrupt.net/profile/card#me", "https://uo269871.inrupt.net/profile/card#me", "https://ramonvilafer.inrupt.net/profile/card#me"];
-		for (var key of friendsList) { 
-			showNotifications(key, e);
+		if(amigo == null) {
+			for (var key of friendsList) { 
+				showNotifications(key.value, e);
+			}
+		} else {
+			showNotifications(amigo, e);
 		}
         
 		//givePermissions(checkedItems);
-		setshow(!show);
+		//setshow(!show);
 	}
 
 	//function givePermissions() { PUEDE QUE NO SIRVA PARA NADA

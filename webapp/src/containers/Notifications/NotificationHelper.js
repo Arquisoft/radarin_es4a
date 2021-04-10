@@ -7,7 +7,7 @@ import { getUserName } from "../MyFriends/myFriends.component";
 
 import i18n from "i18n";
 
-const Notifications = ({mensaje, nombreBoton, amigo}) => {
+const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 	let cadena = null;
 	var error = false;
 
@@ -79,21 +79,26 @@ const Notifications = ({mensaje, nombreBoton, amigo}) => {
 	function shareWithFriends(e) {
 		e.preventDefault();
         //var friendsList = ["https://uo271397.inrupt.net/profile/card#me", "https://cuartasfabio.inrupt.net/profile/card#me", "https://israelmnrg.inrupt.net/profile/card#me", "https://alvarofuente.inrupt.net/profile/card#me", "https://vitusuarez.inrupt.net/profile/card#me", "https://uo269871.inrupt.net/profile/card#me", "https://ramonvilafer.inrupt.net/profile/card#me"];
-		if(amigo == null) {
+		if(amigos == null) {
 			for (var key of friendsList) { 
 				showNotifications(key.value, e);
 			}
 		} else {
-			showNotifications(amigo, e);
+			for (var key of amigos) { 
+				showNotifications(key, e);
+			}
 		}
 		
-		if (error)
+		if (error) {
 			errorToaster("Notificación no enviada", "ERROR");
-		else
-        	successToaster("Notificación enviada con éxito", "SUCCESS");
-
-		//givePermissions(checkedItems);
-		//setshow(!show);
+		} else {
+			if(toastermsg != null) {
+				successToaster(toastermsg, "SUCCESS");
+			} else {
+				successToaster("Notificación enviada con éxito", "SUCCESS");
+			}
+		}
+    
 	}
 
 	//function givePermissions() { PUEDE QUE NO SIRVA PARA NADA

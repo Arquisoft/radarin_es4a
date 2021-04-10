@@ -44,7 +44,7 @@ class MyFriends extends Component {
             </List>
             }
 
-            <Notifications mensaje=" es, o ha estado en contacto con un positivo en COVID-19." nombreBoton="Notificar contacto COVID-19"/>	
+            <Notifications mensaje=" es, o ha estado en contacto con un positivo en COVID-19." nombreBoton="Notificar COVID-19" toastermsg="Contactos notificados con éxito"/>	
             
             </div>
             </Container>

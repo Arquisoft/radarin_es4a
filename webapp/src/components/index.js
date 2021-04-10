@@ -7,6 +7,7 @@ import Footer from './Footer';
 import Notification from './Notifications';
 import { AutoSaveSpinner } from './AutoSaveSpinner';
 import FriendsMap from './FriendsMap'
+import Settings from './Settings'
 
 export {
   ErrorBoundary,
@@ -17,5 +18,6 @@ export {
   Footer,
   Notification,
   AutoSaveSpinner,
-  FriendsMap
+  FriendsMap,
+  Settings
 };

@@ -47,6 +47,7 @@
   },
   "navBar": {
     "welcome": "Welcome",
+    "settingsRadio": "Ajustes",
     "myFriends": "Friends",
     "friendsMap": "Map",
     "logOut": "Log out",

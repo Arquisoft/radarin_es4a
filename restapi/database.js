@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 const { db } = require("./models/users");
     
-const uri = "mongodb://127.0.0.1:27017"
+const uri = "mongodb://radarines4a:radarines4a@radarines4a-shard-00-00.z94ly.mongodb.net:27017,radarines4a-shard-00-01.z94ly.mongodb.net:27017,radarines4a-shard-00-02.z94ly.mongodb.net:27017/radarines4a?ssl=true&replicaSet=atlas-fzm6ss-shard-0&authSource=admin&retryWrites=true&w=majority"
 const client = new MongoClient(uri);
     
     async function init() {

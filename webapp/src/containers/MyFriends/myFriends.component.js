@@ -4,6 +4,7 @@ import { Button, FormControl, Container} from "react-bootstrap";
 import { addFriend } from './friends.service';
 import  InfoFriends from "./InfoFriends";
 import { Trans, useTranslation } from 'react-i18next';
+import  Notifications from "../Notifications/NotificationHelper";
 
 
 class MyFriends extends Component {
@@ -42,6 +43,8 @@ class MyFriends extends Component {
 			)}
             </List>
             }
+
+            <Notifications mensaje=" es, o ha estado en contacto con un positivo en COVID-19." nombreBoton="Notificar COVID-19" toastermsg="Contactos notificados con éxito"/>	
             
             </div>
             </Container>

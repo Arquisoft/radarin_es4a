@@ -3,7 +3,6 @@ import { List } from "@solid/react";
 import { Button, FormControl, Container} from "react-bootstrap";
 import { addFriend } from './friends.service';
 import  InfoFriends from "./InfoFriends";
-import { Trans, useTranslation } from 'react-i18next';
 import  Notifications from "../Notifications/NotificationHelper";
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Uploader } from '@inrupt/solid-react-components';
 import { Trans, useTranslation } from 'react-i18next';
 import {
@@ -23,7 +23,9 @@ export const WelcomePageContent = props => {
   const { webId, image, updatePhoto, name } = props;
   const { t } = useTranslation();
   const limit = 2100000;
-  const [ showFriends, setShowFriends ] = useState(false);
+  
+  //const [ showFriends, setShowFriends ] = useState(false);
+  
   return (
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">

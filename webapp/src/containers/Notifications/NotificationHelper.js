@@ -5,8 +5,6 @@ import auth from "solid-auth-client";
 import { useLDflexList } from "@solid/react";
 import { getUserName } from "../MyFriends/myFriends.component";
 
-import i18n from "i18n";
-
 const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 	let cadena = null;
 	var error = false;
@@ -26,8 +24,8 @@ const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 	async function sendNotification(content, to, type, license) {
 		try {
 			await createNotification(content, to, type, license);
-		} catch (error) {
-			error = true;
+		} catch (e) {
+			error=true;
 		}
 	}
 
@@ -42,7 +40,7 @@ const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
             
 			if (!publish(sendNotification, contentNotif, friendWebId, NotificationTypes.OFFER))
 				error = true;
-		} catch (error) {
+		} catch (e) {
 			error = true;
 		}
 	}
@@ -84,8 +82,8 @@ const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 				showNotifications(key.value, e);
 			}
 		} else {
-			for (var key of amigos) { 
-				showNotifications(key, e);
+			for (var key2 of amigos) { 
+				showNotifications(key2, e);
 			}
 		}
 		

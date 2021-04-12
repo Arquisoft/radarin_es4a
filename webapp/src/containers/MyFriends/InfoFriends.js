@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouteCard } from "./myfriends.style";
 import  Notifications from "../Notifications/NotificationHelper";
 
 const InfoFriends = (props) => {
 	const { name, webidFriend} = props;
-	const [ showFriends, setShowFriends ] = useState(false);
 
 	return (
 		<RouteCard className="card">

@@ -47,6 +47,7 @@
   },
   "navBar": {
     "welcome": "Welcome",
+    "settingsRadio": "Settings",
     "myFriends": "Friends",
     "friendsMap": "Map",
     "formModel": "Form Model",

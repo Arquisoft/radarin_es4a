@@ -3,7 +3,6 @@ const User = require("./models/users")
 const router = express.Router()
 const db = require("./database");
 
-
 /* Ejemplo de datos a procesar: 
 {
     "webid" : <webid>, 
@@ -21,9 +20,10 @@ router.post("/users/update", async (req, res) => {
     let friends = req.body.data.friends;
     let last_location = req.body.data.last_location;
 
-    let friends_location = {};
+    let friends_location = new Map();
 
     try { // Guardar la ubicación del usuario en la base de datos
+        console.log("Actualizando la ubicación del usuario: " + webid);
         db.updateUser( webid, last_location );
 
     } catch (error) {
@@ -31,19 +31,23 @@ router.post("/users/update", async (req, res) => {
         res.type( 'json' ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
     }
 
-    // Recorrer la lsita de amigos
-    friends.forEach( friend_webid => {
-        try {
-            // Buscar al amigo en la base de datos
-            let friend = db.findByWebId( friend_webid );
+    console.log("Recorriendo la lista de amigos...")
+    console.log("Amigos: [" + friends + "]")
 
-            if (friend) { // Si hay amigo...
-                // ... Añadimos su última ubicación conocida a la lista
-                // que se devolverá posteriormente.
-                friends_location.friend_webid = friend.data;
-            }
-        } catch (error) { /* ¡Fallar silenciosamente! */ }
-    });
+    // Recorrer la lista de amigos ([<webid1>, <webid2>, ...])
+    for( let i = 0; i < friends.length; i++ ) {
+        let friend_webid = friends[i];
+        console.log("Buscando a: " + friend_webid);
+
+        let friend = await db.findByWebId( friend_webid ).then( result => { 
+            console.log("Encontrado!. Datos:")
+            console.log(result.data);
+            return result 
+        } );
+
+        console.log("Añadiendo amigo al Map...")
+        friends_location.set( friend_webid, friend.data );
+    }
 
     // Devolver la última ubicación de los amigos 
     /* 
@@ -65,7 +69,26 @@ router.post("/users/update", async (req, res) => {
             "timestamp" : 917923719823
         }
     } */
-    res.type( 'json' ).status( 200 ).send( friends_location );
+
+    // https://stackoverflow.com/questions/37437805/convert-map-to-json-object-in-javascript
+    const autoConvertMapToObject = (map) => {
+        const obj = {};
+        for (const item of [...map]) {
+          const [
+            key,
+            value
+          ] = item;
+          obj[key] = value;
+        }
+        return obj;
+    }
+
+    var response_object = autoConvertMapToObject( friends_location );
+
+    console.log(friends_location);
+    console.log(response_object);
+
+    res.type( 'json' ).status( 200 ).send( response_object );
 })
 
 

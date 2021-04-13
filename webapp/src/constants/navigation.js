@@ -19,6 +19,12 @@ export const NavigationItems = [
     icon: '/img/icon/r.png',
     label: 'navBar.friendsMap',
     to: '/friendsMap'
+  },
+  {
+    id: 'settingsRadio',
+    icon: '/img/icon/r.png',
+    label: 'navBar.settingsRadio',
+    to: '/settingsRadio'
   }
 ];
 

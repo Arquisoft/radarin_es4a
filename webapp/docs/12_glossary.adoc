@@ -1,31 +1,13 @@
 [[section-glossary]]
 == Glossary
 
-
-
-[role="arc42help"]
-****
-.Contents
-The most important domain and technical terms that your stakeholders use when discussing the system.
-
-You can also see the glossary as source for translations if you work in multi-language teams.
-
-.Motivation
-You should clearly define your terms, so that all stakeholders
-
-* have an identical understanding of these terms
-* do not use synonyms and homonyms
-
-.Form
-A table with columns <Term> and <Definition>.
-
-Potentially more columns in case you need translations.
-
-****
-
 [options="header"]
 |===
-| Term         | Definition
-| <Term-1>     | <definition-1>
-| <Term-2>     | <definition-2>
+| Término         | Definición
+| React | Es una biblioteca Javascript de código abierto diseñada para crear interfaces de usuario con el objetivo de facilitar el desarrollo de aplicaciones en una sola página.
+| Solid | Un conjunto de funciones y procedimientos que permiten la creación de aplicaciones que acceden a las características o datos de un sistema operativo, aplicación u otro servicio. 
+| Heroku | Heroku es una plataforma como servicio que permite a los desarrolladores crear, ejecutar y operar aplicaciones completamente en la nube.
+| Pod | Los Pods de solid son donde tú almacenas tu información. Cualquier tipo de información puede ser guardada en un Pod de Solid. Una vez guardada tu controlas quien accede a tus datos.
+| Aplicación | 
+| Sistema | 
 |===

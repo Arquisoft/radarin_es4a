@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { Navigation, Toolbar, HamburgerButton, MobileNavigation } from './children';
+import { NavLogo } from './nav-bar.style';
 
 type Props = {
   t: Function,
@@ -57,9 +57,9 @@ const NavBar = (props: Props) => {
     <header role="navigation" className="header header__desktop fixed" ref={componentElement}>
       <section className="header-wrap">
         <div className="logo-block">
-          <Link to="/welcome">
-            <img src="/img/radarin.png" alt="inrupt" />
-          </Link>
+        <NavLogo data-testid="nav-bar-logo">
+          <img src="/img/radarin.png" alt="inrupt" />
+        </NavLogo>
         </div>
 
         {isOpenMobile ? (

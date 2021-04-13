@@ -68,8 +68,32 @@ async function getFriends( friends ) {
   return friendsValue;
 }
 
+// Auxiliar method to convert coords to radians.
+var toRadianes = function (valor) {
+  return (Math.PI / 180) * valor;
+}
+// Calculates the distance between two coordinates according to Haversine Formule.
+var distanceFilter = function (lat2, lng2, userLat, userLon) {
+  var RadioTierraKm = 6378.0;
 
+  var lat1 = userLat;
+  var lng1 = userLon;
+  var difLat = toRadianes(lat2 - lat1);
+  var difLng = toRadianes(lng2 - lng1);
 
+  var a = Math.pow(Math.sin(difLat / 2), 2) +
+      Math.cos(toRadianes(lat1)) *
+      Math.cos(toRadianes(lat2)) *
+      Math.pow(Math.sin(difLng / 2), 2);
+
+  var c = RadioTierraKm * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+
+  if (c > radius()) {
+      return false;
+  }
+
+  return true;
+}
 
 // Use React.Memo
 function FriendsMap( props ) {
@@ -137,6 +161,7 @@ function FriendsMap( props ) {
        <Marker lat={ latitude } lng={ longitude } color="blue" text="Tú"/>
 
        { Object.keys(lista).map( (amigo) => {
+         if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude))
           return (
             <Marker lat={ lista[amigo].lat } lng={ lista[amigo].lon } color="green" text={ amigo.split("/")[2].split(".")[0] } />
           );

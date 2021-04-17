@@ -113,7 +113,7 @@ function FriendsMap( props ) {
 
     //Metemos esto en una función para que no se ejecute todo el rato
     function prueba(){
-      userFriendsList.forEach(element => tempFriendsList.push( element.valueOf() ) );
+      userFriendsList.forEach((element) => tempFriendsList.push( element.valueOf() ) );
 
       let userInfo = { 
         "webid": webID,
@@ -130,7 +130,7 @@ function FriendsMap( props ) {
       if (tempFriendsList.length > 0 ){
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
         axios.post( apiEndPoint + "/users/update", userInfo )
-            .then(res => { setLista(res.data) }); //Usamos el setState y metemos la lista que luego usaremos con setList
+            .then((res) => { setLista(res.data) }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }
     }
 

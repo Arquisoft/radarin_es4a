@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import data from '@solid/query-ldflex';
-import { namedNode } from '@rdfjs/data-model';
-import { WelcomePageContent } from './welcome.component';
-import { successToaster, errorToaster } from '@utils';
+import React, { Component } from "react";
+import data from "@solid/query-ldflex";
+import { namedNode } from "@rdfjs/data-model";
+import { WelcomePageContent } from "./welcome.component";
+import { successToaster, errorToaster } from "@utils";
 
-const defaultProfilePhoto = '/img/icon/empty-profile.svg';
+const defaultProfilePhoto = "/img/icon/empty-profile.svg";
 
 /**
  * Container component for the Welcome Page, containing example of how to fetch data from a POD
@@ -14,7 +14,7 @@ export class WelcomeComponent extends Component<Props> {
     super(props);
 
     this.state = {
-      name: '',
+      name: "",
       image: defaultProfilePhoto,
       isLoading: false,
       hasImage: false
@@ -42,7 +42,7 @@ export class WelcomeComponent extends Component<Props> {
     const { webId } = this.props;
     /*
      * This is an example of how to use LDFlex. Here, we're loading the webID link into a user variable. This user object
-     * will contain all of the data stored in the webID link, such as profile information. Then, we're grabbing the user.name property
+     * will contain all of the data stored in the webID link, such as profile information. Then, we"re grabbing the user.name property
      * from the returned user object.
      */
     const user = data[webId];
@@ -62,10 +62,10 @@ export class WelcomeComponent extends Component<Props> {
     /**
      * This is where we set the state with the name and image values. The user[hasPhotoContext] line of code is an example of
      * what to do when LDFlex doesn't have the full context. LDFlex has many data contexts already in place, but in case
-     * it's missing, you can manually add it like we're doing here.
+     * it"s missing, you can manually add it like we"re doing here.
      *
      * The hasPhotoContext variable stores a link to the definition of the vcard ontology and, specifically, the #hasPhoto
-     * property that we're using to store and link the profile image.
+     * property that we"re using to store and link the profile image.
      *
      * For more information please go to: https://github.com/solid/query-ldflex
      */
@@ -78,7 +78,7 @@ export class WelcomeComponent extends Component<Props> {
    * will just update it, the idea is use image instead of hasPhoto
    * @params{String} uri photo url
    */
-  updatePhoto = async (uri: String, message, title = '') => {
+  updatePhoto = async (uri: String, message, title = "") => {
     const { hasImage } = this.state;
     try {
       const { user } = data;
@@ -86,7 +86,7 @@ export class WelcomeComponent extends Component<Props> {
       else await user.vcard_hasPhoto.add(namedNode(uri));
       successToaster(message, title);
     } catch (error) {
-      errorToaster(error.message, 'Error');
+      errorToaster(error.message, "Error");
     }
   };
 

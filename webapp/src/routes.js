@@ -1,29 +1,29 @@
-import React, { Fragment } from 'react';
-import { PrivateLayout, PublicLayout, NotLoggedInLayout } from '@layouts';
-import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import { FriendsMap, Settings } from './components'
+import React, { Fragment } from "react";
+import { PrivateLayout, PublicLayout, NotLoggedInLayout } from "@layouts";
+import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+import { FriendsMap, Settings } from "./components"
 
-import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends } from './containers';
+import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends } from "./containers";
 
 const privateRoutes = [
   {
-    id: 'welcome',
-    path: '/welcome',
+    id: "welcome",
+    path: "/welcome",
     component: Welcome
   },
   {
-    id: 'myFriends',
-    path: '/myFriends',
+    id: "myFriends",
+    path: "/myFriends",
     component: MyFriends
   },
   {
-    id: 'friendsMap',
-    path: '/friendsMap',
+    id: "friendsMap",
+    path: "/friendsMap",
     component: FriendsMap
   },
   {
-    id: 'settingsRadio',
-    path: '/settingsRadio',
+    id: "settingsRadio",
+    path: "/settingsRadio",
     component: Settings
   }
 ];

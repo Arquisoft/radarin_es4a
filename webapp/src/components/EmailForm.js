@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {addUser,getUsers} from '../api/api'
+import {addUser,getUsers} from "../api/api"
 
 class EmailForm extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {email: '', enabled: false, welcomeMsg: ''}
+    this.state = {email: "", enabled: false, welcomeMsg: ""}
   }
 
   componentDidMount(){
@@ -54,7 +54,7 @@ class EmailForm extends React.Component{
       this.registerUser()
     }
     else
-        this.setState({welcomeMsg:'ERROR: You must fill both fields!'})
+        this.setState({welcomeMsg:"ERROR: You must fill both fields!"})
   }
 
   render(){
@@ -76,7 +76,7 @@ class EmailForm extends React.Component{
               Submit
             </Button>
             <div>
-              <span hidden={this.state.welcomeMsg===''}>{this.state.welcomeMsg}</span>
+              <span hidden={this.state.welcomeMsg===""}>{this.state.welcomeMsg}</span>
             </div>
           </Form>
     )

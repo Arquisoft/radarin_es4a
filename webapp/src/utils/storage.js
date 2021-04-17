@@ -1,7 +1,7 @@
-import data from '@solid/query-ldflex';
-import { AccessControlList } from '@inrupt/solid-react-components';
-import { resourceExists, createDoc, createDocument } from './ldflex-helper';
-import { storageHelper, errorToaster, permissionHelper } from '@utils';
+import data from "@solid/query-ldflex";
+import { AccessControlList } from "@inrupt/solid-react-components";
+import { resourceExists, createDoc, createDocument } from "./ldflex-helper";
+import { storageHelper, errorToaster, permissionHelper } from "@utils";
 
 const appPath = process.env.REACT_APP_TICTAC_PATH;
 
@@ -14,7 +14,7 @@ const appPath = process.env.REACT_APP_TICTAC_PATH;
  */
 export const buildPathFromWebId = (webId, path) => {
   if (!webId) return false;
-  const domain = new URL(typeof webId === 'object' ? webId.webId : webId).origin;
+  const domain = new URL(typeof webId === "object" ? webId.webId : webId).origin;
   return `${domain}/${path}`;
 };
 
@@ -25,10 +25,10 @@ export const buildPathFromWebId = (webId, path) => {
 export const getAppStorage = async webId => {
   const podStoragePath = await data[webId].storage;
   let podStoragePathValue =
-    podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : '';
+    podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : "";
 
   // Make sure that the path ends in a / so it is recognized as a folder path
-  if (podStoragePathValue && !podStoragePathValue.endsWith('/')) {
+  if (podStoragePathValue && !podStoragePathValue.endsWith("/")) {
     podStoragePathValue = `${podStoragePathValue}/`;
   }
 
@@ -67,14 +67,14 @@ export const createInitialFiles = async webId => {
     const gameFolderExists = await resourceExists(gameUrl);
     if (!gameFolderExists) {
       await createDoc(data, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'text/turtle'
+          "Content-Type": "text/turtle"
         }
       });
     }
 
-    // Check if data file exists, if not then create it. This file holds links to other people's games
+    // Check if data file exists, if not then create it. This file holds links to other people"s games
     const dataFileExists = await resourceExists(dataFilePath);
     if (!dataFileExists) {
       await createDocument(dataFilePath);
@@ -88,9 +88,9 @@ export const createInitialFiles = async webId => {
 
     return true;
   } catch (error) {
-    errorToaster(error.message, 'Error');
+    errorToaster(error.message, "Error");
     return false;
   }
 };
 
-export const checkAndInitializeInbox = async () => '';
+export const checkAndInitializeInbox = async () => "";

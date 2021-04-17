@@ -63,9 +63,11 @@ input[type='checkbox'] {
   width: auto !important;
   margin-left: 4px !important;
 }
+
 input[type='checkbox']::before {
   content: none !important;
 }
+
 /**
 Ends temporary react/fontawesome fix
  */

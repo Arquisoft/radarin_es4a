@@ -13,7 +13,7 @@ type Props = {
 const AuthNavBar = React.memo((props: Props) => {
   const [inboxes, setInbox] = useState([]);
   const { t, i18n } = useTranslation();
-  const navigation = NavigationItems.map(item => ({ ...item, label: t(item.label) }));
+  const navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));
   const { webId } = props;
   /**
    * Looks for all of the inbox containers in the pod and sets inboxes state
@@ -36,11 +36,12 @@ const AuthNavBar = React.memo((props: Props) => {
        * If user doesn't has inbox in his pod will show an error and link to
        * know how fix it.
        */
-      if (inboxes.length === 0)
+      if (inboxes.length === 0) {
         errorToaster(t("noInboxUser.message"), "Error", {
           label: t("noInboxUser.link.label"),
           href: t("noInboxUser.link.href")
         });
+      }
       setInbox(inboxes);
     } catch (error) {
       /**
@@ -71,7 +72,7 @@ const AuthNavBar = React.memo((props: Props) => {
           id: "notifications"
         },
         {
-          component: props => <NavBarContainer {...{ t, i18n, webId, history, ...props }} />,
+          component: (props) => <NavBarContainer {...{ t, i18n, webId, history, ...props }} />,
           id: "profile"
         }
       ]}

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { List } from "@solid/react";
 import { Button, FormControl, Container} from "react-bootstrap";
-import { addFriend } from './friends.service';
+import { addFriend } from "./friends.service";
 import  InfoFriends from "./InfoFriends";
 import  Notifications from "../Notifications/NotificationHelper";
 
@@ -28,7 +28,7 @@ class MyFriends extends Component {
                 <FormControl onChange={this.updateFriendWebId} type="webID" placeholder="Enter webId">
                 </FormControl>
 
-            <Button variant="outline-primary" onClick={()=> addFriend(this.state.enteredWebId, this.props.webId)}>  Enviar
+            <Button variant="outline-primary" onClick={() => addFriend(this.state.enteredWebId, this.props.webId)}>  Enviar
             </Button>
                 <h1>Lista de amigos:</h1>
 

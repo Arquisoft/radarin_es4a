@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { media } from '../../utils';
+import styled from "styled-components";
+import { media } from "../../utils";
 
 export const WelcomeWrapper = styled.section`
   width: 100%;
@@ -95,7 +95,7 @@ export const ImageWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background-image: ${({ image }) => (image ? `url(${image})` : '#cccccc')};
+  background-image: ${({ image }) => (image ? `url(${image})` : "#cccccc")};
   background-size: cover;
   border-radius: 50%;
   width: 128px;

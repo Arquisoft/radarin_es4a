@@ -22,3 +22,5 @@ restapi/data
 
 # IDE
 .vscode/
+restapi/package-lock.json
+webapp/package-lock.json

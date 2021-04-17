@@ -1,6 +1,6 @@
-import React from 'react';
-import { Uploader } from '@inrupt/solid-react-components';
-import { Trans, useTranslation } from 'react-i18next';
+import React from "react";
+import { Uploader } from "@inrupt/solid-react-components";
+import { Trans, useTranslation } from "react-i18next";
 import {
   WelcomeWrapper,
   WelcomeCard,
@@ -9,10 +9,10 @@ import {
   WelcomeDetail,
   WelcomeName,
   ImageWrapper
-} from './welcome.style';
-import { ImageProfile } from '@components';
-import { errorToaster } from '@utils';
-import { getUserName } from '../MyFriends/myFriends.component';
+} from "./welcome.style";
+import { ImageProfile } from "@components";
+import { errorToaster } from "@utils";
+import { getUserName } from "../MyFriends/myFriends.component";
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page
@@ -34,32 +34,32 @@ export const WelcomePageContent = props => {
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
-            {t('welcome.welcome')}, <WelcomeName>{getUserName(name)}</WelcomeName>
+            {t("welcome.welcome")}, <WelcomeName>{getUserName(name)}</WelcomeName>
           </h3>
           <ImageWrapper>
             <Uploader
               {...{
-                fileBase: webId && webId.split('/card')[0],
+                fileBase: webId && webId.split("/card")[0],
                 limitFiles: 1,
                 limitSize: limit,
-                accept: 'jpg,jpeg,png',
+                accept: "jpg,jpeg,png",
                 errorsText: {
-                  sizeLimit: t('welcome.errors.sizeLimit', {
+                  sizeLimit: t("welcome.errors.sizeLimit", {
                     limit: `${limit / 1000000}Mbs`
                   }),
-                  unsupported: t('welcome.errors.unsupported'),
-                  maximumFiles: t('welcome.errors.maximumFiles')
+                  unsupported: t("welcome.errors.unsupported"),
+                  maximumFiles: t("welcome.errors.maximumFiles")
                 },
                 onError: error => {
                   if (error && error.statusText) {
-                    errorToaster(error.statusText, t('welcome.errorTitle'));
+                    errorToaster(error.statusText, t("welcome.errorTitle"));
                   }
                 },
                 onComplete: uploadedFiles => {
                   updatePhoto(
                     uploadedFiles[uploadedFiles.length - 1].uri,
-                    t('welcome.uploadSuccess'),
-                    t('welcome.successTitle')
+                    t("welcome.uploadSuccess"),
+                    t("welcome.successTitle")
                   );
                 },
                 render: props => (
@@ -68,8 +68,8 @@ export const WelcomePageContent = props => {
                       ...props,
                       webId,
                       photo: image,
-                      text: t('welcome.upload'),
-                      uploadingText: t('welcome.uploadingText')
+                      text: t("welcome.upload"),
+                      uploadingText: t("welcome.uploadingText")
                     }}
                   />
                 )
@@ -100,8 +100,8 @@ export const WelcomePageContent = props => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                link{' '}
-              </a>{' '}
+                link{" "}
+              </a>{" "}
               text
             </p>
           </Trans>
@@ -147,13 +147,13 @@ export const WelcomePageContent = props => {
               >
                 Release Timeline
               </a>
-              for what’s been implemented as part of the previous releases, and what's currently
+              for what’s been implemented as part of the previous releases, and what"s currently
               planned.
             </p>
           </Trans>
-          <p>{t('welcome.version050')}</p>
-          <h3>{t('welcome.fairUsageTitle')}</h3>
-          <p>{t('welcome.fairUsageText')}</p>
+          <p>{t("welcome.version050")}</p>
+          <h3>{t("welcome.fairUsageTitle")}</h3>
+          <p>{t("welcome.fairUsageText")}</p>
           <Trans i18nKey="welcome.fairUsageExamples">
             <ul>
               <li>
@@ -161,8 +161,8 @@ export const WelcomePageContent = props => {
                 that. If not, please don’t misrepresent yourself by using the Solid logo.
               </li>
               <li>
-                Please don't use the inrupt name as a part of your company name, website name,
-                domain name, service name, or app name. Don't use our logo as your own or modify it
+                Please don"t use the inrupt name as a part of your company name, website name,
+                domain name, service name, or app name. Don"t use our logo as your own or modify it
                 to fit into your own logo.
               </li>
               <li>
@@ -172,8 +172,8 @@ export const WelcomePageContent = props => {
               </li>
             </ul>
           </Trans>
-          <p>{t('welcome.fairUsageSummary')}</p>
-          <h3>{t('welcome.contactUsTitle')}</h3>
+          <p>{t("welcome.fairUsageSummary")}</p>
+          <h3>{t("welcome.contactUsTitle")}</h3>
           <Trans i18nKey="welcome.contactUsText">
             <p>
               If you have additional questions about the use of the React SDK for Solid, the

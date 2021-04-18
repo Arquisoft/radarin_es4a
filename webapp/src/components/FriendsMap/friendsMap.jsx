@@ -107,8 +107,8 @@ function FriendsMap( props ) {
 
   const { latitude, longitude } = usePosition( false );
 
-  //getFriends(useLDflexList( "[" + webID + "].friends" ))
-  //      .then( (friendsList) => { setUserFriendsList( friendsList ) });
+  getFriends(useLDflexList( "[" + webID + "].friends" ))
+        .then( (friendsList) => { setUserFriendsList( friendsList ) });
 
 
     //Metemos esto en una función para que no se ejecute todo el rato
@@ -134,9 +134,9 @@ function FriendsMap( props ) {
       }
     }
 
-    //useEffect(() => {
-    //  prueba();
-    //});
+    useEffect(() => {
+      prueba();
+    });
 
     // TODO: Fix
     //if ( veces < 1000 ) { prueba(); veces++; }

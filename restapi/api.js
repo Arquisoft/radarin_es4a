@@ -28,7 +28,7 @@ router.post("/users/update", async (req, res) => {
 
     } catch (error) {
         // Si hay un error, notificar al front
-        res.type( 'json' ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
+        res.type( "json" ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
     }
 
     console.log("Recorriendo la lista de amigos...");
@@ -88,7 +88,7 @@ router.post("/users/update", async (req, res) => {
     console.log(friends_location);
     console.log(response_object);
 
-    res.type( 'json' ).status( 200 ).send( response_object );
+    res.type( "json" ).status( 200 ).send( response_object );
 });
 
 
@@ -102,7 +102,7 @@ router.post("/users/add", async (req, res) => {
     let user = await db.findByWebId(webid);
     if ( user ){
         // El usuario ya existe, notificar al usuario.
-        res.type( 'json' ).status( 403 ).send( {"code": 403, "message": "User already registered"} );
+        res.type( "json" ).status( 403 ).send( {"code": 403, "message": "User already registered"} );
     }
     else {
         // El usuario no existe, lo añadimos a la base de datos
@@ -110,7 +110,7 @@ router.post("/users/add", async (req, res) => {
         let user_id = user._id;
 
         // Notificar 
-        res.type( 'json' ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id } );
+        res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id } );
     }
 })
 

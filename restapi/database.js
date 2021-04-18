@@ -16,24 +16,24 @@ async function init( mongo_uri ) {
     console.log("Conexión realizada!");
 
     console.log("Creando base de datos Radarin");
-    const database = mongo_client.db('baseDatosRadarin');
+    const database = mongo_client.db("baseDatosRadarin");
     
     console.log("Eliminando colecciones existentes...");
     console.log("...usuarios");
-    database.dropCollection('usuarios');
+    database.dropCollection("usuarios");
     console.log("...admin");
-    database.dropCollection('admin');
+    database.dropCollection("admin");
     console.log("...baneados");
-    database.dropCollection('baneados');
+    database.dropCollection("baneados");
     console.log("OK");
 
     console.log("Creando colecciones vacias...");
     console.log("..usuarios");
-    const users = database.collection('usuarios');
+    const users = database.collection("usuarios");
     console.log("...admin");
-    const admin = database.collection('admin');
+    const admin = database.collection("admin");
     console.log("...baneados");
-    const bans = database.collection('baneados');
+    const bans = database.collection("baneados");
     console.log("OK");
 
     const user1 = { "webid": "https://israelmnrg.inrupt.net/profile/card#me", "data": { "lat": 43.3669759938579, "lon": -5.877764106417212, "timestamp": Date.now() } };
@@ -63,41 +63,41 @@ async function init( mongo_uri ) {
 }
 
 async function userList() {
-    const database = mongo_client.db('baseDatosRadarin');
-    const users = database.collection('usuarios');
+    const database = mongo_client.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
     var usuariosEncontrados = users.find().toArray();
     return usuariosEncontrados;
 }
 
 async function findByWebId(webid) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const users = database.collection('usuarios');
+    const database = mongo_client.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
     return users.findOne({ "webid" : webid });
 }
 
 async function getAdmin() {
-    const database = mongo_client.db('baseDatosRadarin');
-    const admin = database.collection('admin');
+    const database = mongo_client.db("baseDatosRadarin");
+    const admin = database.collection("admin");
     var userAdmin = admin.findOne();
     return userAdmin;
 }
 
 async function banUser(webid) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const bans = database.collection('baneados');
+    const database = mongo_client.db("baseDatosRadarin");
+    const bans = database.collection("baneados");
     const user = { "webid" : webid };
     await bans.insertOne(user);
 }
 
 async function unbanUser(webid) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const bans = database.collection('baneados');
+    const database = mongo_client.db("baseDatosRadarin");
+    const bans = database.collection("baneados");
     await bans.deleteOne({ "webid" : webid });
 }
 
 async function isBanned(webid) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const bans = database.collection('baneados');
+    const database = mongo_client.db("baseDatosRadarin");
+    const bans = database.collection("baneados");
     var baneado = bans.findOne({ "webid" : webid });
     if (baneado != null) {
         return true;
@@ -106,14 +106,14 @@ async function isBanned(webid) {
 }
 
 async function updateUser(webid, data) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const users = database.collection('usuarios');
+    const database = mongo_client.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
     users.updateOne({"webid" : webid }, { $set: {"data" : data} });
 }
 
 async function addUser(webid, data) {
-    const database = mongo_client.db('baseDatosRadarin');
-    const users = database.collection('usuarios');
+    const database = mongo_client.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
     const user = { "webid": webid, "data": data };
     await users.insertOne(user);
 }

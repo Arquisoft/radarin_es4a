@@ -1,3 +1,3 @@
-import Notifications from './NotificationHelper';
+import Notifications from "./NotificationHelper";
 
 export default Notifications;

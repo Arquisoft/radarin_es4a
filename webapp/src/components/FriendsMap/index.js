@@ -1,3 +1,3 @@
-import FriendsMap from './friendsMap';
+import FriendsMap from "./friendsMap";
 
 export default FriendsMap;

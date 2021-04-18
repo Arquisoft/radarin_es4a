@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const promBundle = require("express-prom-bundle");
 const cors = require('cors');
 const api = require("./api");
@@ -15,7 +15,7 @@ function connect(){
     db.init( mongo_uri );
 
     // Cargar FW Express
-    const app = express()
+    const app = express();
 
     //Monitoring middleware
     const metricsMiddleware = promBundle({includeMethod: true});
@@ -23,12 +23,12 @@ function connect(){
 
     app.use(cors());
     app.options('*', cors());
-    app.use(express.json())
+    app.use(express.json());
 
     // Anteponer /api a todas las llamadas
-    app.use("/api", api)
+    app.use("/api", api);
 
-    app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port))
+    app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port));
 }
 
-setTimeout(connect, 5000)
+setTimeout(connect, 5000);

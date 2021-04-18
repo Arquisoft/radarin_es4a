@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { PrivateLayout, PublicLayout, NotLoggedInLayout } from "@layouts";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-import { FriendsMap, Settings } from "./components"
+import { FriendsMap, Settings } from "./components";
 
 import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends } from "./containers";
 

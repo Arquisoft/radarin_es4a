@@ -13,8 +13,8 @@ class UserList extends React.Component{
                     })}
                 </ListGroup>
            </div>
-        )
+        );
     }
 }
 
-export default UserList
+export default UserList;

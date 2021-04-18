@@ -1,6 +1,6 @@
-const express = require("express")
-const User = require("./models/users")
-const router = express.Router()
+const express = require("express");
+const User = require("./models/users");
+const router = express.Router();
 const db = require("./database");
 
 /* Ejemplo de datos a procesar: 
@@ -31,8 +31,8 @@ router.post("/users/update", async (req, res) => {
         res.type( 'json' ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
     }
 
-    console.log("Recorriendo la lista de amigos...")
-    console.log("Amigos: [" + friends + "]")
+    console.log("Recorriendo la lista de amigos...");
+    console.log("Amigos: [" + friends + "]");
 
     // Recorrer la lista de amigos ([<webid1>, <webid2>, ...])
     for( let i = 0; i < friends.length; i++ ) {
@@ -40,12 +40,12 @@ router.post("/users/update", async (req, res) => {
         console.log("Buscando a: " + friend_webid);
 
         let friend = await db.findByWebId( friend_webid ).then( result => { 
-            console.log("Encontrado!. Datos:")
+            console.log("Encontrado!. Datos:");
             console.log(result.data);
-            return result 
+            return result;
         } );
 
-        console.log("Añadiendo amigo al Map...")
+        console.log("Añadiendo amigo al Map...");
         friends_location.set( friend_webid, friend.data );
     }
 
@@ -81,7 +81,7 @@ router.post("/users/update", async (req, res) => {
           obj[key] = value;
         }
         return obj;
-    }
+    };
 
     var response_object = autoConvertMapToObject( friends_location );
 
@@ -89,7 +89,7 @@ router.post("/users/update", async (req, res) => {
     console.log(response_object);
 
     res.type( 'json' ).status( 200 ).send( response_object );
-})
+});
 
 
 

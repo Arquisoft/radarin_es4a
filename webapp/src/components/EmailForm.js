@@ -15,25 +15,32 @@ class EmailForm extends React.Component{
 
   changeEmail(e) {
     const email = e.target.value ;
-    this.setState({email: email});
+    this.setState({
+      email: email
+    });
   }
 
   changeUserName(e) {
     const username = e.target.value ;
-    this.setState({username: username});
+    this.setState({
+      username: username
+    });
   }
 
   async registerUser(){
       let response = await addUser(this.state.username,this.state.email);
-      console.log(response);
-      if (response.error)
+      //console.log(response);
+      if (response.error) {
         this.setState({welcomeMsg:response.error});
-      else if (response.name===this.state.username)
+      }
+      else if (response.name===this.state.username) {
         this.setState({welcomeMsg:"Welcome to ASW"});
-      else
+      }
+      else {
         this.setState({welcomeMsg:"Unexpected error, maybe the restapi is still sleeping..."});
+      }
       //Refresh the users
-      this.fetchUsers()
+      this.fetchUsers();
   }
 
   async fetchUsers(){
@@ -79,8 +86,8 @@ class EmailForm extends React.Component{
               <span hidden={this.state.welcomeMsg===""}>{this.state.welcomeMsg}</span>
             </div>
           </Form>
-    )
+    );
   }
 }
 
-export default EmailForm
+export default EmailForm;

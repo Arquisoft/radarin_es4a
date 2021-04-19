@@ -23,7 +23,7 @@ router.post("/users/update", async (req, res) => {
     let friends_location = new Map();
 
     try { // Guardar la ubicación del usuario en la base de datos
-        console.log("Actualizando la ubicación del usuario: " + webid);
+        //console.log("Actualizando la ubicación del usuario: " + webid);
         db.updateUser( webid, last_location );
 
     } catch (error) {
@@ -31,21 +31,21 @@ router.post("/users/update", async (req, res) => {
         res.type( "json" ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
     }
 
-    console.log("Recorriendo la lista de amigos...");
-    console.log("Amigos: [" + friends + "]");
+    //console.log("Recorriendo la lista de amigos...");
+    //console.log("Amigos: [" + friends + "]");
 
     // Recorrer la lista de amigos ([<webid1>, <webid2>, ...])
     for( let i = 0; i < friends.length; i++ ) {
         let friend_webid = friends[i];
-        console.log("Buscando a: " + friend_webid);
+        //console.log("Buscando a: " + friend_webid);
 
-        let friend = await db.findByWebId( friend_webid ).then( result => { 
-            console.log("Encontrado!. Datos:");
-            console.log(result.data);
+        let friend = await db.findByWebId( friend_webid ).then( (result) => { 
+            //console.log("Encontrado!. Datos:");
+            //console.log(result.data);
             return result;
         } );
 
-        console.log("Añadiendo amigo al Map...");
+        //console.log("Añadiendo amigo al Map...");
         friends_location.set( friend_webid, friend.data );
     }
 
@@ -85,8 +85,8 @@ router.post("/users/update", async (req, res) => {
 
     var response_object = autoConvertMapToObject( friends_location );
 
-    console.log(friends_location);
-    console.log(response_object);
+    //console.log(friends_location);
+    //console.log(response_object);
 
     res.type( "json" ).status( 200 ).send( response_object );
 });
@@ -112,6 +112,6 @@ router.post("/users/add", async (req, res) => {
         // Notificar 
         res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id } );
     }
-})
+});
 
-module.exports = router
+module.exports = router;

@@ -2,39 +2,39 @@ const { MongoClient } = require("mongodb");
 
 let MONGO_URI = "";
 let isConnected = false;
-let mongo_client = null;
+let mongoClient = null;
     
-async function init( mongo_uri ) {
+async function init( mongoUri ) {
 
-    MONGO_URI = mongo_uri;
-    mongo_client = new MongoClient( MONGO_URI );
+    MONGO_URI = mongoUri;
+    mongoClient = new MongoClient( MONGO_URI );
 
-    console.log("Conectando con base de datos en " + mongo_uri + "!!");
+    //console.log("Conectando con base de datos en " + mongoUri + "!!");
 
-    await mongo_client.connect();
+    await mongoClient.connect();
 
-    console.log("Conexión realizada!");
+    //console.log("Conexión realizada!");
 
-    console.log("Creando base de datos Radarin");
-    const database = mongo_client.db("baseDatosRadarin");
+    //console.log("Creando base de datos Radarin");
+    const database = mongoClient.db("baseDatosRadarin");
     
-    console.log("Eliminando colecciones existentes...");
-    console.log("...usuarios");
+    //console.log("Eliminando colecciones existentes...");
+    //console.log("...usuarios");
     database.dropCollection("usuarios");
-    console.log("...admin");
+    //console.log("...admin");
     database.dropCollection("admin");
-    console.log("...baneados");
+    //console.log("...baneados");
     database.dropCollection("baneados");
-    console.log("OK");
+    //console.log("OK");
 
-    console.log("Creando colecciones vacias...");
-    console.log("..usuarios");
+    //console.log("Creando colecciones vacias...");
+    //console.log("..usuarios");
     const users = database.collection("usuarios");
-    console.log("...admin");
+    //console.log("...admin");
     const admin = database.collection("admin");
-    console.log("...baneados");
+    //console.log("...baneados");
     const bans = database.collection("baneados");
-    console.log("OK");
+    //console.log("OK");
 
     const user1 = { "webid": "https://israelmnrg.inrupt.net/profile/card#me", "data": { "lat": 43.3669759938579, "lon": -5.877764106417212, "timestamp": Date.now() } };
     const user2 = { "webid": "https://alvarofuente.inrupt.net/profile/card#me", "data": { "lat": 43.354767891444865, "lon": -5.851398652481771, "timestamp": Date.now() } };
@@ -48,57 +48,65 @@ async function init( mongo_uri ) {
 
     const pruebaBan = { "webid": "prueba" };
     
-    console.log("Insertando usuarios...");
+    //console.log("Insertando usuarios...");
     await users.insertMany([user1, user2, user3, user4, user5, user6, user7]);
     
-    console.log("Insertando administrador...");
+    //console.log("Insertando administrador...");
     await admin.insertOne(userAdmin);
 
-    console.log("Insertando baneado...");
+    //console.log("Insertando baneado...");
     await bans.insertOne(pruebaBan);
 
-    console.log("OK. Datos insertados!");
+    //console.log("OK. Datos insertados!");
 
     isConnected = true;
 }
 
 async function userList() {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
     var usuariosEncontrados = users.find().toArray();
     return usuariosEncontrados;
 }
 
 async function findByWebId(webid) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    return users.findOne({ "webid" : webid });
+    return users.findOne({
+        "webid" : webid
+    });
 }
 
 async function getAdmin() {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const admin = database.collection("admin");
     var userAdmin = admin.findOne();
     return userAdmin;
 }
 
 async function banUser(webid) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    const user = { "webid" : webid };
+    const user = {
+        "webid" : webid
+    };
     await bans.insertOne(user);
 }
 
 async function unbanUser(webid) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    await bans.deleteOne({ "webid" : webid });
+    await bans.deleteOne({
+        "webid" : webid
+    });
 }
 
 async function isBanned(webid) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    var baneado = bans.findOne({ "webid" : webid });
+    var baneado = bans.findOne({
+         "webid" : webid
+    });
     if (baneado != null) {
         return true;
     }
@@ -106,16 +114,28 @@ async function isBanned(webid) {
 }
 
 async function updateUser(webid, data) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    users.updateOne({"webid" : webid }, { $set: {"data" : data} });
+    users.updateOne(
+        {
+            "webid" : webid
+        },
+        {
+            $set: {
+                "data" : data
+            }
+        }
+    );
 }
 
 async function addUser(webid, data) {
-    const database = mongo_client.db("baseDatosRadarin");
+    const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    const user = { "webid": webid, "data": data };
+    const user = {
+        "webid": webid,
+        "data": data
+    };
     await users.insertOne(user);
 }
 
-module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI}
+module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI};

@@ -28,6 +28,7 @@
     "dotenv-expand": "4.2.0",
     "express": "^4.17.1",
     "flag-icon-css": "^3.3.0",
+    "for-each": "^0.3.3",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
     "google-map-react": "^2.1.9",

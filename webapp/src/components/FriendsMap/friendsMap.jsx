@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
 
-import solid from "@solid/query-ldflex";
+//import solid from "@solid/query-ldflex";
 
-import { useWebId, List } from  "@solid/react";
-import { useLDflexValue, useLDflexList } from "@solid/react";
+import { useWebId } from  "@solid/react";
+import { useLDflexList } from "@solid/react";
 import axios from "axios"; 
 
 //import "./friendsMap.css"
-
-
-var veces = 0;
 
 const Marker = (props) => (
   <div style={{
@@ -29,6 +26,7 @@ const Marker = (props) => (
   </div>
 );
 
+/*
 const Circle = (props) => (
   <div style={{
     color: "red", 
@@ -44,6 +42,7 @@ const Circle = (props) => (
     {props.text}
   </div>
 );
+*/
 
 const radius = () => {
   if (window.sessionStorage.getItem("radius") != null) {
@@ -57,11 +56,13 @@ const radius = () => {
 
 //console.log(radius());
 
+/*
 async function getUserWebID () {
   const user = solid.data.user;
   const webID = await user;
   return webID;
 }
+*/
 
 async function getFriends( friends ) {
   const friendsValue = await friends;
@@ -98,8 +99,8 @@ var distanceFilter = function (lat2, lng2, userLat, userLon) {
 // Use React.Memo
 function FriendsMap( props ) {
   const [userFriendsList, setUserFriendsList] = useState( [] );
-  const [serverResponse, setServerResponse] = useState( {} );
-  const [userWebID, setUserWebID] = useState( useWebId() );
+  //const [serverResponse, setServerResponse] = useState( {} );
+  //const [userWebID, setUserWebID] = useState( useWebId() );
   const [lista, setLista] = useState( {} );
 
   const tempFriendsList = [];
@@ -138,9 +139,6 @@ function FriendsMap( props ) {
       prueba();
     });
 
-    // TODO: Fix
-    //if ( veces < 1000 ) { prueba(); veces++; }
-
   return (
     <div style={{ height: "80vh", width: "100%" }}>
       <GoogleMapReact
@@ -169,6 +167,8 @@ function FriendsMap( props ) {
           return (
             <Marker lat={ lista[amigo].lat } lng={ lista[amigo].lon } color="green" text={ amigo.split("/")[2].split(".")[0] } />
           );
+         else
+          return null;
        })}
       
        

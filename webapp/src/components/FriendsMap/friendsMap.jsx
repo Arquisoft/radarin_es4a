@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
+import { successToaster } from "@utils";
+//import Notifications from "../../containers/Notifications/NotificationHelper";
 
 //import solid from "@solid/query-ldflex";
 
@@ -9,6 +11,8 @@ import { useLDflexList } from "@solid/react";
 import axios from "axios"; 
 
 //import "./friendsMap.css"
+
+const notificado = new Map();
 
 const Marker = (props) => (
   <div style={{
@@ -114,7 +118,12 @@ function FriendsMap( props ) {
 
     //Metemos esto en una función para que no se ejecute todo el rato
     function prueba(){
-      userFriendsList.forEach((element) => tempFriendsList.push( element.valueOf() ) );
+      userFriendsList.forEach((element) => {
+        tempFriendsList.push( element.valueOf() );
+        if (!notificado.has(element.valueOf())) {
+          notificado.set(element.valueOf(), false);
+        }
+      });
 
       let userInfo = { 
         "webid": webID,
@@ -163,12 +172,19 @@ function FriendsMap( props ) {
        <Marker lat={ latitude } lng={ longitude } color="blue" text="Tú"/>
 
        { Object.keys(lista).map( (amigo) => {
-         if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude))
-          return (
-            <Marker lat={ lista[amigo].lat } lng={ lista[amigo].lon } color="green" text={ amigo.split("/")[2].split(".")[0] } />
-          );
-         else
-          return null;
+          if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude)) {
+            if (!notificado.get(amigo)) {
+              successToaster(amigo.split("/")[2].split(".")[0] + " está cerca de tu zona", "SUCCESS");
+              notificado.set(amigo, true);
+            }
+            return (
+              <Marker lat={ lista[amigo].lat } lng={ lista[amigo].lon } color="green" text={ amigo.split("/")[2].split(".")[0] } />
+            );
+          }
+          else {
+            notificado.set(amigo, false);
+            return null;
+          }
        })}
       
        

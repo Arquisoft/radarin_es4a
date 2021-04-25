@@ -1,4 +1,5 @@
 type ProviderEntity = {
+  id: String,
   label: String,
   image: String,
   value: String,

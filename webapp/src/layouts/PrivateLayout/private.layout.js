@@ -22,6 +22,8 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
+const admin = "https://uo271397.inrupt.net/profile/card#me";
+
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
   const errorMessages = {
@@ -36,7 +38,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     }
   }, [webId]);
 
-  return (
+  return (webId === admin)? (
     <React.Fragment>
       <Container>
         <Route
@@ -47,15 +49,52 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
               <Switch>
                 {routes.map((route) => {
                   const { component: RouteComponent } = route;
-                  return (
-                    <Route
-                      key={route.id}
-                      path={route.path}
-                      render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
-                      webId={webId}
-                      exact
-                    />
-                  );
+                  if (route.id === "adminView") {
+                    return (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
+                        webId={webId}
+                        exact
+                      />
+                    );
+                  }
+                  else 
+                    return null;
+                })}
+                <Redirect to="/admin" />
+              </Switch>
+            </Content>
+          )}
+        />
+        <Footer />
+      </Container>
+    </React.Fragment>
+  ) : (
+    <React.Fragment>
+      <Container>
+        <Route
+          {...rest}
+          component={({ history }) => (
+            <Content className="contentApp">
+              <AuthNavBar {...{ location, webId, history }} />
+              <Switch>
+                {routes.map((route) => {
+                  const { component: RouteComponent } = route;
+                  if (route.id !== "adminView") {
+                    return (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
+                        webId={webId}
+                        exact
+                      />
+                    );
+                  }
+                  else
+                    return null;
                 })}
                 <Redirect to="/404" />
               </Switch>

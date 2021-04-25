@@ -1,13 +1,15 @@
-import React, { Fragment } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
+import { Container } from "react-bootstrap";
 
 function AdminView() {
 
-    return (
-        <Fragment>
 
-            <h1>Admin Panel</h1>
-           
-        </Fragment >
+
+    return (
+        <Container>
+            <h1>Panel del administrador</h1>               
+            
+        </Container>
     );
 }
 

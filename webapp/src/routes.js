@@ -28,7 +28,7 @@ const privateRoutes = [
   },
   {
     id:"adminView",
-    path: "/admin",
+    path: "/adminView",
     component: AdminView
   }
 ];

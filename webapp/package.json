@@ -23,7 +23,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
     "dotenv": "6.0.0",
-    "dotenv-expand": "4.2.0",
+    "dotenv-expand": "^4.2.0",
     "express": "^4.17.1",
     "flag-icon-css": "^3.3.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",

@@ -22,7 +22,7 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const admin = "https://uo271397.inrupt.net/profile/card#me";
+const admin = "https://alvarofuente.inrupt.net/profile/card#me";
 
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
@@ -63,7 +63,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
                   else 
                     return null;
                 })}
-                <Redirect to="/admin" />
+                <Redirect to="/adminView" />
               </Switch>
             </Content>
           )}

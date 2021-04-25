@@ -14,11 +14,13 @@ const AuthNavBar = React.memo((props: Props) => {
   const [inboxes, setInbox] = useState([]);
   const { t, i18n } = useTranslation();
   const { webId } = props;
+
   var navigation = null;
-  if (webId === "https://uo271397.inrupt.net/profile/card#me")
+  if (webId === "https://alvarofuente.inrupt.net/profile/card#me")
     navigation = AdminNavigationItems.map((item) => ({ ...item, label: t(item.label) }));
   else
     navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));
+  
   /**
    * Looks for all of the inbox containers in the pod and sets inboxes state
    */

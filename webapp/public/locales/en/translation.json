@@ -66,7 +66,9 @@
       "noinbox": "Global inbox not found. Please create one and try again.",
       "fetchingError": "Error fetching notifications from Pod"
     },
-    "tictactoe": "Game"
+    "tictactoe": "Game",
+    "users": "Users",
+    "system": "System"
   },
   "footer": {
     "version": "Version"

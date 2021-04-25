@@ -28,7 +28,20 @@ export const NavigationItems = [
   }
 ];
 
-export const AdminNavigationItems = [];
+export const AdminNavigationItems = [
+  {
+    id: "users",
+    icon: "/img/icon/r.png",
+    label: "navBar.users",
+    to: "/users"
+  },
+  {
+    id: "system",
+    icon: "/img/icon/r.png",
+    label: "navBar.system",
+    to: "/system"
+  },
+];
 
 export const ProfileOptions = [
   {

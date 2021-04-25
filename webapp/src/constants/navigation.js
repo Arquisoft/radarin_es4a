@@ -28,6 +28,8 @@ export const NavigationItems = [
   }
 ];
 
+export const AdminNavigationItems = [];
+
 export const ProfileOptions = [
   {
     label: "navBar.logOut",

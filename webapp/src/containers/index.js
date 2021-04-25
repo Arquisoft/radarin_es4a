@@ -3,5 +3,6 @@ import Register, { RegistrationSuccess } from './Register';
 import PageNotFound from './PageNotFound';
 import Welcome from './Welcome';
 import MyFriends from './MyFriends';
+import AdminView from './AdminView';
 
-export { Login, Register, RegistrationSuccess, PageNotFound, Welcome, MyFriends };
+export { Login, Register, RegistrationSuccess, PageNotFound, Welcome, MyFriends, AdminView };

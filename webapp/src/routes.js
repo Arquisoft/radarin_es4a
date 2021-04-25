@@ -3,7 +3,7 @@ import { PrivateLayout, PublicLayout, NotLoggedInLayout } from "@layouts";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { FriendsMap, Settings } from "./components";
 
-import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends } from "./containers";
+import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends, AdminView } from "./containers";
 
 const privateRoutes = [
   {
@@ -25,6 +25,11 @@ const privateRoutes = [
     id: "settingsRadio",
     path: "/settingsRadio",
     component: Settings
+  },
+  {
+    id:"adminView",
+    path: "/admin",
+    component: AdminView
   }
 ];
 

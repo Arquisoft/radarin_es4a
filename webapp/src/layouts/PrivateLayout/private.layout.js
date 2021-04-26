@@ -22,7 +22,7 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const admin = "https://alvarofuente.inrupt.net/profile/card#me";
+const admin = "https://uo27139.inrupt.net/profile/card#me";
 
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();

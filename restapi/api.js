@@ -114,12 +114,12 @@ router.post("/users/add", async (req, res) => {
     }
 });
 
-router.post("/get/usuarios", async(req, res) => {
-    let listaUsuarios = db.userList();
+router.post("/users/list", async(req, res) => {
+    let listaUsuarios = await db.userList();
     console.log(listaUsuarios);
     
     if(listaUsuarios !== null && listaUsuarios !== undefined)
-        res.type("json").status(200).send();
+        res.type("json").status(200).send(listaUsuarios);
 });
 
 module.exports = router;

@@ -61,10 +61,10 @@ async function init( mongoUri ) {
 
     isConnected = true;
 
-    var r = userList();
+    //var r = userList();
 
-    console.log(r);
-    console.log(typeof(r)); // Object
+    //console.log(r);
+    //console.log(typeof(r)); // Object
 }
 
 async function userList() {

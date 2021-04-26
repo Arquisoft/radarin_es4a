@@ -5,7 +5,7 @@ import { usePosition } from "use-position";
 //import solid from "@solid/query-ldflex";
 
 import { useWebId } from  "@solid/react";
-import { useLDflexList } from "@solid/react";
+//import { useLDflexList } from "@solid/react";
 import axios from "axios"; 
 
 //import "./friendsMap.css"
@@ -64,10 +64,10 @@ async function getUserWebID () {
 }
 */
 
-async function getFriends( friends ) {
+/*async function getFriends( friends ) {
   const friendsValue = await friends;
   return friendsValue;
-}
+}*/
 
 // Auxiliar method to convert coords to radians.
 var toRadianes = function (valor) {
@@ -98,7 +98,7 @@ var distanceFilter = function (lat2, lng2, userLat, userLon) {
 
 // Use React.Memo
 function FriendsMap( props ) {
-  const [userFriendsList, setUserFriendsList] = useState( [] );
+  const [userFriendsList, /*setUserFriendsList*/] = useState( [] );
   //const [serverResponse, setServerResponse] = useState( {} );
   //const [userWebID, setUserWebID] = useState( useWebId() );
   const [lista, setLista] = useState( {} );
@@ -108,8 +108,8 @@ function FriendsMap( props ) {
 
   const { latitude, longitude } = usePosition( false );
 
-  getFriends(useLDflexList( "[" + webID + "].friends" ))
-        .then( (friendsList) => { setUserFriendsList( friendsList ) });
+//  getFriends(useLDflexList( "[" + webID + "].friends" ))
+//        .then( (friendsList) => { setUserFriendsList( friendsList ) });
 
 
     //Metemos esto en una función para que no se ejecute todo el rato

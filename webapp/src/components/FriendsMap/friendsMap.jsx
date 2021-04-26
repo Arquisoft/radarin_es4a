@@ -137,7 +137,7 @@ function FriendsMap( props ) {
 
     useEffect(() => {
       prueba();
-    });
+    }, [] );
 
   return (
     <div style={{ height: "80vh", width: "100%" }}>

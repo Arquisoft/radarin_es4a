@@ -130,6 +130,7 @@ function FriendsMap( props ) {
     
       if (tempFriendsList.length > 0 ){
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+
         axios.post( apiEndPoint + "/users/update", userInfo )
             .then((res) => { setLista(res.data) }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }

@@ -57,9 +57,14 @@ async function init( mongoUri ) {
     //console.log("Insertando baneado...");
     await bans.insertOne(pruebaBan);
 
-    //console.log("OK. Datos insertados!");
+    console.log("OK. Datos insertados!");
 
     isConnected = true;
+
+    var r = userList();
+
+    console.log(r);
+    console.log(typeof(r)); // Object
 }
 
 async function userList() {

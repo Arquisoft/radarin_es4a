@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { withAuthorization } from "@inrupt/solid-react-components";
 import { AuthNavBar, Footer } from "@components";
 import { permissionHelper } from "@utils";
 import styled from "styled-components";
+import axios from "axios"; 
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +23,9 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const admin = "https://uo27139.inrupt.net/profile/card#me";
+const admin = "https://alvarofuente.inrupt.net/profile/card#me";
+
+// var admin = undefined;
 
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
@@ -32,12 +35,28 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     label: t("appPermission.link.label"),
     href: t("appPermission.link.href")
   };
+
+  //const [admin, setAdmin] = useState( {} );
+
+  /*
+  function getAdmin() {
+    const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+    axios.get( apiEndPoint + "/admin").then((res) => { 
+      admin = res.data.webid;
+      //setAdmin(res.data.webid); 
+      console.log(admin)});
+  }  
+  */
+
   useEffect(() => {
+    // getAdmin();
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);
     }
   }, [webId]);
-
+  
+  //console.log("Justo antes del if que saca o no la vista admin\t" + admin);
+  
   return (webId === admin)? (
     <React.Fragment>
       <Container>

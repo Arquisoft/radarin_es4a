@@ -14,7 +14,6 @@ RUN npm install --production
 
 # add app
 COPY . ./
-
 RUN npm run build
 
 # start app

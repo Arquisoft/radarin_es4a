@@ -115,10 +115,14 @@ router.post("/users/add", async (req, res) => {
 });
 
 router.get("/users/list", async(req, res) => {
-    let listaUsuarios = await db.userList();
+    let usuarios = await db.userList();
     
-    if(listaUsuarios !== null && listaUsuarios !== undefined)
-        res.type("json").status(200).send(listaUsuarios);
+    if(usuarios !== null && usuarios !== undefined)
+        res.type("json").status(200).send(usuarios);
+});
+
+router.get("/users/currently", async(req, res) => {
+   // TODO Devuelve los usuarios conectados actualmente
 });
 
 router.get("/admin", async(req, res) => {

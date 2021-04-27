@@ -11,12 +11,12 @@ class Settings extends Component{
     }
 
     handleChange(event) {
-         this.radius = document.getElementById("radius").value ;
+            this.radius = document.getElementById("radius").value ;
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        window.sessionStorage.setItem("radius",this.radius);
+        window.sessionStorage.setItem("radius", document.getElementById("radius").value);
         window.location.href = "/friendsMap";
     }
 
@@ -29,7 +29,7 @@ class Settings extends Component{
 
                     <div>
                         <label>Radius in km around the user to load on the map :</label>
-                        <input type="number" defaultValue={window.sessionStorage.getItem("radius")} placeholder="default = 5" id="radius" name="radius" min="0" onChange={this.handleChange} />
+                        <input type="number" defaultValue={window.sessionStorage.getItem("radius")} placeholder="default = 5" id="radius" name="radius" min="1" max="30" onChange={this.handleChange} />
                     </div>
                     <input href="/friendsMap" type="submit" className="btn btn-primary" value="Apply"/>
                 </form>

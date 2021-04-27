@@ -43,7 +43,7 @@ async function init( mongoUri ) {
     const user5 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat":43.355331492910125, "lon": -5.863415983665659, "timestamp": Date.now() } };
     const user6 = { "webid": "https://uo269871.inrupt.net/profile/card#me", "data": { "lat": 43.36683582828603, "lon": -5.843256887954077, "timestamp": Date.now() } };
     const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": Date.now() } };
-    
+
     const userAdmin = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me" };
 
     const pruebaBan = { "webid": "prueba" };

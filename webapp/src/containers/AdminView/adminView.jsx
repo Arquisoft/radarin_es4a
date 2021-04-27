@@ -28,26 +28,20 @@ function AdminView() {
         <Container>
         <div id="adminView" class="row justify-content-center">
             <h1>Panel del administrador</h1>
-            <h3>Usuarios del sistema</h3>
-            <ul>
+            <h3>Usuarios del sistema</h3> 
+            <table class="default">
                 { 
                     Object.keys(lista).map( (amigo) => {
-                        <Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button>
+                        //<Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button>
                         return (
-                            <li>{ lista[amigo].webid }</li>
+                            <tr>
+                                <td>    {lista[amigo].webid}    </td>
+                                <td>    <Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button> </td>
+                            </tr>
                         );
                     })
-                    
-                    
-                    /*
-                    Object.keys(lista).map( (amigo) => {
-                        return (
-                            <Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button>
-                        );
-                    })
-                    */
                 }
-            </ul>
+            </table>
             <h3>Usuarios activos</h3>
             <ul>
                 {

@@ -148,12 +148,13 @@ function FriendsMap( props ) {
       setTimeout(prueba, 1000);
     });
 
+
   return (
     <div style={{ height: "80vh", width: "100%" }}>
       <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
       center={{lat: latitude, lng: longitude}}
-      defaultZoom={15}
+      defaultZoom={(radius()<=8) ? Math.round(15-(radius()*0.4)) : (radius()<20) ? Math.round(15-(radius()*0.3)) : Math.round(15-(radius()*0.18)) }
       yesIWantToUseGoogleMapApiInternals={true}
       onGoogleApiLoaded={({map, maps}) =>
       {

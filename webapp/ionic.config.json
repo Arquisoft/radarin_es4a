@@ -1,0 +1,7 @@
+{
+  "name": "Radarin ES4A",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

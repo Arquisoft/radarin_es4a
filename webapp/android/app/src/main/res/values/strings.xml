@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Radarin ES4A</string>
+    <string name="title_activity_main">Radarin ES4A</string>
+    <string name="package_name">es.uniovi.radarines4a</string>
+    <string name="custom_url_scheme">es.uniovi.radarines4a</string>
+</resources>

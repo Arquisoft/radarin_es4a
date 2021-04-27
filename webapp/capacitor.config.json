@@ -1,0 +1,8 @@
+{
+  "appId": "es.uniovi.radarines4a",
+  "appName": "Radarin ES4A",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}

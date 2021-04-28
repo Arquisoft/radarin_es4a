@@ -17,4 +17,4 @@ RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 
 # start app
-CMD ["npm", "--optimize_for_size", "--max_old_space_size=460", "--gc_interval=100", "start"]
+CMD ["npm", "--optimize_for_size", "--max_old_space_size=230", "--gc_interval=100", "start"]

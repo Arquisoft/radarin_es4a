@@ -18,4 +18,5 @@ RUN npm run build
 ENV PATH /app/node_modules/.bin:$PATH
 
 # start app
+RUN chmod +x start.sh
 CMD ["./start.sh"]

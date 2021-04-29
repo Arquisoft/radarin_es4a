@@ -20,6 +20,9 @@ RUN npm run build
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+# run docs
+RUN npm run docs
+
 # start app
 RUN chmod +x start.sh
 CMD ["./start.sh"]

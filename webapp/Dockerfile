@@ -17,11 +17,11 @@ RUN npm install
 
 RUN npm run build
 
+# generate the doc
+RUN npm run docs
+
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-# run docs
-RUN npm run docs
 
 # start app
 RUN chmod +x start.sh

@@ -9,6 +9,9 @@ COPY . ./
 COPY package.json ./
 COPY package-lock.json ./
 
+ARG API_URI="http://localhost:5000/api"
+ENV REACT_APP_API_URI=$API_URI
+
 RUN npm install -g serve
 RUN npm install
 
@@ -16,8 +19,6 @@ RUN npm run build
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-ARG API_URI="http://localhost:5000/api"
-ENV REACT_APP_API_URI=$API_URI
 
 # start app
 RUN chmod +x start.sh

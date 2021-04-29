@@ -106,6 +106,13 @@ async function unbanUser(webid) {
     });
 }
 
+async function userListBanned() {
+    const database = mongoClient.db("baseDatosRadarin");
+    const users = database.collection("baneados");
+    var usuariosEncontrados = users.find().toArray();
+    return usuariosEncontrados;
+}
+
 async function isBanned(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
@@ -152,4 +159,4 @@ async function removeUser(webid) {
     await users.deleteOne(user);
 }
 
-module.exports = {init, userList, findByWebId, updateUser, addUser, removeUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI};
+module.exports = {init, userList, findByWebId, updateUser, addUser, removeUser, getAdmin, banUser, userListBanned, unbanUser, isBanned, isConnected, MONGO_URI};

@@ -14,20 +14,36 @@ function removeUser(webid) {
     axios.post(apiEndPoint + "/remove/user", { webid: webid });
 }
 
+function banUser(webid) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+    axios.post(apiEndPoint + "/ban", { webid: webid });
+}
+
+function unbanUser(webid) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+    axios.post(apiEndPoint + "/unban", { webid: webid });
+}
+
 function AdminView() {
-    const [lista, setLista] = useState( {} );
+    const [usuariosSistema, setUsuariosSistema] = useState( {} );
+    const [usuariosActivos, setUsuariosActivos] = useState( {} );
+    const [usuariosBaneados, setUsuariosBaneados] = useState( {} );
 
     function prueba() {
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 
-        axios.get( apiEndPoint + "/users/list").then((res) => { setLista(res.data) });
+        // Usuarios del sistema
+        axios.get( apiEndPoint + "/users/list").then((res) => { setUsuariosSistema(res.data) });
+        // Usuarios activos
+        axios.get( apiEndPoint + "/users/currently").then((res) => { setUsuariosActivos(res.data) });
+        // Usuarios baneados
+        axios.get( apiEndPoint + "/users/ban").then((res) => { setUsuariosBaneados(res.data) });
     }
 
     if (f<5) {
         prueba();
         f++;
     }
-    
 
     return (
         <Container>
@@ -35,15 +51,15 @@ function AdminView() {
             <h1>Panel del administrador</h1>
             <h3>Usuarios del sistema</h3> 
             <table class="default">
-                { 
-                    Object.keys(lista).map( (amigo) => {
+                {
+                    Object.keys(usuariosSistema).map( (sistema) => {
                         return (
                             <tr>
-                                <td>{ lista[amigo].webid }</td>
+                                <td>{ usuariosSistema[sistema].webid }</td>
                                 <td>
                                     <Button type="button" variant="outline-primary" onClick=
                                     {() => {
-                                                removeUser(lista[amigo].webid);
+                                                removeUser(usuariosSistema[sistema].webid);
                                                 window.location.reload();
                                             }
                                     }> Eliminar usuario </Button> 
@@ -56,7 +72,41 @@ function AdminView() {
             <h3>Usuarios activos</h3>
             <ul>
                 {
-                    
+                     Object.keys(usuariosActivos).map( (activo) => {
+                        return (
+                            <tr>
+                                <td>{ usuariosActivos[activo].webid }</td>
+                                <td>
+                                    <Button type="button" variant="outline-primary" onClick=
+                                    {() => {
+                                                banUser(usuariosActivos[activo].webid);
+                                                window.location.reload();
+                                            }
+                                    }> Banear usuario </Button> 
+                                </td>
+                            </tr>
+                        );
+                    })
+                }
+            </ul>
+            <h3>Usuarios baneados</h3>
+            <ul>
+                {
+                     Object.keys(usuariosBaneados).map( (ban) => {
+                        return (
+                            <tr>
+                                <td>{ usuariosBaneados[ban].webid }</td>                                
+                                <td>
+                                    <Button type="button" variant="outline-primary" onClick=
+                                    {() => {
+                                                unbanUser(usuariosBaneados[ban].webid);
+                                                window.location.reload();
+                                            }
+                                    }> Desbanear usuario </Button> 
+                                </td>
+                            </tr>
+                        );
+                    })
                 }
             </ul>
         </div>

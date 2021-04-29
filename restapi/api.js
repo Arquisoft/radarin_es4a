@@ -141,4 +141,29 @@ router.post("/remove/user", async(req, res) => {
     }
 });
 
+router.get("/users/ban", async(req, res) => {
+    let usuarios = await db.userListBanned();
+    
+    if(usuarios !== null && usuarios !== undefined)
+        res.type("json").status(200).send(usuarios);
+});
+
+router.post("/ban", async(req, res) => {
+    let webid = req.body.webid;
+
+    if(webid !== null && webid !== undefined) {
+        db.banUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User banned. Everything is OK.", "webid": webid});
+    }
+});
+
+router.post("/unban", async(req, res) => {
+    let webid = req.body.webid;
+
+    if(webid !== null && webid !== undefined) {
+        db.unbanUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User unbanned. Everything is OK.", "webid": webid});
+    }
+});
+
 module.exports = router;

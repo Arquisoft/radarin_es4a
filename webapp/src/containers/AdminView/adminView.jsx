@@ -5,10 +5,13 @@ import axios from "axios";
 var f = 0;
 
 function removeUser(webid) {
-    console.log("Entramos en removeUser para el usuario " + webid);
+    /* 
+        No es necesario comprobar el webid ya que el admin 
+        no aparecería en la lista de usuarios, así que no se
+        puede eliminar
+    */
     const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
-    axios.post(apiEndPoint + "/remove/user", { webid: webid }).then((res) => { console.log(res.data) });
-    console.log("Supuestamente se ha eliminado el usuario " + webid);
+    axios.post(apiEndPoint + "/remove/user", { webid: webid });
 }
 
 function AdminView() {
@@ -36,8 +39,15 @@ function AdminView() {
                     Object.keys(lista).map( (amigo) => {
                         return (
                             <tr>
-                                <td>    {lista[amigo].webid}    </td>
-                                <td>    <Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button> </td>
+                                <td>{ lista[amigo].webid }</td>
+                                <td>
+                                    <Button type="button" variant="outline-primary" onClick=
+                                    {() => {
+                                                removeUser(lista[amigo].webid);
+                                                window.location.reload();
+                                            }
+                                    }> Eliminar usuario </Button> 
+                                </td>
                             </tr>
                         );
                     })

@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:13.12.0
+FROM node:12.14.1
 
 # set working directory
 WORKDIR /app
@@ -16,8 +16,6 @@ RUN npm run build
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-ARG PORT=3000
-ENV PORT=$PORT
 
 # start app
 CMD ["./start.sh"]

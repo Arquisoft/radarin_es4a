@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import NotificationItem from "../NotificationItem";
 import { List, NoNotifications } from "./notification-list.style";
+import { getText } from "../../../../../../i18n";
 
 type Props = {
   notifications: Array,
@@ -29,7 +30,7 @@ const NotificationList = ({ notifications, markAsRead, deleteNotification }: Pro
         ))}
       </List>
     ) : (
-      <NoNotifications className="empty-list">No notifications to show</NoNotifications>
+      <NoNotifications className="empty-list">{getText("notifications.listEmpty")}</NoNotifications>
     )}
   </Fragment>
 );

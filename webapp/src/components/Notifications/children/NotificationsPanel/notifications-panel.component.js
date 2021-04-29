@@ -2,6 +2,7 @@ import React from "react";
 import { NotificationList, Tabs } from "./children";
 import { Panel, Title } from "./notifications-panel.style";
 import { Loader } from "@util-components";
+import { getText } from "../../../../i18n";
 
 type Props = {
   notifications: Array,
@@ -22,7 +23,7 @@ const NotificationsPanel = ({
   isLoading
 }: Props) => (
   <Panel>
-    <Title>Notifications</Title>
+    <Title>{getText("notifications.notifications")}</Title>
     {isLoading ? (
       <Loader absolute />
     ) : (

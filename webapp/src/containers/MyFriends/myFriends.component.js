@@ -4,7 +4,7 @@ import { Button, FormControl, Container} from "react-bootstrap";
 import { addFriend } from "./friends.service";
 import  InfoFriends from "./InfoFriends";
 import  Notifications from "../Notifications/NotificationHelper";
-
+import { getText } from "../../i18n";
 
 class MyFriends extends Component {
    
@@ -17,20 +17,21 @@ class MyFriends extends Component {
         };
         //const { t } = useTranslation();
     }
-   
+    
     updateFriendWebId = (evt) => { this.setState( {enteredWebId: evt.target.value}); };
     
     render(){
+        
         return (
             <Container>
             <div>
-                <h1>Añadir amigo:</h1>
-                <FormControl onChange={this.updateFriendWebId} type="webID" placeholder="Enter webId">
+                <h1>{getText("myFriends.add")}</h1>
+                <FormControl onChange={this.updateFriendWebId} type="webID" placeholder={getText("myFriends.webId")}>
                 </FormControl>
 
-            <Button variant="outline-primary" onClick={() => addFriend(this.state.enteredWebId, this.props.webId)}>  Enviar
+            <Button variant="outline-primary" onClick={() => addFriend(this.state.enteredWebId, this.props.webId)}>  {getText("myFriends.send")}
             </Button>
-                <h1>Lista de amigos:</h1>
+                <h1>{getText("myFriends.list")}</h1>
 
             {<List src="user.friends">
             {(item, i) => (
@@ -43,7 +44,7 @@ class MyFriends extends Component {
             </List>
             }
 
-            <Notifications mensaje=" es, o ha estado en contacto con un positivo en COVID-19." nombreBoton="Notificar COVID-19" toastermsg="Contactos notificados con éxito"/>	
+            <Notifications mensaje={getText("myFriends.covid.message")} nombreBoton={getText("myFriends.covid.covid")} toastermsg={getText("myFriends.covid.toast")}/>	
             
             </div>
             </Container>

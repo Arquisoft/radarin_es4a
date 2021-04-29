@@ -7,6 +7,8 @@
     }
   },
   "notifications": {
+    "notifications":"Notifications",
+    "listEmpty": "No notifications to show",
     "success": "Success",
     "error": "Error",
     "unknownError": "An unknown error has occurred",
@@ -47,7 +49,7 @@
   },
   "navBar": {
     "welcome": "Welcome",
-    "settingsRadio": "Ajustes",
+    "settingsRadio": "Settings",
     "myFriends": "Friends",
     "friendsMap": "Map",
     "logOut": "Log out",
@@ -88,7 +90,7 @@
     "fairUsageSummary": "All part of the group radarin_es4a from the Software Architecture subject of School of Computer Science Engineering (University of Oviedo).",
     "contactUsTitle": "Contact Us",
     "contactUsText": "<0>If you have additional questions about Radarin, please contact <1>support@radarin.com<1>.</0>",
-    "evolvingMessage": "<0>This application is currently under development. We are following the principles of the <1>SOLID proyect</1>, prioritizing the user's privacy and not storing any personal data.</0>",
+    "evolvingMessage": "<0>This application is currently under development. We are following the principles of the <1>SOLID project</1>, prioritizing the user's privacy and not storing any personal data.</0>",
     "implementing": "This latest release builds on the prior versions:",
     "version010": "<0><0><0>Internationalization</0> best practices, with application session language selection.</0><0>Ability to update your profile image on the Welcome page.</0> </0>",
     "version030": "<0><0>Implementing the ability to view and edit your <1>User Profile</1></0><1>Including an Application Footer that displays the build number and links to resources.</1><2>Addressing several minor issues based on user feedback.</2></0>",
@@ -249,5 +251,29 @@
   },
   "button": {
     "enviar":"Send"
+  },
+  "myFriends":{
+    "add":"Add friend:",
+    "webId":"Enter webId",
+    "send": "Send",
+    "list": "Friends list:",
+    "hang":{
+      "hang":"Hang out",
+      "message":" wants to hang out with you.",
+      "toast":"Friend notified successfully"
+    },
+    "covid":{
+      "covid":"Notify COVID-19",
+      "message":" is, or has been in contact with, a COVID-19 positive.",
+      "toast":"Contacts notified successfully"
+    }
+  },
+  "map":{
+    "you":"You",
+    "near": " is near you",
+    "radius":{
+      "text":"Radius in km around the user to load on the map:",
+      "button":"Apply"
+    }
   }
 }

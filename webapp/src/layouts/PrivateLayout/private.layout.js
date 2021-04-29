@@ -23,7 +23,7 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const admin = "https://vitusuarez.inrupt.net/profile/card#me";
+const admin = "https://alvarofuente.inrupt.net/profile/card#me";
 
 // var admin = undefined;
 

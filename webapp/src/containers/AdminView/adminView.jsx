@@ -6,7 +6,7 @@ var f = 0;
 
 function removeUser(webid) {
     console.log("Entramos en removeUser para el usuario " + webid);
-
+    
 }
 
 function AdminView() {

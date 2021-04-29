@@ -16,7 +16,7 @@ const AuthNavBar = React.memo((props: Props) => {
   const { webId } = props;
 
   var navigation = null;
-  if (webId === "https://vitusuarez.inrupt.net/profile/card#me")
+  if (webId === "https://alvarofuente.inrupt.net/profile/card#me")
     navigation = AdminNavigationItems.map((item) => ({ ...item, label: t(item.label) }));
   else
     navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));

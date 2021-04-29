@@ -17,11 +17,16 @@ RUN npm install
 
 RUN npm run build
 
-# generate the doc
-RUN npm run docs
-
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
+
+#Install software neccesary for generating the doc
+RUN apt-get update && apt-get -y install ruby openjdk-8-jre
+RUN gem install asciidoctor asciidoctor-diagram
+RUN npm install shx --save-dev
+
+#generate the doc
+RUN npm run docs
 
 # start app
 RUN chmod +x start.sh

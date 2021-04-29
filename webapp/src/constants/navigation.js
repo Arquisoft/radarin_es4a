@@ -29,6 +29,7 @@ export const NavigationItems = [
 ];
 
 export const AdminNavigationItems = [
+  /*
   {
     id: "users",
     icon: "/img/icon/r.png",
@@ -40,7 +41,7 @@ export const AdminNavigationItems = [
     icon: "/img/icon/r.png",
     label: "navBar.system",
     to: "/system"
-  },
+  },*/
 ];
 
 export const ProfileOptions = [

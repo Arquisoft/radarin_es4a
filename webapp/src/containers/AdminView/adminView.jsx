@@ -6,7 +6,9 @@ var f = 0;
 
 function removeUser(webid) {
     console.log("Entramos en removeUser para el usuario " + webid);
-    
+    const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+    axios.post(apiEndPoint + "/remove/user", { webid: webid }).then((res) => { console.log(res.data) });
+    console.log("Supuestamente se ha eliminado el usuario " + webid);
 }
 
 function AdminView() {
@@ -32,7 +34,6 @@ function AdminView() {
             <table class="default">
                 { 
                     Object.keys(lista).map( (amigo) => {
-                        //<Button type="button" variant="outline-primary" onClick={() => removeUser(lista[amigo].webid)}> Eliminar usuario </Button>
                         return (
                             <tr>
                                 <td>    {lista[amigo].webid}    </td>

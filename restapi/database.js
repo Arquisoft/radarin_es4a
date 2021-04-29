@@ -143,4 +143,13 @@ async function addUser(webid, data) {
     await users.insertOne(user);
 }
 
-module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI};
+async function removeUser(webid) {
+    const database = mongoClient.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
+    const user = {
+        "webid": webid
+    };
+    await users.deleteOne(user);
+}
+
+module.exports = {init, userList, findByWebId, updateUser, addUser, removeUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI};

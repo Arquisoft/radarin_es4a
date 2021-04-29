@@ -132,4 +132,14 @@ router.get("/admin", async(req, res) => {
         res.type("json").status(200).send(admin);
 });
 
+router.post("/remove/user", async(req, res) => {
+    let webid = req.body.webid;
+    
+    if(webid !== null && webid !== undefined) {
+        db.removeUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User remove. Everything is OK.", "webid": webid});
+    }
+
+});
+
 module.exports = router;

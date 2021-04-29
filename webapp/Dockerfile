@@ -3,18 +3,21 @@ FROM node:13.12.0
 
 # set working directory
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+COPY . ./
 
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
 
-# add app
-COPY . ./
+RUN npm install -g serve
+RUN npm install
+
+RUN npm run build
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+ARG PORT=3000
+ENV PORT=$PORT
 
 # start app
-CMD ["npm", "--optimize_for_size", "--max_old_space_size=460", "--gc_interval=100", "start"]
+CMD ["./start.sh"]

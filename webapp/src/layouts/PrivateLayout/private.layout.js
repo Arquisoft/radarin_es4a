@@ -27,8 +27,6 @@ var admin = undefined;
 const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
 
-//var admin = undefined;
-
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
   const errorMessages = {
@@ -38,26 +36,11 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     href: t("appPermission.link.href")
   };
 
-  //var [admin, setAdmin] = useState( {} );
-  
-  /*function getAdmin() {
-    const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
-    axios.get( apiEndPoint + "/admin").then((res) => { 
-      admin = res.data.webid;
-      setAdmin(res.data.webid); 
-      console.log(admin)});
-  }*/
-  
-
   useEffect(() => {
-    //getAdmin();
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);
     }
   }, [webId]);
-  
-  //console.log("Justo antes del if que saca o no la vista admin");
-  //console.log(admin);
   
   return (webId === admin)? (
     <React.Fragment>

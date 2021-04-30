@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getText } from "../../i18n";
 
 class Settings extends Component{
 
@@ -11,27 +12,27 @@ class Settings extends Component{
     }
 
     handleChange(event) {
-         this.radius = document.getElementById("radius").value ;
+            this.radius = document.getElementById("radius").value ;
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        window.sessionStorage.setItem("radius",this.radius);
+        window.sessionStorage.setItem("radius", document.getElementById("radius").value);
         window.location.href = "/friendsMap";
     }
 
     render(){
         return (
             <div>
-                <h2>Settings</h2>
+                <h2>{getText("navBar.settingsRadio")}</h2>
 
                 <form className="form-horizontal" onSubmit={this.handleSubmit} >
 
                     <div>
-                        <label>Radius in km around the user to load on the map :</label>
-                        <input type="number" defaultValue={window.sessionStorage.getItem("radius")} placeholder="default = 5" id="radius" name="radius" min="0" onChange={this.handleChange} />
+                        <label>{getText("map.radius.text")}</label>
+                        <input type="number" defaultValue={window.sessionStorage.getItem("radius")} placeholder="default = 5" id="radius" name="radius" min="1" max="30" onChange={this.handleChange} />
                     </div>
-                    <input href="/friendsMap" type="submit" className="btn btn-primary" value="Apply"/>
+                    <input href="/friendsMap" type="submit" className="btn btn-primary" value={getText("map.radius.button")}/>
                 </form>
             </div>
         );

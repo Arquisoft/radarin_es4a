@@ -11,7 +11,7 @@ export const ImageProfileWrapper = styled.div`
     border-radius: 360px;
     border: 3px solid white;
     box-sizing: border-box;
-    width: 100%;
+    
     height: 128px;
   }
   &:hover {

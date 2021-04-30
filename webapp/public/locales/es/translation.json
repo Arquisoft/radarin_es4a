@@ -7,6 +7,8 @@
     }
   },
   "notifications": {
+    "notifications":"Notificaciones",
+    "listEmpty":"No hay notificaciones que mostrar",
     "success": "Éxito",
     "error": "Error",
     "unknownError": "Ha occurido un error desconocido",
@@ -256,5 +258,29 @@
   },
   "button": {
     "enviar":"Enviar"
+  },
+  "myFriends":{
+    "add":"Añadir amigo:",
+    "webId":"Introducir webId",
+    "send": "Enviar",
+    "list": "Lista de amigos:",
+    "hang":{
+      "hang":"Quedar",
+      "message":" quiere quedar contigo.",
+      "toast":"Amigo notificado con éxito"
+    },
+    "covid":{
+      "covid":"Notificar COVID-19",
+      "message":" es, o ha estado en contacto con, un positivo en COVID-19.",
+      "toast":"Contactos notificados con éxito"
+    }
+  },
+  "map":{
+    "you":"Tú",
+    "near":" está cerca de tu zona",
+    "radius":{
+      "text":"Radio en km alrededor del usuario para mostrar en el mapa:",
+      "button":"Aplicar"
+    }
   }
 }

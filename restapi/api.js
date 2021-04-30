@@ -92,7 +92,6 @@ router.post("/users/update", async (req, res) => {
 });
 
 
-
 // Registro de un usuario
 router.post("/users/add", async (req, res) => {
     let webid = req.body.webid;
@@ -111,6 +110,114 @@ router.post("/users/add", async (req, res) => {
 
         // Notificar 
         res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id } );
+    }
+});
+
+router.get("/users/list", async(req, res) => {
+    let usuarios = await db.userList();
+    
+    if(usuarios !== null && usuarios !== undefined) {
+        res.type("json").status(200).send(usuarios);
+    }
+});
+
+router.get("/users/currently", async(req, res) => {
+    let usuarios = await db.userList();
+    
+    var ahora = new Date(Date.now());
+    let usuarios_activos = [];
+
+    for( let i = 0; i < usuarios.length; i++ ) {
+
+        var ultimaVezVisto = new Date(usuarios[i].data.timestamp);
+        var ban = await db.isBanned(usuarios[i].webid);
+        
+        if (ban === null){
+            if (ultimaVezVisto.getFullYear() === ahora.getFullYear() 
+            && ultimaVezVisto.getMonth() === ahora.getMonth() 
+            && ultimaVezVisto.getDay() === ahora.getDay()){
+                if ( (ahora.getHours()-ultimaVezVisto.getHours()) === 1
+                && (ahora.getMinutes() + 60 -  ultimaVezVisto.getMinutes()) <= 15){
+                    usuarios_activos.push(usuarios[i].webid);
+                }
+                else if ( ahora.getHours() === ultimaVezVisto.getHours()
+                && (ahora.getMinutes() -  ultimaVezVisto.getMinutes()) <= 15){
+                    usuarios_activos.push(usuarios[i].webid);
+                }
+            }
+        }
+    }
+
+    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    
+});
+
+router.get("/users/system", async(req, res) => {
+    let usuarios = await db.userList();
+    
+    let usuarios_activos = [];
+
+    for( let i = 0; i < usuarios.length; i++ ) {
+
+        var ban = await db.isBanned(usuarios[i].webid);
+        
+        if (ban === null){
+            usuarios_activos.push(usuarios[i]);
+        }
+    }
+
+    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    
+});
+
+router.get("/isBanned", async(req, res) => {
+    var webid = req.body.webid;
+
+    var ban = await db.isBanned(webid);
+
+    res.type( "json" ).status( 200 ).send( ban );
+    
+});
+
+router.get("/admin", async(req, res) => {
+    let admin = await db.getAdmin();
+
+    if(admin !== null && admin !== undefined) {
+        res.type("json").status(200).send(admin);
+    }
+});
+
+router.post("/remove/user", async(req, res) => {
+    let webid = req.body.webid;
+
+    if(webid !== null && webid !== undefined) {
+        db.removeUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User remove. Everything is OK.", "webid": webid});
+    }
+});
+
+router.get("/users/ban", async(req, res) => {
+    let usuarios = await db.userListBanned();
+    
+    if(usuarios !== null && usuarios !== undefined)
+        res.type("json").status(200).send(usuarios);
+});
+
+router.post("/ban", async(req, res) => {
+    let webid = req.body.webid;
+
+    if(webid !== null && webid !== undefined) {
+        db.banUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User banned. Everything is OK.", "webid": webid});
+    }
+});
+
+router.post("/unban", async(req, res) => {
+    let webid = req.body.webid;
+
+    if(webid !== null && webid !== undefined) {
+        db.unbanUser(webid);
+        res.type("json").status(200).send({"code": 200, "message": "User unbanned. Everything is OK.", "webid": webid});
     }
 });
 

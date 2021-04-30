@@ -69,7 +69,9 @@
       "noinbox": "No se encontró ningún inbox en su POD, debes tener al menos uno para jugar.",
       "fetchingError": "Error en las notificaciones"
     },
-    "tictactoe": "Juego"
+    "tictactoe": "Juego",
+    "users": "Usuarios",
+    "system": "Sistema"
   },
   "footer": {
     "version": "Versión"
@@ -78,6 +80,10 @@
     "title": "Página no encontrada",
     "content": "Puede existir un problema con la dirección buscada. Por favor verifiquela e intente de nuevo. O la página que buscaste ha sido movida o eliminada",
     "redirectButton": "Llevarme a la página principal"
+  },
+  "banned": {
+    "title": "Usuario baneado",
+    "content": "Usted ha sido baneado de esta aplicación por un uso indebido de ella."
   },
   "welcome": {
     "welcome": "Bienvenido",

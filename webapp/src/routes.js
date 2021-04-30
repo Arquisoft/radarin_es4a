@@ -3,7 +3,7 @@ import { PrivateLayout, PublicLayout, NotLoggedInLayout } from "@layouts";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { FriendsMap, Settings } from "./components";
 
-import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, MyFriends } from "./containers";
+import { Login, Register, PageNotFound, PageBanned, Welcome, RegistrationSuccess, MyFriends, AdminView } from "./containers";
 
 const privateRoutes = [
   {
@@ -25,6 +25,11 @@ const privateRoutes = [
     id: "settingsRadio",
     path: "/settingsRadio",
     component: Settings
+  },
+  {
+    id:"adminView",
+    path: "/adminView",
+    component: AdminView
   }
 ];
 
@@ -36,6 +41,7 @@ const Routes = () => (
         <NotLoggedInLayout component={Register} path="/register" exact />
         <NotLoggedInLayout path="/register/success" component={RegistrationSuccess} exact />
         <PublicLayout path="/404" component={PageNotFound} exact />
+        <PublicLayout path="/403" component={PageBanned} exact />
         <Redirect from="/" to="/welcome" exact />
         <PrivateLayout path="/" routes={privateRoutes} />
         <Redirect to="/404" />

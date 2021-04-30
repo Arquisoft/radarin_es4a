@@ -37,19 +37,20 @@ async function init( mongoUri ) {
     //console.log("OK");
 
     const user1 = { "webid": "https://israelmnrg.inrupt.net/profile/card#me", "data": { "lat": 43.3669759938579, "lon": -5.877764106417212, "timestamp": Date.now() } };
-    const user2 = { "webid": "https://alvarofuente.inrupt.net/profile/card#me", "data": { "lat": 43.354767891444865, "lon": -5.851398652481771, "timestamp": Date.now() } };
-    const user3 = { "webid": "https://uo271397.inrupt.net/profile/card#me", "data": { "lat": 43.36353462859176, "lon": -5.850477590513935, "timestamp": Date.now() } };
-    const user4 = { "webid": "https://cuartasfabio.inrupt.net/profile/card#me", "data": { "lat": 43.357599558753186, "lon": -5.853321185716373, "timestamp": Date.now() } }; 
-    const user5 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat":43.355331492910125, "lon": -5.863415983665659, "timestamp": Date.now() } };
-    const user6 = { "webid": "https://uo269871.inrupt.net/profile/card#me", "data": { "lat": 43.36683582828603, "lon": -5.843256887954077, "timestamp": Date.now() } };
-    const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": Date.now() } };
-    
-    const userAdmin = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me" };
+    const user2 = { "webid": "https://ramonvilafer.inrupt.net/profile/card#me", "data": { "lat": 43.354767891444865, "lon": -5.851398652481771, "timestamp": Date.now() } };
+    //const user3 = { "webid": "https://uo271397.inrupt.net/profile/card#me", "data": { "lat": 43.36353462859176, "lon": -5.850477590513935, "timestamp": 1619699326 } };
+    const user4 = { "webid": "https://cuartasfabio.inrupt.net/profile/card#me", "data": { "lat": 43.357599558753186, "lon": -5.853321185716373, "timestamp": 1619699326 } }; 
+    const user5 = { "webid": "https://alvarofuente.inrupt.net/profile/card#me", "data": { "lat":43.355331492910125, "lon": -5.863415983665659, "timestamp": 1619699326 } };
+    const user6 = { "webid": "https://uo269871.inrupt.net/profile/card#me", "data": { "lat": 43.36683582828603, "lon": -5.843256887954077, "timestamp": 1619699326 } };
+    const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": 1619699326 } };
+    const user8 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": 1619699326 } };
+
+    const userAdmin = { "webid": "https://uo271397.inrupt.net/profile/card#me" };
 
     const pruebaBan = { "webid": "prueba" };
     
     //console.log("Insertando usuarios...");
-    await users.insertMany([user1, user2, user3, user4, user5, user6, user7]);
+    await users.insertMany([user1, user2, /*user3,*/ user4, user5, user6, user7, user8]);
     
     //console.log("Insertando administrador...");
     await admin.insertOne(userAdmin);
@@ -57,9 +58,14 @@ async function init( mongoUri ) {
     //console.log("Insertando baneado...");
     await bans.insertOne(pruebaBan);
 
-    //console.log("OK. Datos insertados!");
+    console.log("OK. Datos insertados!");
 
     isConnected = true;
+
+    //var r = userList();
+
+    //console.log(r);
+    //console.log(typeof(r)); // Object
 }
 
 async function userList() {
@@ -101,16 +107,21 @@ async function unbanUser(webid) {
     });
 }
 
+async function userListBanned() {
+    const database = mongoClient.db("baseDatosRadarin");
+    const users = database.collection("baneados");
+    var usuariosEncontrados = users.find().toArray();
+    return usuariosEncontrados;
+}
+
 async function isBanned(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
     var baneado = bans.findOne({
          "webid" : webid
     });
-    if (baneado != null) {
-        return true;
-    }
-    return false;
+    
+    return baneado;
 }
 
 async function updateUser(webid, data) {
@@ -138,4 +149,13 @@ async function addUser(webid, data) {
     await users.insertOne(user);
 }
 
-module.exports = {init, userList, findByWebId, updateUser, addUser, getAdmin, banUser, unbanUser, isBanned, isConnected, MONGO_URI};
+async function removeUser(webid) {
+    const database = mongoClient.db("baseDatosRadarin");
+    const users = database.collection("usuarios");
+    const user = {
+        "webid": webid
+    };
+    await users.deleteOne(user);
+}
+
+module.exports = {init, userList, findByWebId, updateUser, addUser, removeUser, getAdmin, banUser, userListBanned, unbanUser, isBanned, isConnected, MONGO_URI};

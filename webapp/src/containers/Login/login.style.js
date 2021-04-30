@@ -33,7 +33,7 @@ export const LoginTitle = styled.span`
   position: relative;
   margin: 30px 0;
   display: inline-block;
-  width: 100%;
+   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

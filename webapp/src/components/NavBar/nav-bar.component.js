@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Navigation, Toolbar, HamburgerButton, MobileNavigation } from "./children";
-import { NavLogo } from "./nav-bar.style";
+import { NavLogo, ImgLogo } from "./nav-bar.style";
+import "./LogoStyle.css";
 
 type Props = {
   t: Function,
@@ -53,12 +54,13 @@ const NavBar = (props: Props) => {
     setOpenMobile(!isOpenMobile);
   };
 
+  //<img src="/img/radarin.png" alt="inrupt" />
   return (
     <header role="navigation" className="header header__desktop fixed" ref={componentElement}>
       <section className="header-wrap">
         <div className="logo-block">
         <NavLogo data-testid="nav-bar-logo">
-          <img src="/img/radarin.png" alt="inrupt" />
+          <img src="/img/radarin.png" className="logo-img" alt="inrupt" width="auto" />
         </NavLogo>
         </div>
 

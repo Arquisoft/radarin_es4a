@@ -35,7 +35,7 @@ function AdminView() {
         // Usuarios del sistema
         axios.get( apiEndPoint + "/users/list").then((res) => { setUsuariosSistema(res.data) });
         // Usuarios activos
-        axios.get( apiEndPoint + "/users/currently" , { users: usuariosSistema }).then((res) => { setUsuariosActivos(res.data) });
+        axios.get( apiEndPoint + "/users/currently").then((res) => { setUsuariosActivos(res.data) });
         // Usuarios baneados
         axios.get( apiEndPoint + "/users/ban").then((res) => { setUsuariosBaneados(res.data) });
     }
@@ -78,16 +78,16 @@ function AdminView() {
                 }
             </table>
             <h3>Usuarios activos</h3>
-            <ul>
+            <table class="default">
                 {
                      Object.keys(usuariosActivos).map( (activo) => {
                         return (
                             <tr>
-                                <td>{ usuariosActivos[activo].webid }</td>
+                                <td>{ usuariosActivos[activo] }</td>
                                 <td>
                                     <Button type="button" variant="outline-primary" onClick=
                                     {() => {
-                                                banUser(usuariosActivos[activo].webid);
+                                                banUser(usuariosActivos[activo]);
                                                 window.location.reload();
                                             }
                                     }> Banear usuario </Button> 
@@ -96,7 +96,7 @@ function AdminView() {
                         );
                     })
                 }
-            </ul>
+            </table>
             <h3>Usuarios baneados</h3>
             <table class="default">
                 {

@@ -121,8 +121,32 @@ router.get("/users/list", async(req, res) => {
 });
 
 router.get("/users/currently", async(req, res) => {
-    //let users = req.body;
-    //console.log(users);
+    let usuarios = await db.userList();
+    
+    var ahora = new Date(Date.now());
+    let usuarios_activos = [];
+
+    for( let i = 0; i < usuarios.length; i++ ) {
+
+        var ultimaVezVisto = new Date(usuarios[i].data.timestamp);
+        //if (!db.isBanned(usuarios[i].webid)){
+            if (ultimaVezVisto.getFullYear() === ahora.getFullYear() 
+            && ultimaVezVisto.getMonth() === ahora.getMonth() 
+            && ultimaVezVisto.getDay() === ahora.getDay()){
+                if ( (ahora.getHours()-ultimaVezVisto.getHours()) === 1
+                && (ahora.getMinutes() + 60 -  ultimaVezVisto.getMinutes()) <= 15){
+                    usuarios_activos.push(usuarios[i].webid);
+                }
+                else if ( ahora.getHours() === ultimaVezVisto.getHours()
+                && (ahora.getMinutes() -  ultimaVezVisto.getMinutes()) <= 15){
+                    usuarios_activos.push(usuarios[i].webid);
+                }
+            }
+        //}
+    }
+
+    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    
 });
 
 router.get("/admin", async(req, res) => {

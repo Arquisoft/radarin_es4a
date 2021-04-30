@@ -37,7 +37,6 @@ const Routes = () => (
         <NotLoggedInLayout path="/register/success" component={RegistrationSuccess} exact />
         <PublicLayout path="/404" component={PageNotFound} exact />
         <Redirect from="/" to="/welcome" exact />
-        <Redirect from="/doc" to="/docs" exact />
         <PrivateLayout path="/" routes={privateRoutes} />
         <Redirect to="/404" />
       </Switch>

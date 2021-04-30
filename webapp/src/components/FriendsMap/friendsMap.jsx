@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
 import { successToaster } from "@utils";
+import { getText } from "../../i18n";
 //import Notifications from "../../containers/Notifications/NotificationHelper";
 
 //import solid from "@solid/query-ldflex";
@@ -170,12 +171,12 @@ function FriendsMap( props ) {
         });
       }}
         >
-       <Marker lat={ latitude } lng={ longitude } color="blue" text="Tú"/>
+       <Marker lat={ latitude } lng={ longitude } color="blue" text={getText("map.you")}/>
 
        { Object.keys(lista).map( (amigo) => {
           if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude)) {
             if (!notificado.get(amigo)) {
-              successToaster(amigo.split("/")[2].split(".")[0] + " está cerca de tu zona", "SUCCESS");
+              successToaster(amigo.split("/")[2].split(".")[0] + getText("map.near"), "SUCCESS");
               notificado.set(amigo, true);
             }
             return (

@@ -10,6 +10,8 @@
     "@inrupt/solid-sdk-forms": "0.1.1",
     "@inrupt/solid-style-guide": "^0.1.34",
     "@ldflex/comunica": "^3.4.2",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.27",
     "@rdfjs/data-model": "^1.1.1",
     "@shexjs/core": "^1.0.0-alpha.9",
     "@solid/query-ldflex": "^2.11.3",

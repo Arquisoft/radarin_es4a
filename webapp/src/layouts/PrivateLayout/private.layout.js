@@ -23,7 +23,7 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-var admin = undefined;
+var admin = null;
 const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
 
@@ -38,7 +38,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     href: t("appPermission.link.href")
   };
 
-  var ban = undefined;
+  var ban = null;
   axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
 
   useEffect(() => {

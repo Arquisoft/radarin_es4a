@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import React, { useState, Fragment } from "react";
+import { Container } from "react-bootstrap";
+import { Card, CardContent, Button, TableRow, Box } from "@material-ui/core";
+import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios"; 
 
 var f = 0;
@@ -12,112 +14,122 @@ function removeUser(webid) {
     */
     const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
     axios.post(apiEndPoint + "/remove/user", { webid: webid });
+    window.location.reload();
 }
 
 function banUser(webid) {
     const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
     axios.post(apiEndPoint + "/ban", { webid: webid });
+    window.location.reload();
 }
 
 function unbanUser(webid) {
     const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
     axios.post(apiEndPoint + "/unban", { webid: webid });
+    window.location.reload();
 }
 
 function AdminView() {
-    const [usuariosSistema, setUsuariosSistema] = useState( {} );
-    const [usuariosActivos, setUsuariosActivos] = useState( {} );
-    const [usuariosBaneados, setUsuariosBaneados] = useState( {} );
+    const columns = [
+        { field: "id", headerName: "User", width: 400 }
+    ];
+    const [rowsUsers, setRowsUsers] = useState([]);
+    const [rowsActiveUsers, setRowsActiveUsers] = useState([]);
+    const [rowsBannedUsers, setRowsBannedUsers] = useState([]);
+    const [selectionModel, setSelectionModel] = React.useState([]);
+    const [selectionModelActive, setSelectionModelActive] = React.useState([]);
+    const [selectionModelBanned, setSelectionModelBanned] = React.useState([]);
 
-    function prueba() {
+    function insertData() {
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 
         // Usuarios del sistema
-        axios.get( apiEndPoint + "/users/system").then((res) => { setUsuariosSistema(res.data) });
+        var temp = [];
+        var systemUsers = [];
+        
+        axios.get( apiEndPoint + "/users/system").then((res) => { res.data.map( (item) => systemUsers.push(item)) });
+
+        console.log(systemUsers);
+        systemUsers.map((item, index) => {
+            var user = { id: item.webid }
+            temp.push(user);
+        });
+
+        setRowsUsers(temp);
+
         // Usuarios activos
-        axios.get( apiEndPoint + "/users/currently").then((res) => { setUsuariosActivos(res.data) });
+        var temp2 = [];
+        var systemUsers2 = [];
+        
+        axios.get( apiEndPoint + "/users/currently").then((res) => { systemUsers2.push(res.data) });
+
         // Usuarios baneados
-        axios.get( apiEndPoint + "/users/ban").then((res) => { setUsuariosBaneados(res.data) });
+        var temp3 = [];
+        var systemUsers3 = [];
+        
+        axios.get( apiEndPoint + "/users/ban").then((res) => { systemUsers3.push(res.data) });
     }
 
     if (f<5) {
-        prueba();
+        insertData();
         f++;
     }
 
     return (
         <Container>
-        <div id="adminView" class="row justify-content-center">
             <h1>Panel del administrador</h1>
-            <h3>Usuarios del sistema</h3> 
-            <table class="default">
-                {
-                    Object.keys(usuariosSistema).map( (sistema) => {
-                        return (
-                            <tr>
-                                <td>{ usuariosSistema[sistema] }</td>
-                                <td>
-                                    <Button type="button" variant="outline-primary" onClick=
-                                    {() => {
-                                                removeUser(usuariosSistema[sistema]);
-                                                window.location.reload();
-                                            }
-                                    }> Eliminar usuario </Button> 
-                                </td>
-                                <td>
-                                    <Button type="button" variant="outline-primary" onClick=
-                                    {() => {
-                                                banUser(usuariosSistema[sistema]);
-                                                window.location.reload();
-                                            }
-                                    }> Banear usuario </Button> 
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-            </table>
-            <h3>Usuarios activos</h3>
-            <table class="default">
-                {
-                     Object.keys(usuariosActivos).map( (activo) => {
-                        return (
-                            <tr>
-                                <td>{ usuariosActivos[activo] }</td>
-                                <td>
-                                    <Button type="button" variant="outline-primary" onClick=
-                                    {() => {
-                                                banUser(usuariosActivos[activo]);
-                                                window.location.reload();
-                                            }
-                                    }> Banear usuario </Button> 
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-            </table>
-            <h3>Usuarios baneados</h3>
-            <table class="default">
-                {
-                     Object.keys(usuariosBaneados).map( (ban) => {
-                        return (
-                            <tr>
-                                <td>{ usuariosBaneados[ban].webid }</td>                                
-                                <td>
-                                    <Button type="button" variant="outline-primary" onClick=
-                                    {() => {
-                                                unbanUser(usuariosBaneados[ban].webid);
-                                                window.location.reload();
-                                            }
-                                    }> Desbanear usuario </Button> 
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-            </table>
-        </div>
+            <Fragment>
+                <Card>
+                    <CardContent>
+                        <h3>Usuarios del sistema</h3>
+                        <Box height="24em">
+                        <DataGrid rows={rowsUsers} columns={columns} pageSize={5} checkboxSelection
+
+                            onSelectionModelChange={(newSelection) => {
+                                setSelectionModel(newSelection.selectionModel);
+                            }}
+
+                            selectionModel={selectionModel} />
+                        </Box>
+                        <Button onClick={() => removeUser(selectionModel)}>Delete</Button>
+                        <Button onClick={() => banUser(selectionModel)}>Ban</Button>
+                    </CardContent>
+                </Card> 
+            </Fragment>
+            <Fragment>
+                <Card>
+                    <CardContent>
+                        <h3>Usuarios activos</h3>
+                        <Box height="24em">
+                        <DataGrid rows={rowsActiveUsers} columns={columns} pageSize={5} checkboxSelection
+
+                            onSelectionModelChange={(newSelection) => {
+                                setSelectionModelActive(newSelection.selectionModel);
+                            }}
+
+                            selectionModel={selectionModelActive} />
+                        </Box>
+                        <Button onClick={() => banUser(selectionModelActive)}>Ban</Button>
+                    </CardContent>
+                </Card> 
+            </Fragment>
+            <Fragment>
+                <Card>
+                    <CardContent>
+                        <h3>Usuarios baneados</h3>
+                        <Box height="24em">
+                        <DataGrid rows={rowsBannedUsers} columns={columns} pageSize={5} checkboxSelection
+
+                            onSelectionModelChange={(newSelection) => {
+                                setSelectionModelBanned(newSelection.selectionModel);
+                            }}
+
+                            selectionModel={selectionModelBanned} />
+                        </Box>
+                        <Button onClick={() => unbanUser(selectionModelBanned)}>Unban</Button>
+                    </CardContent>
+                </Card> 
+            </Fragment>
         </Container>
     );
 }

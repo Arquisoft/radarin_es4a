@@ -161,7 +161,7 @@ router.get("/users/system", async(req, res) => {
         var ban = await db.isBanned(usuarios[i].webid);
         
         if (ban === null){
-            usuarios_activos.push(usuarios[i].webid);
+            usuarios_activos.push(usuarios[i]);
         }
     }
 

@@ -1,7 +1,6 @@
 /* eslint-disable constructor-super */
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { PageBannedWrapper, PageBannedContent } from "./page-banned.style";
 
 /**

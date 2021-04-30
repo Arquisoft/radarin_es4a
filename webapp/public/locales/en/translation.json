@@ -9,6 +9,8 @@
   "notifications": {
     "success": "Success",
     "error": "Error",
+    "sent":"Notification sent successfully",
+    "notSent":"Notification not sent",
     "unknownError": "An unknown error has occurred",
     "404": "Editing a new document.",
     "errorLoading": "There was an error loading your file, please try again.",
@@ -255,5 +257,16 @@
   },
   "button": {
     "enviar":"Send"
+  },
+  "admin":{
+    "panel": "Administrator panel",
+    "system": "System users",
+    "active": "Active users",
+    "banned": "Banned users",
+    "button":{
+      "ban":"Ban user",
+      "unban":"Unban user",
+      "remove":"Remove user"
+    }
   }
 }

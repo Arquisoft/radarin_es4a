@@ -23,5 +23,7 @@ i18n
       wait: true
     }
   });
-
+export function getText(key) {
+    return i18n.t(key);
+}
 export default i18n;

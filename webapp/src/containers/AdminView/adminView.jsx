@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios"; 
+import { getText } from "../../i18n";
 
 var f = 0;
 
@@ -48,8 +49,8 @@ function AdminView() {
     return (
         <Container>
         <div id="adminView" class="row justify-content-center">
-            <h1>Panel del administrador</h1>
-            <h3>Usuarios del sistema</h3> 
+            <h1>{getText("administrator.panel")}</h1>
+            <h3>{getText("administrator.system")}</h3> 
             <table class="default">
                 {
                     Object.keys(usuariosSistema).map( (sistema) => {
@@ -62,7 +63,7 @@ function AdminView() {
                                                 removeUser(usuariosSistema[sistema]);
                                                 window.location.reload();
                                             }
-                                    }> Eliminar usuario </Button> 
+                                    }>{getText("administrator.button.remove")}</Button> 
                                 </td>
                                 <td>
                                     <Button type="button" variant="outline-primary" onClick=
@@ -70,14 +71,14 @@ function AdminView() {
                                                 banUser(usuariosSistema[sistema]);
                                                 window.location.reload();
                                             }
-                                    }> Banear usuario </Button> 
+                                    }>{getText("administrator.button.ban")}</Button> 
                                 </td>
                             </tr>
                         );
                     })
                 }
             </table>
-            <h3>Usuarios activos</h3>
+            <h3>{getText("administrator.active")}</h3>
             <table class="default">
                 {
                      Object.keys(usuariosActivos).map( (activo) => {
@@ -90,14 +91,14 @@ function AdminView() {
                                                 banUser(usuariosActivos[activo]);
                                                 window.location.reload();
                                             }
-                                    }> Banear usuario </Button> 
+                                    }>{getText("administrator.button.ban")}</Button> 
                                 </td>
                             </tr>
                         );
                     })
                 }
             </table>
-            <h3>Usuarios baneados</h3>
+            <h3>{getText("administrator.banned")}</h3>
             <table class="default">
                 {
                      Object.keys(usuariosBaneados).map( (ban) => {
@@ -110,7 +111,7 @@ function AdminView() {
                                                 unbanUser(usuariosBaneados[ban].webid);
                                                 window.location.reload();
                                             }
-                                    }> Desbanear usuario </Button> 
+                                    }>{getText("administrator.button.unban")}</Button> 
                                 </td>
                             </tr>
                         );

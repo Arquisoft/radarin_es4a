@@ -116,8 +116,9 @@ router.post("/users/add", async (req, res) => {
 router.get("/users/list", async(req, res) => {
     let usuarios = await db.userList();
     
-    if(usuarios !== null && usuarios !== undefined)
+    if(usuarios !== null && usuarios !== undefined) {
         res.type("json").status(200).send(usuarios);
+    }
 });
 
 router.get("/users/currently", async(req, res) => {
@@ -181,8 +182,9 @@ router.get("/isBanned", async(req, res) => {
 router.get("/admin", async(req, res) => {
     let admin = await db.getAdmin();
 
-    if(admin !== null && admin !== undefined)
+    if(admin !== null && admin !== undefined) {
         res.type("json").status(200).send(admin);
+    }
 });
 
 router.post("/remove/user", async(req, res) => {

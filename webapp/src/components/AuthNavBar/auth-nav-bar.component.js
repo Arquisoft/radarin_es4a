@@ -5,6 +5,7 @@ import { NavBarContainer } from "./children";
 import { LanguageDropdown } from "@util-components";
 import { ldflexHelper, errorToaster } from "@utils";
 import { NavigationItems, AdminNavigationItems } from "@constants";
+import axios from "axios"; 
 
 type Props = {
   webId: string
@@ -14,9 +15,17 @@ const AuthNavBar = React.memo((props: Props) => {
   const [inboxes, setInbox] = useState([]);
   const { t, i18n } = useTranslation();
   const { webId } = props;
+  const [admin, setAdmin] = useState([]);
+
+
+
+
+  const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+  axios.get( apiEndPoint + "/admin").then((res) => { setAdmin(res.data.webid); });
+
 
   var navigation = null;
-  if (webId === "https://alvarofuente.inrupt.net/profile/card#me")
+  if (webId === admin)
     navigation = AdminNavigationItems.map((item) => ({ ...item, label: t(item.label) }));
   else
     navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));

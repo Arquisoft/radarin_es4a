@@ -35,7 +35,7 @@ function AdminView() {
         // Usuarios del sistema
         axios.get( apiEndPoint + "/users/list").then((res) => { setUsuariosSistema(res.data) });
         // Usuarios activos
-        axios.get( apiEndPoint + "/users/currently").then((res) => { setUsuariosActivos(res.data) });
+        axios.get( apiEndPoint + "/users/currently" , { users: usuariosSistema }).then((res) => { setUsuariosActivos(res.data) });
         // Usuarios baneados
         axios.get( apiEndPoint + "/users/ban").then((res) => { setUsuariosBaneados(res.data) });
     }
@@ -64,6 +64,14 @@ function AdminView() {
                                             }
                                     }> Eliminar usuario </Button> 
                                 </td>
+                                <td>
+                                    <Button type="button" variant="outline-primary" onClick=
+                                    {() => {
+                                                banUser(usuariosSistema[sistema].webid);
+                                                window.location.reload();
+                                            }
+                                    }> Banear usuario </Button> 
+                                </td>
                             </tr>
                         );
                     })
@@ -90,7 +98,7 @@ function AdminView() {
                 }
             </ul>
             <h3>Usuarios baneados</h3>
-            <ul>
+            <table class="default">
                 {
                      Object.keys(usuariosBaneados).map( (ban) => {
                         return (
@@ -108,7 +116,7 @@ function AdminView() {
                         );
                     })
                 }
-            </ul>
+            </table>
         </div>
         </Container>
     );

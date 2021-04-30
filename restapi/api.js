@@ -92,7 +92,6 @@ router.post("/users/update", async (req, res) => {
 });
 
 
-
 // Registro de un usuario
 router.post("/users/add", async (req, res) => {
     let webid = req.body.webid;
@@ -122,7 +121,8 @@ router.get("/users/list", async(req, res) => {
 });
 
 router.get("/users/currently", async(req, res) => {
-   // TODO Devuelve los usuarios conectados actualmente
+    //let users = req.body;
+    //console.log(users);
 });
 
 router.get("/admin", async(req, res) => {

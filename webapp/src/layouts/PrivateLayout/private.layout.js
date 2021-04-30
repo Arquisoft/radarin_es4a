@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect/*, useState */} from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { withAuthorization } from "@inrupt/solid-react-components";

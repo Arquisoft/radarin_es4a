@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Navigation, Toolbar, HamburgerButton, MobileNavigation } from "./children";
 import { NavLogo, ImgLogo } from "./nav-bar.style";
-import "./LogoStyle.css";
 
 type Props = {
   t: Function,

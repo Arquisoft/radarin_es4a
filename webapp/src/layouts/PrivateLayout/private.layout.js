@@ -27,6 +27,8 @@ var admin = undefined;
 const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
 
+
+
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
   const errorMessages = {
@@ -35,6 +37,9 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     label: t("appPermission.link.label"),
     href: t("appPermission.link.href")
   };
+
+  var ban = undefined;
+  axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
 
   useEffect(() => {
     if (webId) {
@@ -75,7 +80,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
         <Footer />
       </Container>
     </React.Fragment>
-  ) : (
+  ) : (ban === null)? (
     <React.Fragment>
       <Container>
         <Route
@@ -108,7 +113,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
         <Footer />
       </Container>
     </React.Fragment>
-  );
+  ): <Redirect to="/403" />;
 };
 
 export default withAuthorization(PrivateLayout);

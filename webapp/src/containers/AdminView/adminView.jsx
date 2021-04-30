@@ -33,7 +33,7 @@ function AdminView() {
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 
         // Usuarios del sistema
-        axios.get( apiEndPoint + "/users/list").then((res) => { setUsuariosSistema(res.data) });
+        axios.get( apiEndPoint + "/users/system").then((res) => { setUsuariosSistema(res.data) });
         // Usuarios activos
         axios.get( apiEndPoint + "/users/currently").then((res) => { setUsuariosActivos(res.data) });
         // Usuarios baneados
@@ -55,11 +55,11 @@ function AdminView() {
                     Object.keys(usuariosSistema).map( (sistema) => {
                         return (
                             <tr>
-                                <td>{ usuariosSistema[sistema].webid }</td>
+                                <td>{ usuariosSistema[sistema] }</td>
                                 <td>
                                     <Button type="button" variant="outline-primary" onClick=
                                     {() => {
-                                                removeUser(usuariosSistema[sistema].webid);
+                                                removeUser(usuariosSistema[sistema]);
                                                 window.location.reload();
                                             }
                                     }> Eliminar usuario </Button> 
@@ -67,7 +67,7 @@ function AdminView() {
                                 <td>
                                     <Button type="button" variant="outline-primary" onClick=
                                     {() => {
-                                                banUser(usuariosSistema[sistema].webid);
+                                                banUser(usuariosSistema[sistema]);
                                                 window.location.reload();
                                             }
                                     }> Banear usuario </Button> 

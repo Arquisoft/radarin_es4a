@@ -129,7 +129,9 @@ router.get("/users/currently", async(req, res) => {
     for( let i = 0; i < usuarios.length; i++ ) {
 
         var ultimaVezVisto = new Date(usuarios[i].data.timestamp);
-        //if (!db.isBanned(usuarios[i].webid)){
+        var ban = await db.isBanned(usuarios[i].webid);
+        
+        if (ban === null){
             if (ultimaVezVisto.getFullYear() === ahora.getFullYear() 
             && ultimaVezVisto.getMonth() === ahora.getMonth() 
             && ultimaVezVisto.getDay() === ahora.getDay()){
@@ -142,10 +144,37 @@ router.get("/users/currently", async(req, res) => {
                     usuarios_activos.push(usuarios[i].webid);
                 }
             }
-        //}
+        }
     }
 
     res.type( "json" ).status( 200 ).send( usuarios_activos );
+    
+});
+
+router.get("/users/system", async(req, res) => {
+    let usuarios = await db.userList();
+    
+    let usuarios_activos = [];
+
+    for( let i = 0; i < usuarios.length; i++ ) {
+
+        var ban = await db.isBanned(usuarios[i].webid);
+        
+        if (ban === null){
+            usuarios_activos.push(usuarios[i].webid);
+        }
+    }
+
+    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    
+});
+
+router.get("/isBanned", async(req, res) => {
+    var webid = req.body.webid;
+
+    var ban = await db.isBanned(webid);
+
+    res.type( "json" ).status( 200 ).send( ban );
     
 });
 

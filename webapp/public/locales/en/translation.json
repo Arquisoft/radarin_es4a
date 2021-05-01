@@ -262,6 +262,7 @@
     "add":"Add friend:",
     "webId":"Enter webId",
     "send": "Send",
+    "delete": "Delete",
     "list": "Friends list:",
     "hang":{
       "hang":"Hang out",

@@ -16,7 +16,7 @@
     "errorLoading": "Había un error al cargar tu documento. Por favor, intenta de nuevo.",
     "errorSaving": "Había un error al guardar tu documento. Por favor, intenta de nuevo.",
     "errorFetching": "Error recogiendo fichero.",
-      
+    "accessGranted": "Colaborador ahora tiene acceso de leer y escribir.",
     "errorGrantingAccess": "Había un error al dar acceso a tu documento. Por favor, intenta de nuevo.",
     "saved": "Tu documento ha sido guardado al pod.",
     "notEditable": "(no editable)",

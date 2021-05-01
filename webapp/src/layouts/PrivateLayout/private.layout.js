@@ -41,7 +41,9 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   var ban = null;
   axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
 
-  axios.get( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }});
+  if (webId !== admin) {
+    axios.post( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }}).then(console.log(webId));
+  }
 
   useEffect(() => {
     if (webId) {

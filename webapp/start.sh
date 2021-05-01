@@ -1,2 +1,1 @@
-#serve -s -l $PORT build
-node server.js
+serve -s -l $PORT build

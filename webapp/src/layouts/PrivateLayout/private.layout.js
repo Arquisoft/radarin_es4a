@@ -41,6 +41,8 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   var ban = null;
   axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
 
+  axios.get( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }});
+
   useEffect(() => {
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);

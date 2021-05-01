@@ -93,23 +93,27 @@ router.post("/users/update", async (req, res) => {
 
 
 // Registro de un usuario
-router.post("/users/add", async (req, res) => {
+router.post("/users/register", async (req, res) => {
     let webid = req.body.webid;
     let data = req.body.data;
 
     // Comprobar si existe el usuario
     let user = await db.findByWebId(webid);
     if ( user ){
-        // El usuario ya existe, notificar al usuario.
-        res.type( "json" ).status( 403 ).send( {"code": 403, "message": "User already registered"} );
+        // El usuario ya existe, notificar.
+        res.type( "json" )
+            .status( 403 )
+            .send( {"code": 403, "message": "User already registered"} );
     }
     else {
-        // El usuario no existe, lo añadimos a la base de datos
+        // El usuario no existe, añadir a la BD.
         let user = db.addUser(webid, data);
         let user_id = user._id;
 
         // Notificar 
-        res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id } );
+        res.type( "json" )
+            .status( 200 )
+            .send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id} );
     }
 });
 

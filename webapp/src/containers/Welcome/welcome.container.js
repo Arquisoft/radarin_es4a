@@ -17,12 +17,25 @@ export class WelcomeComponent extends Component<Props> {
       name: "",
       image: defaultProfilePhoto,
       isLoading: false,
-      hasImage: false
+      hasImage: false,
+      hasBeenRegistered: false
     };
   }
 
   componentDidMount() {
     const { webId } = this.props;
+
+    console.log("Registrando usuario con webId: " + webId);
+
+    fetch("/api/users/register", {
+      method: 'POST',
+      body: { "webid": webId, "data": {}}, // Empty data on register to avoid errors
+
+    }).then(res => res.json())
+      .then(
+          (result) => { this.setState({ hasBeenRegistered: true }) },
+          (error)  => { this.setState({ hasBeenRegistered: true }) } )
+
     if (webId) this.getProfileData();
   }
 

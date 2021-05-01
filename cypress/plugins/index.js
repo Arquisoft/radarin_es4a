@@ -20,3 +20,11 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 }
+
+module.exports = (on, config) => {
+  if (config.testingType === 'component') {
+    require('@cypress/react/plugins/react-scripts')(on, config)
+  }
+
+  return config
+}

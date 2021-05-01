@@ -1,3 +1,7 @@
 {
-  "projectId": "heceak"
+  "projectId": "heceak",
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/*spec.{js,jsx,ts,tsx}"
+  }
 }

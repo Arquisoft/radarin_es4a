@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { NavBarContainer } from "./children";
 import { LanguageDropdown } from "@util-components";
 import { ldflexHelper, errorToaster } from "@utils";
-import { NavigationItems } from "@constants";
+import { NavigationItems, AdminNavigationItems } from "@constants";
+import axios from "axios"; 
 
 type Props = {
   webId: string
@@ -13,8 +14,22 @@ type Props = {
 const AuthNavBar = React.memo((props: Props) => {
   const [inboxes, setInbox] = useState([]);
   const { t, i18n } = useTranslation();
-  const navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));
   const { webId } = props;
+  const [admin, setAdmin] = useState([]);
+
+
+
+
+  const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+  axios.get( apiEndPoint + "/admin").then((res) => { setAdmin(res.data.webid); });
+
+
+  var navigation = null;
+  if (webId === admin)
+    navigation = AdminNavigationItems.map((item) => ({ ...item, label: t(item.label) }));
+  else
+    navigation = NavigationItems.map((item) => ({ ...item, label: t(item.label) }));
+  
   /**
    * Looks for all of the inbox containers in the pod and sets inboxes state
    */

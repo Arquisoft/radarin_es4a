@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect/*, useState */} from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { withAuthorization } from "@inrupt/solid-react-components";
 import { AuthNavBar, Footer } from "@components";
 import { permissionHelper } from "@utils";
 import styled from "styled-components";
+import axios from "axios"; 
 
 const Container = styled.div`
   display: flex;
@@ -22,6 +23,12 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
+var admin = "https://uo271397.inrupt.net/profile/card#me";
+const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+//axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
+
+
+
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
   const errorMessages = {
@@ -30,13 +37,21 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     label: t("appPermission.link.label"),
     href: t("appPermission.link.href")
   };
+
+  var ban = null;
+  axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
+
+  if (webId !== admin) {
+    axios.post( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }}).then(console.log(webId));
+  }
+
   useEffect(() => {
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);
     }
   }, [webId]);
-
-  return (
+  
+  return (webId === admin)? (
     <React.Fragment>
       <Container>
         <Route
@@ -47,18 +62,21 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
               <Switch>
                 {routes.map((route) => {
                   const { component: RouteComponent } = route;
-                  return (
-                    <Route
-                      key={route.id}
-                      path={route.path}
-                      render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
-                      webId={webId}
-                      exact
-                    />
-                  );
+                  if (route.id === "adminView") {
+                    return (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
+                        webId={webId}
+                        exact
+                      />
+                    );
+                  }
+                  else 
+                    return null;
                 })}
-                <Route path="/docs"></Route>
-                <Redirect to="/404" />
+                <Redirect to="/adminView" />
               </Switch>
             </Content>
           )}
@@ -66,7 +84,39 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
         <Footer />
       </Container>
     </React.Fragment>
-  );
+  ) : (ban === null)? (
+    <React.Fragment>
+      <Container>
+        <Route
+          {...rest}
+          component={({ history }) => (
+            <Content className="contentApp">
+              <AuthNavBar {...{ location, webId, history }} />
+              <Switch>
+                {routes.map((route) => {
+                  const { component: RouteComponent } = route;
+                  if (route.id !== "adminView") {
+                    return (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        render={(routerProps) => <RouteComponent {...routerProps} webId={webId} />}
+                        webId={webId}
+                        exact
+                      />
+                    );
+                  }
+                  else
+                    return null;
+                })}
+              </Switch>
+            </Content>
+          )}
+        />
+        <Footer />
+      </Container>
+    </React.Fragment>
+  ): <Redirect to="/403" />;
 };
 
 export default withAuthorization(PrivateLayout);

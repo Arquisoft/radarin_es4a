@@ -11,6 +11,12 @@ body,
   box-sizing: border-box;
 }
 
+.logo-img {
+  display: inline-block;
+  width: auto !important;
+  object-fit: contain;
+}
+
 body {
   color: #666;
   font-size: 62.5%;

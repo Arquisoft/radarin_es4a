@@ -38,8 +38,12 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     href: t("appPermission.link.href")
   };
 
-  var ban = undefined;
-  axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
+  var ban = null;
+  function prueba() {
+    axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
+  }
+
+  setTimeout(prueba, 1000);
 
   if (webId !== admin) {
     axios.post( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }}).then(console.log(webId));
@@ -86,7 +90,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
         <Footer />
       </Container>
     </React.Fragment>
-  ) : (ban === null)? (
+  ) : (ban === null || ban === undefined)? (
     <React.Fragment>
       <Container>
         <Route

@@ -23,9 +23,9 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-var admin = null;
+var admin = "https://uo271397.inrupt.net/profile/card#me";
 const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
-axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
+//axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
 
 
 
@@ -105,8 +105,6 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
                   else
                     return null;
                 })}
-                <Route path="/docs"></Route>
-                <Redirect to="/404" />
               </Switch>
             </Content>
           )}

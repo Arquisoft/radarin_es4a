@@ -2,6 +2,7 @@ const express = require("express");
 const promBundle = require("express-prom-bundle");
 const cors = require("cors");
 const api = require("./api");
+const mobile_api = require("./pod_api")
 const db = require("./database");
 
 function connect(){
@@ -25,8 +26,8 @@ function connect(){
     app.options("*", cors());
     app.use(express.json());
 
-    // Anteponer /api a todas las llamadas
     app.use("/api", api);
+    app.use("/api/mobile", mobile_api);
 
     app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port));
 }

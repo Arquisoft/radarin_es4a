@@ -38,7 +38,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     href: t("appPermission.link.href")
   };
 
-  var ban = null;
+  var ban = undefined;
   axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
 
   if (webId !== admin) {
@@ -50,6 +50,8 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
       permissionHelper.checkPermissions(webId, errorMessages);
     }
   }, [webId]);
+
+  console.log(ban);
   
   return (webId === admin)? (
     <React.Fragment>

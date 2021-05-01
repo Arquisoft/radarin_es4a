@@ -118,6 +118,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
                   else
                     return null;
                 })}
+                <Redirect to="/404" />;
               </Switch>
             </Content>
           )}

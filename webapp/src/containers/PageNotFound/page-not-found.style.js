@@ -34,7 +34,7 @@ export const PageNotFoundContent = styled.div`
 
   @media only screen and (max-width: 600px) {
     img {
-       width: 100%;
+      width: 100%;
     }
   }
 `;

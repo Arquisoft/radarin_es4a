@@ -47,7 +47,7 @@ export const ImageWrapper = styled.div`
 
   img {
     display: block;
-    
+    max-width: 100%;
     margin: 0 auto;
   }
   ${media.tablet`order: 1;`}

@@ -45,9 +45,9 @@ async function init( mongoUri ) {
     const user7 = { "webid": "https://uo269984.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": 1619699326 } };
     const user8 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": 1619699326 } };
 
-    const userAdmin = { "webid": "https://uo271397.inrupt.net/profile/card#me" };
+    const userAdmin = { "webid": "https://radarines4a.inrupt.net/profile/card#me" };
 
-    const pruebaBan = { "webid": "prueba" };
+    //const pruebaBan = { "webid": "https://uo271397.inrupt.net/profile/card#me" };
     
     //console.log("Insertando usuarios...");
     await users.insertMany([user1, user2, /*user3,*/ user4, user5, user6, user7, user8]);
@@ -56,7 +56,7 @@ async function init( mongoUri ) {
     await admin.insertOne(userAdmin);
 
     //console.log("Insertando baneado...");
-    await bans.insertOne(pruebaBan);
+    //await bans.insertOne(pruebaBan);
 
     console.log("OK. Datos insertados!");
 

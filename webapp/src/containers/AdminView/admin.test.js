@@ -1,14 +1,14 @@
 import React from "react";
 import { render, cleanup } from "react-testing-library";
 import { BrowserRouter as Router } from "react-router-dom";
-import Settings from "./settingsRadio";
+import AdminView from "./adminView";
 
-describe("Settings", () => {
+describe("AdminView", () => {
   afterAll(cleanup);
 
   const { container } = render(
     <Router>
-      <Settings />
+      <AdminView />
     </Router>
   );
 

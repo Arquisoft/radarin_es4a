@@ -67,7 +67,9 @@ export const createNonExistentDocument = async (documentUri, body = "") => {
 export const fetchLdflexDocument = async (documentUri) => {
   try {
     const result = await documentExists(documentUri);
-    if (result.status === 404) return null;
+    if (result.status === 404) {
+      return null;
+    }
     const document = await ldflex[documentUri];
     return document;
   } catch (e) {
@@ -87,7 +89,9 @@ export const resourceExists = async (resourcePath) => {
 export const discoverInbox = async (document) => {
   try {
     const documentExists = await resourceExists(document);
-    if (!documentExists) return false;
+    if (!documentExists) {
+      return false;
+    }
 
     const inboxDocument = await ldflex[document]["ldp:inbox"];
     const inbox = inboxDocument ? await inboxDocument.value : false;
@@ -102,7 +106,7 @@ export const discoverInbox = async (document) => {
  * @param resourcePath
  * @returns {Promise<string|*>}
  */
-export const getLinkedInbox = async resourcePath => {
+export const getLinkedInbox = async (resourcePath) => {
   try {
     const inboxLinkedPath = await ldflex[resourcePath].inbox;
     if (inboxLinkedPath) {

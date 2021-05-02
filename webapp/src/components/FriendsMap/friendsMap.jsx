@@ -77,7 +77,7 @@ async function getFriends( friends ) {
 // Auxiliar method to convert coords to radians.
 var toRadianes = function (valor) {
   return (Math.PI / 180) * valor;
-}
+};
 // Calculates the distance between two coordinates according to Haversine Formule.
 var distanceFilter = function (lat2, lng2, userLat, userLon) {
   var RadioTierraKm = 6378.0;
@@ -114,7 +114,10 @@ function FriendsMap( props ) {
   const { latitude, longitude } = usePosition( false );
 
   getFriends(useLDflexList( "[" + webID + "].friends" ))
-        .then( (friendsList) => { if (friendsList!==userFriendsList) setUserFriendsList( friendsList ) });
+        .then( (friendsList) => { if (friendsList!==userFriendsList) {
+          setUserFriendsList( friendsList );
+        }
+      });
 
 
     //Metemos esto en una función para que no se ejecute todo el rato
@@ -142,7 +145,7 @@ function FriendsMap( props ) {
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 
         axios.post( apiEndPoint + "/users/update", userInfo )
-            .then((res) => { setLista(res.data) }); //Usamos el setState y metemos la lista que luego usaremos con setList
+            .then((res) => { setLista(res.data); }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }
     }
 

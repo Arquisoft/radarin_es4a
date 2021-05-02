@@ -16,7 +16,7 @@ module.exports.startdb = async () => {
     const mongo_uri =await mongod.getUri();
     //console.log(mongo_uri);
     
-}
+};
 
 module.exports.startserver = async () => {
     //console.log("conecceting to database");

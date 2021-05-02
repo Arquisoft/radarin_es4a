@@ -12,7 +12,7 @@ const PageBanned = () => {
   return (
     <PageBannedWrapper>
       <PageBannedContent>
-        <img src="/img/403.svg" alt="403" />
+        <img src="/img/403.png" alt="403" />
         <h3> {t("banned.title")} </h3>
         <p> {t("banned.content")}</p>
       </PageBannedContent>

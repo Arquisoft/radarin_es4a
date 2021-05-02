@@ -10,19 +10,19 @@ export const NavigationItems = [
   },
   {
     id: "myFriends",
-    icon: "/img/icon/r.png",
+    icon: "/img/icon/r_friends.png",
     label: "navBar.myFriends",
     to: "/myFriends"
   },
   {
     id: "friendsMap",
-    icon: "/img/icon/r.png",
+    icon: "/img/icon/r_map.png",
     label: "navBar.friendsMap",
     to: "/friendsMap"
   },
   {
     id: "settingsRadio",
-    icon: "/img/icon/r.png",
+    icon: "/img/icon/r_settings.png",
     label: "navBar.settingsRadio",
     to: "/settingsRadio"
   }

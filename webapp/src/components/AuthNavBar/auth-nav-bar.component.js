@@ -52,7 +52,7 @@ const AuthNavBar = React.memo((props: Props) => {
        * know how fix it.
        */
       if (inboxes.length === 0) {
-        errorToaster(t("noInboxUser.message"), "Error", {
+        errorToaster(t("noInboxUser.message"), t("notification.error"), {
           label: t("noInboxUser.link.label"),
           href: t("noInboxUser.link.href")
         });

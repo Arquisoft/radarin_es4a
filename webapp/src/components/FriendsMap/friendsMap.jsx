@@ -15,7 +15,6 @@ import "./friendsMap.css"
 
 const notificado = new Map();
 var i = 0;
-var flag = true;
 
 const Marker = (props) => (
   <div style={{
@@ -149,20 +148,14 @@ function FriendsMap( props ) {
         axios.post( apiEndPoint + "/users/update", userInfo )
             .then((res) => { setLista(res.data); }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }
-      console.log("hola");
-      flag = true;
     }
 
     useEffect(() => {
-      console.log("buenas");
       if (i < 1) {
         prueba();
         i++;
       }
-      if (flag) {
-        flag = false;
-        setTimeout(prueba, 10000);
-      }
+      setTimeout(prueba, 10000);
     });
 
 

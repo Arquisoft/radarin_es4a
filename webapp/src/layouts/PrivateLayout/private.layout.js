@@ -49,7 +49,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     });
 
     if (webId !== admin) {
-      axios.post( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }});
+      axios.post( apiEndPoint + "/users/register", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }});
     }
   }
 

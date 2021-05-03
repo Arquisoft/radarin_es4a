@@ -91,7 +91,7 @@
     "doneMessage": "All done ?",
     "title": "<0><1>Radarin</1></0>",
     "description": "<0>Radarin allows you to locate and meet up with your friends in a quick and easy way. Here you can:</0>",
-    "libraryList": "<0><0>Add new people to your friend list or detele existing ones.</0><1>Visualize friends on you area.</1><1>Show as well, your own location to your friends.</1></0>",
+    "libraryList": "<0><0>Add new people to your friend list or detele existing ones.</0><1>Visualize friends in you area, given a search distance.</1><1>Show as well, your own location to your friends.</1><1>Notify your friends in case you want to meet.</1> <1>Inform that you have been in touch with a covid19 positive.</1></0>",
     "fairUsageTitle": "Authors",
     "fairUsageText": "The Radarin app is being developed by ",
     "fairUsageExamples": "<0><0> Rubén Pardiño Iglesias.</0><1>Victor Suárez Sierra.</1><2>Miguel Menéndez Rodríguez.</2><0>Álvaro de la Fuente Fernández.</0><1>Ramón Vila Ferreres.</1><2>Fabio Cuartas Puente.</2><0>Israel Méndez Rodríguez.</0></0>",

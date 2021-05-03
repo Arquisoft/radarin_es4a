@@ -8,6 +8,5 @@
 | Solid | Un conjunto de funciones y procedimientos que permiten la creación de aplicaciones que acceden a las características o datos de un sistema operativo, aplicación u otro servicio. 
 | Heroku | Heroku es una plataforma como servicio que permite a los desarrolladores crear, ejecutar y operar aplicaciones completamente en la nube.
 | Pod | Los Pods de solid son donde tú almacenas tu información. Cualquier tipo de información puede ser guardada en un Pod de Solid. Una vez guardada tu controlas quien accede a tus datos.
-| Aplicación | 
-| Sistema | 
+| Timestamp | Marca de tiempo de la ubicación del usuario.
 |===

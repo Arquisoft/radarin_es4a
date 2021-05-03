@@ -43,46 +43,100 @@ Algún ejemplo de ello puede ser como se añade y se gestionan los amigos, o com
 3. Se comprueba que las credenciales sean correctas.
 4. El servidor acepta/rechaza la petición de autenticación.
 
-[plantuml,"inicio_de_sesion",png]
+==== Aplicación Web
+[plantuml,"inicio_de_sesion_web",png]
 ----
 actor Pablo
 participant  "Radarín"
-participant "LoginManager"
 participant "POD"
 Pablo -> "Radarín": Envía solicitud para registrarse.
-Pablo -> "LoginManager": Introduce sus credenciales
-"LoginManager" -> "POD": Verifica las credenciales
+Pablo -> "POD": Introduce sus credenciales.
+"POD" -> "POD": Verifica las credenciales.
 "POD" -> "Radarín": acepta/rechaza la petición de autenticación.
+----
+
+==== Aplicación Móvil
+[plantuml,"inicio_de_sesion_movil",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "API Rest"
+participant "Base de Datos"
+participant "POD"
+Pablo -> "Radarín": Envía solicitud para registrarse.
+Pablo -> "API Rest": Introduce sus credenciales.
+"API Rest" -> "POD": Verifica las credenciales.
+"POD" -> "API Rest": Devuelve los datos del POD.
+"API Rest" -> "Base de Datos": Pide los datos necesarios.
+"Base de Datos" -> "API Rest": Devuelve los datos necesarios.
+"API Rest" -> "Radarín": Devuelve los datos obtenidos.
 ----
 
 === Mis amigos
 Nuestra aplicación permitirá que el usuario disponga de una lista de amigos dentro de la aplicación una vez se inicia sesión, de la misma manera permitiremos
 la opción de añadir o eliminar amigos de la lista, la cual desembocará en una actualización de la página que nos permitirá ver los cambios.
 
-[plantuml,"mostrar_amigos",png]
+==== Aplicación Web
+[plantuml,"mostrar_amigos_web",png]
 ----
 actor Pablo
-participant  "Radarín"
-participant "Base de datos"
+participant "Radarín"
+participant "POD"
 Pablo -> "Radarín": Pide su lista de amigos
-"Radarín" -> "Base de datos": Consulta los amigos de ese usuario
-"Base de datos" -> "Radarín": Devuelve la lista de amigos de ese usuario
+"Radarín" -> "POD": Consulta los amigos de ese usuario
+"POD" -> "Radarín": Devuelve la lista de amigos de ese usuario
+"Radarín" -> "Radarín": Muestra los amigos
+----
+
+==== Aplicación Móvil
+[plantuml,"mostrar_amigos_movil",png]
+----
+actor Pablo
+participant "Radarín"
+participant "Servidor"
+participant "POD"
+Pablo -> "Radarín": Pide su lista de amigos
+"Radarín" -> "Servidor": Consulta los amigos de ese usuario
+"Servidor" -> "POD": Consulta los amigos de ese usuario
+"POD" -> "Servidor": Devuelve la lista de amigos de ese usuario
+"Servidor" -> "Radarín": Devuelve la lista de amigos de ese usuario
 "Radarín" -> "Radarín": Muestra los amigos
 ----
 
 === Añadir nuevos amigos
 Nuestra aplicación dispondrá de una opción para añadir amigos.
 
-[plantuml,"anadir_amigos",png]
+==== Aplicación Web
+[plantuml,"anadir_amigos_web",png]
 ----
 actor Pablo
-participant  "Radarín"
-participant "FriendsManager"
-participant "Base de datos"
+participant "Radarín"
+participant "API"
+participant "Servidor"
+participant "POD"
+participant "Caché"
 Pablo -> "Radarín": Pide añadir un amigo
-"Radarín" -> "FriendsManager": Pide añadir un amigo
-"FriendsManager" -> "Base de datos": Pide añadir el usuario a la lista de amigos
-"Base de datos" -> "Base de datos": Lo añade
+"Radarín" -> "API": Pide añadir un amigo
+"API" -> "Servidor": Pide añadir el usuario a la lista de amigos
+"Servidor" -> "": Lo añade
+"Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
+"Radarín" -> "Radarín": Muestra los amigos
+----
+
+==== Aplicación Móvil
+
+[plantuml,"anadir_amigos_movil",png]
+----
+actor Pablo
+participant "Radarín"
+participant "API"
+participant "Servidor"
+participant "POD"
+participant "Caché"
+Pablo -> "Radarín": Pide añadir un amigo
+"Radarín" -> "API": Pide añadir un amigo
+"API" -> "Servidor": Pide añadir el usuario a la lista de amigos
+"Servidor" -> "Base de datos": Lo añade
 "Base de datos" -> "Radarín" : Devuelve los amigos de Pablo
 "Radarín" -> "Radarín": Muestra los amigos
 ----

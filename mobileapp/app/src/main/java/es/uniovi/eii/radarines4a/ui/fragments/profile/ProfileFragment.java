@@ -1,9 +1,9 @@
 package es.uniovi.eii.radarines4a.ui.fragments.profile;
 
-import android.content.Intent;
-import android.location.Geocoder;
+//import android.content.Intent;
+//import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+//import java.util.Locale;
 
 import es.uniovi.eii.radarines4a.R;
 import es.uniovi.eii.radarines4a.model.Friend;
@@ -25,9 +25,9 @@ import es.uniovi.eii.radarines4a.ui.adapter.HomeFriendsAdapter;
 
 public class ProfileFragment extends Fragment {
 
-    List<Friend> friendsList;
-    User usuario;
-    RecyclerView friendsRecycler;
+    private List<Friend> friendsList;
+    private User usuario;
+    private RecyclerView friendsRecycler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {

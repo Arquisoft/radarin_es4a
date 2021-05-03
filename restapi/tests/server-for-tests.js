@@ -16,7 +16,7 @@ module.exports.startdb = async () => {
     const mongo_uri =await mongod.getUri();
     //console.log(mongo_uri);
     
-}
+};
 
 module.exports.startserver = async () => {
     //console.log("conecceting to database");
@@ -32,7 +32,7 @@ module.exports.startserver = async () => {
     server = await app.listen(5000);
     //console.log("Server has started!");
     return app;
-}
+};
 
 module.exports.closeServer = async () => {
     await mongoose.connection.dropDatabase();

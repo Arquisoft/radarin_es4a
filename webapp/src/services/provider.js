@@ -19,14 +19,6 @@ export default class Provider {
         value: 'https://inrupt.net/auth',
         registerLink: 'https://inrupt.net/register',
         description: 'Lorem ipsum dolor sit amet non ipsom dolor'
-      },
-      {
-        id: 'solid-community',
-        label: 'Solid Community',
-        image: '/img/Solid.png',
-        value: 'https://solid.community',
-        registerLink: 'https://solid.community/register',
-        description: 'Lorem ipsum dolor sit non consectetur'
       }
     ];
   }

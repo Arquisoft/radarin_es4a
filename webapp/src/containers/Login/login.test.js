@@ -13,7 +13,7 @@ describe("Login", () => {
   test("renders without crashing", () => {
     expect(container).toBeTruthy();
   });
-
+  
   test("renders with styled components", () => {
     expect(document.querySelector(".login-panel")).toBeTruthy();
     expect(document.querySelector(".panel-body")).toBeTruthy();
@@ -27,4 +27,5 @@ describe("Login", () => {
     const providerLogin = document.querySelector(".solid-provider-login-component");
     expect(providerLogin).toBeTruthy();
   });
+  
 });

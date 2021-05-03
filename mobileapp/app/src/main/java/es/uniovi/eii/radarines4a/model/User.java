@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import es.uniovi.eii.radarines4a.model.api_pojo.Friend;
+import es.uniovi.eii.radarines4a.model.api_pojo.Session;
+
 /**
  * POJO Usuario.
  * Representa un usuario de la aplicación.
@@ -16,22 +19,20 @@ public class User implements Parcelable {
     private String username;
     private String login_provider;
     private String image_url;
-    private HashMap<String, Object> session;
+    private Session session;
     private Date last_seen;
     private List<Friend> friends;
-    private GeoPoint last_location;
 
-    public User() { /**/ }
+    public User () { /**/ }
 
-    public User(
+    public User (
             String webid,
             String username,
             String login_provider,
             String image_url,
-            HashMap<String, Object> session,
+            Session session,
             Date last_seen,
-            List<Friend> friends,
-            GeoPoint last_location) {
+            List<Friend> friends) {
 
         this.webid = webid;
         this.username = username;
@@ -40,7 +41,6 @@ public class User implements Parcelable {
         this.session = session;
         this.last_seen = last_seen;
         this.friends = friends;
-        this.last_location = last_location;
     }
 
     protected User(Parcel in) {
@@ -48,8 +48,6 @@ public class User implements Parcelable {
         username = in.readString();
         login_provider = in.readString();
         image_url = in.readString();
-        friends = in.createTypedArrayList(Friend.CREATOR);
-        last_location = in.readParcelable(GeoPoint.class.getClassLoader());
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -75,7 +73,5 @@ public class User implements Parcelable {
         dest.writeString(username);
         dest.writeString(login_provider);
         dest.writeString(image_url);
-        dest.writeTypedList(friends);
-        dest.writeParcelable(last_location, flags);
     }
 }

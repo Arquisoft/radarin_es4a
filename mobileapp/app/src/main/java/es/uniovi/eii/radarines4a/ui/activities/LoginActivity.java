@@ -7,11 +7,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Date;
+
 import es.uniovi.eii.radarines4a.R;
 import es.uniovi.eii.radarines4a.helper.SharedPreferencesHelper;
 import es.uniovi.eii.radarines4a.helper.remote.APIService;
 import es.uniovi.eii.radarines4a.helper.remote.APIUtils;
 import es.uniovi.eii.radarines4a.model.User;
+import es.uniovi.eii.radarines4a.model.api_pojo.LoginResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,23 +66,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private User userServerLogin(String login_provider, String username, String password) {
-        User current_user;
-
-        /*
+        final User[] current_user = new User[1];
+        
         mAPIService.login(login_provider, username, password).enqueue(new Callback<LoginResponse>() {
 
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                // Update current user
+                current_user[0] = new User (
+                        response.body().getUser().getWebid(),
+                        response.body().getUser().getUsername(),
+                        response.body().getUser().getIdentProv(),
+                        response.body().getUser().getPhoto(),
+                        response.body().getUser().getSession(),
+                        new Date(),
+                        response.body().getUser().getFriends()
+                );
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // Notify login error
                 Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT);
             }
         });
-         */
-        return new User();
+        
+        return current_user[0];
     }
 }

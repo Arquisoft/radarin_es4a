@@ -17,7 +17,8 @@ export class WelcomeComponent extends Component<Props> {
       name: "",
       image: defaultProfilePhoto,
       isLoading: false,
-      hasImage: false
+      hasImage: false,
+      hasBeenRegistered: false
     };
   }
 

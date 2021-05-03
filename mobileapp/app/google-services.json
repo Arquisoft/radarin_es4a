@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "888503930919",
+    "firebase_url": "https://bubble-21d99.firebaseio.com",
+    "project_id": "bubble-21d99",
+    "storage_bucket": "bubble-21d99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888503930919:android:fd90fd2126c6bbafa47e02",
+        "android_client_info": {
+          "package_name": "es.uniovi.eii.bubble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888503930919-c0jlg4ka2bieshop8dqp2r0u3f16ua61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6JW_a5-uBMhBxG0qA1-cpLReDGVLvcsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888503930919-c0jlg4ka2bieshop8dqp2r0u3f16ua61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

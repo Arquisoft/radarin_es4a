@@ -1,20 +1,94 @@
 const express = require("express");
-const User = require("./models/users");
 const router = express.Router();
 const db = require("./database");
+const { default: data } = require('@solid/query-ldflex')
+const auth = require('solid-auth-cli');
 
-/* Ejemplo de datos a procesar: 
-{
-    "webid" : <webid>, 
-    "data" : { 
-        "friends" : [<webid1>, <webid2>, ...], 
-        "last_location": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        } 
-    } 
-} */
+async function getUserProfilePicture(user_webid) {
+    const user = data[user_webid];
+    return await user.vcard$hasPhoto;
+}
+
+async function getUserFriends(user_webid) {
+    let response_friends = [];
+
+    const user = data[user_webid];
+
+    for await (const name of user.friends) {
+        let friend_photo = await data[name.toString()].vcard$hasPhoto;
+        friend_photo = (friend_photo == undefined) ? "empty" : friend_photo;
+
+        console.log(name.toString());
+        console.log(friend_photo.toString());
+
+        response_friends.push({
+            "webid": name.toString(),
+            "photo": friend_photo.toString()
+        })
+    }
+    return response_friends;
+}
+
+/**
+ * Obtiene los amigos de un usuario.
+ */
+router.post("/user/friends", async (req, res) => {
+    let user_webid = req.body.user_webid;
+
+    let response_friends = await getUserFriends( user_webid );
+
+    res.type( "json" ).status( 200 ).send({"friends": response_friends });
+});
+
+/**
+ * Inicia sesión en el POD de un usuario y devuelve sus credenciales
+ * de sesión.
+ */
+router.post("/user/login", async (req, res) => {
+    let ident_prov = req.body.ident_prov;
+    let username   = req.body.username;
+    let password   = req.body.password;
+    let friends;
+    let session;
+    let profile_picture;
+
+    console.log("User login triggered: " + username);
+
+    await auth.login({ idp: ident_prov, username: username, password: password })
+        .then( g_session =>  {
+            session = g_session;
+            session.sessionKey = JSON.parse(g_session.sessionKey);
+            console.log("Got session:" + session.toString());
+        })
+        .catch( error => { // Ups! Something happened, maybe password mismatch?
+            res.type( "json" ).status( 401 ).send( { "res": "KO", "error": error } );
+        });
+
+    friends = await getUserFriends( session.webId );
+    console.log("Friends: " + friends);
+
+    profile_picture = await getUserProfilePicture( session.webId );
+    console.log("Profile picture: " + profile_picture);
+
+    res.type( "json" ).status( 200 ).send(
+        {
+            "res": "OK",
+            "msg": "User login successful!",
+            "user": {
+                "webid": session.webId,
+                "username": username,
+                "photo": profile_picture,
+                "ident_prov": ident_prov,
+                "session": session,
+                "friends": friends
+            }
+        }
+    );
+});
+
+/**
+ * Actualiza el estado de un usuario.
+ */
 router.post("/users/update", async (req, res) => {
     let webid = req.body.webid;
     let friends = req.body.data.friends;
@@ -49,27 +123,6 @@ router.post("/users/update", async (req, res) => {
         friendsLocation.set( friendWebid, friend.data );
     }
 
-    // Devolver la última ubicación de los amigos 
-    /* 
-    Ejemplo de respuesta: 
-    { 
-        "https://alvarofuente.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        },
-        "https://cuartasfabio.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        },
-        "https://ramonvilafer.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        }
-    } */
-
     // https://stackoverflow.com/questions/37437805/convert-map-to-json-object-in-javascript
     const autoConvertMapToObject = (map) => {
         const obj = {};
@@ -85,26 +138,27 @@ router.post("/users/update", async (req, res) => {
 
     var responseObject = autoConvertMapToObject( friendsLocation );
 
-    //console.log(friendsLocation);
-    //console.log(response_object);
-
     res.type( "json" ).status( 200 ).send( responseObject );
 });
 
 
-// Registro de un usuario
-router.post("/users/add", async (req, res) => {
+/**
+ * Registra a un usuario en el sistema.
+ */
+router.post("/users/register", async (req, res) => {
     let webid = req.body.webid;
     let data = req.body.data;
 
     // Comprobar si existe el usuario
     let user = await db.findByWebId(webid);
     if ( user ){
-        // El usuario ya existe, notificar al usuario.
-        res.type( "json" ).status( 403 ).send( {"code": 403, "message": "User already registered"} );
+        // El usuario ya existe, notificar.
+        res.type( "json" )
+            .status( 403 )
+            .send( {"code": 403, "message": "User already registered"} );
     }
     else {
-        // El usuario no existe, lo añadimos a la base de datos
+        // El usuario no existe, añadir a la BD.
         let user = db.addUser(webid, data);
         let userId = user._id;
 
@@ -113,6 +167,9 @@ router.post("/users/add", async (req, res) => {
     }
 });
 
+/**
+ * Lista todos los usuarios de la base de datos.
+ */
 router.get("/users/list", async(req, res) => {
     let usuarios = await db.userList();
     
@@ -121,6 +178,9 @@ router.get("/users/list", async(req, res) => {
     }
 });
 
+/**
+ * Devuelve todos los usuarios activos.
+ */
 router.get("/users/currently", async(req, res) => {
     let usuarios = await db.userList();
     

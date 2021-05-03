@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">RadarinES4A</string>
+    <string name="seleccionarBtn">Seleccionar</string>
+    <string name="user_data_text">Rellena tus datos</string>
+    <string name="txt_user_image_chooser">Seleccionar imagen</string>
+    <string name="txt_seleccionar_img_user">Selecciona una imagen de perfil</string>
+    <string name="text_quedar">Quedar</string>
+    <string name="my_map">Mapa</string>
+    <string name="my_notifications">Notificaciones</string>
+    <string name="label_user_friends" >Mis amigos</string>
+    <string name="username_label">Nombre de usuario</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="signup_button">Crear cuenta</string>
+    <string name="prompt_pass">Contraseña</string>
+    <string name="logged_in">¡Sesión iniciada!</string>
+    <string name="login_error">Ups, parece que ha habido un error al iniciar sesión.</string>
+</resources>

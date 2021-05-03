@@ -25,7 +25,6 @@ function connect(){
     app.options("*", cors());
     app.use(express.json());
 
-    // Anteponer /api a todas las llamadas
     app.use("/api", api);
 
     app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port));

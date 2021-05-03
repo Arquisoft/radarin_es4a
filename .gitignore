@@ -21,6 +21,7 @@ restapi/data
 .eslintcache
 
 # IDE
+.idea/
 .vscode/
 restapi/package-lock.json
 webapp/package-lock.json

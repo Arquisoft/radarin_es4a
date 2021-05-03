@@ -7,8 +7,7 @@ import { getText } from "../../i18n";
 
 //import solid from "@solid/query-ldflex";
 
-import { useWebId } from  "@solid/react";
-import { useLDflexList } from "@solid/react";
+import { useWebId, useLDflexList } from  "@solid/react";
 import axios from "axios"; 
 
 //import "./friendsMap.css"

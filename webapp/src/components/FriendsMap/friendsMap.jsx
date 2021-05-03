@@ -158,13 +158,13 @@ function FriendsMap( props ) {
       setTimeout(prueba, 10000);
     });
 
-
   return (
     <div style={{ height: "88vh", width: "100%" }}>
+    
       <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >Actualizar ubicación</Button>
 
       <GoogleMapReact
-      bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
+      bootstrapURLKeys={{ key: "AIzaSyD5pqaqaLZ5TkO79T9J6SWIoqo4UqQVx7Y" }}
       center={{lat: latitude, lng: longitude}}
       defaultZoom={(radius()<=8) ? Math.round(15-(radius()*0.4)) : (radius()<20) ? Math.round(15-(radius()*0.3)) : Math.round(15-(radius()*0.18)) }
       yesIWantToUseGoogleMapApiInternals={true}

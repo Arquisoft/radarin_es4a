@@ -4,6 +4,7 @@ import { Card, CardContent, Button, Box } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
 import "./adminView.css";
+import { getText } from "../../i18n";
 
 function removeUser(users) {
     /* 
@@ -94,11 +95,11 @@ function AdminView() {
 
     return (
         <Container width="100%">
-            <h1>Panel del administrador</h1>
+            <h1>{getText("admin.panel")}</h1>
             <Fragment>
                 <Card>
                     <CardContent>
-                        <h3>Usuarios del sistema</h3>
+                        <h3>{getText("admin.system")}</h3>
                         <Box height="24em">
                         <DataGrid rows={rowsUsers} columns={columnsUsers} pageSize={5} checkboxSelection
 
@@ -108,15 +109,15 @@ function AdminView() {
 
                             selectionModel={selectionModel} />
                         </Box>
-                        <Button onClick={() => removeUser(selectionModel)}>Delete</Button>
-                        <Button onClick={() => banUser(selectionModel)}>Ban</Button>
+                        <Button onClick={() => removeUser(selectionModel)}>{getText("admin.button.remove")}</Button>
+                        <Button onClick={() => banUser(selectionModel)}>{getText("admin.button.ban")}</Button>
                     </CardContent>
                 </Card> 
             </Fragment>
             <Fragment>
                 <Card>
                     <CardContent>
-                        <h3>Usuarios activos</h3>
+                        <h3>{getText("admin.active")}</h3>
                         <Box height="24em">
                         <DataGrid rows={rowsActiveUsers} columns={columns} pageSize={5} checkboxSelection
 
@@ -126,14 +127,14 @@ function AdminView() {
 
                             selectionModel={selectionModelActive} />
                         </Box>
-                        <Button onClick={() => banUser(selectionModelActive)}>Ban</Button>
+                        <Button onClick={() => banUser(selectionModelActive)}>{getText("admin.button.ban")}</Button>
                     </CardContent>
                 </Card> 
             </Fragment>
             <Fragment>
                 <Card>
                     <CardContent>
-                        <h3>Usuarios baneados</h3>
+                        <h3>{getText("admin.banned")}</h3>
                         <Box height="24em">
                         <DataGrid rows={rowsBannedUsers} columns={columns} pageSize={5} checkboxSelection
 
@@ -143,7 +144,7 @@ function AdminView() {
 
                             selectionModel={selectionModelBanned} />
                         </Box>
-                        <Button onClick={() => unbanUser(selectionModelBanned)}>Unban</Button>
+                        <Button onClick={() => unbanUser(selectionModelBanned)}>{getText("admin.button.unban")}</Button>
                     </CardContent>
                 </Card> 
             </Fragment>

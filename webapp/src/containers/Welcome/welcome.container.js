@@ -24,24 +24,16 @@ export class WelcomeComponent extends Component<Props> {
 
   componentDidMount() {
     const { webId } = this.props;
-
-    console.log("Registrando usuario con webId: " + webId);
-
-    fetch("/api/users/register", {
-      method: 'POST',
-      body: { "webid": webId, "data": {}}, // Empty data on register to avoid errors
-
-    }).then(res => res.json())
-      .then(
-          (result) => { this.setState({ hasBeenRegistered: true }) },
-          (error)  => { this.setState({ hasBeenRegistered: true }) } )
-
-    if (webId) this.getProfileData();
+    if (webId) {
+      this.getProfileData();
+    }
   }
 
   componentDidUpdate(prevProps) {
     const { webId } = this.props;
-    if (webId && webId !== prevProps.webId) this.getProfileData();
+    if (webId && webId !== prevProps.webId) {
+      this.getProfileData();
+    }
   }
 
   /**
@@ -95,8 +87,12 @@ export class WelcomeComponent extends Component<Props> {
     const { hasImage } = this.state;
     try {
       const { user } = data;
-      if (hasImage) await user.vcard_hasPhoto.set(namedNode(uri));
-      else await user.vcard_hasPhoto.add(namedNode(uri));
+      if (hasImage) {
+        await user.vcard_hasPhoto.set(namedNode(uri));
+      }
+      else {
+        await user.vcard_hasPhoto.add(namedNode(uri));
+      }
       successToaster(message, title);
     } catch (error) {
       errorToaster(error.message, "Error");

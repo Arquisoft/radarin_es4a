@@ -87,6 +87,15 @@ async function isBanned(webid) {
     return bans.findOne({
         "webid": webid
     });
+3 conflicting files
+LoginActivity.java
+...es4a/ui/activities/LoginActivity.java
+api.js
+restapi/api.js
+database.js
+restapi/database.js
+restapi/database.js Resolved
+
 }
 
 async function updateUser(webid, data) {

@@ -1,4 +1,4 @@
-import React, { useEffect/*, useState */} from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { withAuthorization } from "@inrupt/solid-react-components";
@@ -23,7 +23,7 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-var admin = "https://uo271397.inrupt.net/profile/card#me";
+var admin = "https://radarines4a.inrupt.net/profile/card#me";
 const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 //axios.get( apiEndPoint + "/admin").then((res) => { admin = res.data.webid; });
 
@@ -31,26 +31,35 @@ const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api"
 
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
   const { t } = useTranslation();
+  const [ban, setBan] = useState();
   const errorMessages = {
     message: t("appPermission.message"),
     title: t("notifications.error"),
     label: t("appPermission.link.label"),
     href: t("appPermission.link.href")
   };
+  function init() {
+    axios.post( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { 
+      if (res.data !== "") {
+        setBan(res.data);
+      }
+      else {
+        setBan("noBan");
+      }
+    });
 
-  var ban = null;
-  axios.get( apiEndPoint + "/isBanned", {webid : webId}).then((res) => { ban = res.data; });
-
-  if (webId !== admin) {
-    axios.post( apiEndPoint + "/users/add", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }}).then(console.log(webId));
+    if (webId !== admin) {
+      axios.post( apiEndPoint + "/users/register", {webid : webId, data : { lat: 0, lon: 0, timestamp: Date.now() }});
+    }
   }
 
   useEffect(() => {
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);
+      init();
     }
   }, [webId]);
-  
+
   return (webId === admin)? (
     <React.Fragment>
       <Container>
@@ -84,7 +93,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
         <Footer />
       </Container>
     </React.Fragment>
-  ) : (ban === null)? (
+  ) : (ban === "noBan" || ban === undefined)? (
     <React.Fragment>
       <Container>
         <Route
@@ -109,6 +118,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
                   else
                     return null;
                 })}
+                <Redirect to="/404" />;
               </Switch>
             </Content>
           )}

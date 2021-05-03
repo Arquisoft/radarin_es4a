@@ -5,26 +5,27 @@ const { default: data } = require('@solid/query-ldflex')
 const auth = require('solid-auth-cli');
 const client = require("async-redis").createClient();
 
-async function getUserProfilePicture(user_webid) {
-    const user = data[user_webid];
+
+async function getUserProfilePicture(userWebid) {
+    const user = data[userWebid];
     return await user.vcard$hasPhoto;
 }
 
-async function getUserFriends(user_webid) {
-    let response_friends = [];
+async function getUserFriends(userWebid) {
+    let responseFriends = [];
 
-    const user = data[user_webid];
+    const user = data[userWebid];
 
     for await (const name of user.friends) {
-        let friend_photo = await data[name.toString()].vcard$hasPhoto;
-        friend_photo = (friend_photo == undefined) ? "empty" : friend_photo;
+        let friendPhoto = await data[name.toString()].vcard$hasPhoto;
+        friendPhoto = (friendPhoto === undefined) ? "empty" : friendPhoto;
 
         response_friends.push({
             "webid": name.toString(),
-            "photo": friend_photo.toString()
-        })
+            "photo": friendPhoto.toString()
+        });
     }
-    return response_friends;
+    return responseFriends;
 }
 
 /**
@@ -52,7 +53,7 @@ router.post("/user/friends/add", async (req, res) => {
  * de sesión.
  */
 router.post("/user/login", async (req, res) => {
-    let ident_prov = req.body.ident_prov;
+    let identProv = req.body.ident_prov;
     let username   = req.body.username;
     let password   = req.body.password;
     let friends;
@@ -150,13 +151,12 @@ router.post("/user/login", async (req, res) => {
 router.post("/users/update", async (req, res) => {
     let webid = req.body.webid;
     let friends = req.body.data.friends;
-    let last_location = req.body.data.last_location;
-
-    let friends_location = new Map();
+    let lastLocation = req.body.data.last_location;
+    let friendsLocation = new Map();
 
     try { // Guardar la ubicación del usuario en la base de datos
         db.updateUser( webid, last_location );
-
+      
     } catch (error) {
         // Si hay un error, notificar al front
         res.type( "json" ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
@@ -185,8 +185,7 @@ router.post("/users/update", async (req, res) => {
     };
 
     let response_object = autoConvertMapToObject( friends_location );
-
-    res.type( "json" ).status( 200 ).send( response_object );
+    res.type( "json" ).status( 200 ).send( responseObject );
 });
 
 /**
@@ -207,12 +206,10 @@ router.post("/users/register", async (req, res) => {
     else {
         // El usuario no existe, añadir a la BD.
         let user = db.addUser(webid, data);
-        let user_id = user._id;
+        let userId = user._id;
 
         // Notificar 
-        res.type( "json" )
-            .status( 200 )
-            .send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id} );
+        res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": userId } );
     }
 });
 
@@ -234,7 +231,7 @@ router.get("/users/currently", async(req, res) => {
     let usuarios = await db.userList();
     
     var ahora = new Date(Date.now());
-    let usuarios_activos = [];
+    let usuariosActivos = [];
 
     for( let i = 0; i < usuarios.length; i++ ) {
 
@@ -247,42 +244,41 @@ router.get("/users/currently", async(req, res) => {
             && ultimaVezVisto.getDay() === ahora.getDay()){
                 if ( (ahora.getHours()-ultimaVezVisto.getHours()) === 1
                 && (ahora.getMinutes() + 60 -  ultimaVezVisto.getMinutes()) <= 15){
-                    usuarios_activos.push(usuarios[i].webid);
+                    usuariosActivos.push(usuarios[i].webid);
                 }
                 else if ( ahora.getHours() === ultimaVezVisto.getHours()
                 && (ahora.getMinutes() -  ultimaVezVisto.getMinutes()) <= 15){
-                    usuarios_activos.push(usuarios[i].webid);
+                    usuariosActivos.push(usuarios[i].webid);
                 }
             }
         }
     }
-
     res.type( "json" ).status( 200 ).send( usuarios_activos );
 });
 
 router.get("/users/system", async(req, res) => {
     let usuarios = await db.userList();
     
-    let usuarios_activos = [];
+    let usuariosActivos = [];
 
     for( let i = 0; i < usuarios.length; i++ ) {
 
         var ban = await db.isBanned(usuarios[i].webid);
         
         if (ban === null){
-            usuarios_activos.push(usuarios[i]);
+            usuariosActivos.push(usuarios[i]);
         }
     }
 
-    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    res.type( "json" ).status( 200 ).send( usuariosActivos );
     
 });
 
-router.get("/isBanned", async(req, res) => {
+router.post("/isBanned", async(req, res) => {
     var webid = req.body.webid;
 
     var ban = await db.isBanned(webid);
-
+    
     res.type( "json" ).status( 200 ).send( ban );
     
 });
@@ -307,8 +303,9 @@ router.post("/remove/user", async(req, res) => {
 router.get("/users/ban", async(req, res) => {
     let usuarios = await db.userListBanned();
     
-    if(usuarios !== null && usuarios !== undefined)
+    if(usuarios !== null && usuarios !== undefined) {
         res.type("json").status(200).send(usuarios);
+    }
 });
 
 router.post("/ban", async(req, res) => {

@@ -4,6 +4,7 @@ import { notification, errorToaster, successToaster } from "@utils";
 import auth from "solid-auth-client";
 import { useLDflexList } from "@solid/react";
 import { getUserName } from "../MyFriends/myFriends.component";
+import { getText } from "../../i18n";
 
 const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 	let cadena = null;
@@ -88,12 +89,12 @@ const Notifications = ({mensaje, nombreBoton, amigos, toastermsg}) => {
 		}
 		
 		if (error) {
-			errorToaster("Notificación no enviada", "ERROR");
+			errorToaster(getText("notifications.notSent"), getText("notifications.error"));
 		} else {
 			if(toastermsg != null) {
-				successToaster(toastermsg, "SUCCESS");
+				successToaster(toastermsg, getText("notifications.success"));
 			} else {
-				successToaster("Notificación enviada con éxito", "SUCCESS");
+				successToaster(getText("notifications.sent"), getText("notifications.success"));
 			}
 		}
     

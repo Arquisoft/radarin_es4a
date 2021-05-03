@@ -11,7 +11,7 @@ import  {Button} from "@material-ui/core";
 import { useWebId, useLDflexList } from  "@solid/react";
 import axios from "axios"; 
 
-import "./friendsMap.css"
+import "./friendsMap.css";
 
 const notificado = new Map();
 var i = 0;
@@ -100,7 +100,7 @@ var distanceFilter = function (lat2, lng2, userLat, userLon) {
   }
 
   return true;
-}
+};
 
 // Use React.Memo
 function FriendsMap( props ) {
@@ -161,7 +161,7 @@ function FriendsMap( props ) {
   return (
     <div style={{ height: "88vh", width: "100%" }}>
     
-      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >{getText("map.button")}</Button>
+      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload();} } >{getText("map.button")}</Button>
 
       <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyD5pqaqaLZ5TkO79T9J6SWIoqo4UqQVx7Y" }}

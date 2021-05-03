@@ -1,43 +1,43 @@
 const express = require("express");
 const router = express.Router();
 const db = require("./database");
-const { default: data } = require('@solid/query-ldflex')
-const auth = require('solid-auth-cli');
+const { default: data } = require("@solid/query-ldflex");
+const auth = require("solid-auth-cli");
 
-async function getUserProfilePicture(user_webid) {
-    const user = data[user_webid];
+async function getUserProfilePicture(userWebid) {
+    const user = data[userWebid];
     return await user.vcard$hasPhoto;
 }
 
-async function getUserFriends(user_webid) {
-    let response_friends = [];
+async function getUserFriends(userWebid) {
+    let responseFriends = [];
 
-    const user = data[user_webid];
+    const user = data[userWebid];
 
     for await (const name of user.friends) {
-        let friend_photo = await data[name.toString()].vcard$hasPhoto;
-        friend_photo = (friend_photo == undefined) ? "empty" : friend_photo;
+        let friendPhoto = await data[name.toString()].vcard$hasPhoto;
+        friendPhoto = (friendPhoto === undefined) ? "empty" : friendPhoto;
 
-        console.log(name.toString());
-        console.log(friend_photo.toString());
+        //console.log(name.toString());
+        //console.log(friendPhoto.toString());
 
-        response_friends.push({
+        responseFriends.push({
             "webid": name.toString(),
-            "photo": friend_photo.toString()
-        })
+            "photo": friendPhoto.toString()
+        });
     }
-    return response_friends;
+    return responseFriends;
 }
 
 /**
  * Obtiene los amigos de un usuario.
  */
 router.post("/user/friends", async (req, res) => {
-    let user_webid = req.body.user_webid;
+    let userWebid = req.body.user_webid;
 
-    let response_friends = await getUserFriends( user_webid );
+    let responseFriends = await getUserFriends( userWebid );
 
-    res.type( "json" ).status( 200 ).send({"friends": response_friends });
+    res.type( "json" ).status( 200 ).send({"friends": responseFriends });
 });
 
 /**
@@ -45,30 +45,30 @@ router.post("/user/friends", async (req, res) => {
  * de sesión.
  */
 router.post("/user/login", async (req, res) => {
-    let ident_prov = req.body.ident_prov;
+    let identProv = req.body.ident_prov;
     let username   = req.body.username;
     let password   = req.body.password;
     let friends;
     let session;
-    let profile_picture;
+    let profilePicture;
 
-    console.log("User login triggered: " + username);
+    //console.log("User login triggered: " + username);
 
     await auth.login({ idp: ident_prov, username: username, password: password })
-        .then( g_session =>  {
-            session = g_session;
-            session.sessionKey = JSON.parse(g_session.sessionKey);
-            console.log("Got session:" + session.toString());
+        .then( (gSession) =>  {
+            session = gSession;
+            session.sessionKey = JSON.parse(gSession.sessionKey);
+            //console.log("Got session:" + session.toString());
         })
-        .catch( error => { // Ups! Something happened, maybe password mismatch?
+        .catch( (error) => { // Ups! Something happened, maybe password mismatch?
             res.type( "json" ).status( 401 ).send( { "res": "KO", "error": error } );
         });
 
     friends = await getUserFriends( session.webId );
-    console.log("Friends: " + friends);
+    //console.log("Friends: " + friends);
 
-    profile_picture = await getUserProfilePicture( session.webId );
-    console.log("Profile picture: " + profile_picture);
+    profilePicture = await getUserProfilePicture( session.webId );
+    //console.log("Profile picture: " + profilePicture);
 
     res.type( "json" ).status( 200 ).send(
         {
@@ -77,8 +77,8 @@ router.post("/user/login", async (req, res) => {
             "user": {
                 "webid": session.webId,
                 "username": username,
-                "photo": profile_picture,
-                "ident_prov": ident_prov,
+                "photo": profilePicture,
+                "ident_prov": identProv,
                 "session": session,
                 "friends": friends
             }

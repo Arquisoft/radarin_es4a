@@ -32,7 +32,7 @@ module.exports.startserver = async () => {
     server = await app.listen(5000);
     //console.log("Server has started!");
     return app;
-}
+};
 
 module.exports.closeServer = async () => {
     await mongoose.connection.dropDatabase();

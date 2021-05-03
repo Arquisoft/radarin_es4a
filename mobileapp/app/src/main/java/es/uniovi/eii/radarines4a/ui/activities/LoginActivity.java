@@ -12,19 +12,19 @@ import es.uniovi.eii.radarines4a.helper.SharedPreferencesHelper;
 import es.uniovi.eii.radarines4a.helper.remote.APIService;
 import es.uniovi.eii.radarines4a.helper.remote.APIUtils;
 import es.uniovi.eii.radarines4a.model.User;
-import es.uniovi.eii.radarines4a.model.api_pojo.LoginResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+//import es.uniovi.eii.radarines4a.model.api_pojo.LoginResponse;
+//import retrofit2.Call;
+//import retrofit2.Callback;
+//import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button login_button;
-    Button signin_button;
-    TextInputEditText username_input_edit;
-    TextInputEditText password_input_edit;
-    Spinner providers_spinner;
-    SharedPreferencesHelper userHelper;
+    private Button login_button;
+    private Button signin_button;
+    private TextInputEditText username_input_edit;
+    private TextInputEditText password_input_edit;
+    private Spinner providers_spinner;
+    private SharedPreferencesHelper userHelper;
 
     private APIService mAPIService;
 

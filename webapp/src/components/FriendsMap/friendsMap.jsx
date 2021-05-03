@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
 import { successToaster } from "@utils";
 import { getText } from "../../i18n";
+import  {Button} from "@material-ui/core";
 //import Notifications from "../../containers/Notifications/NotificationHelper";
 
 //import solid from "@solid/query-ldflex";
@@ -10,9 +11,10 @@ import { getText } from "../../i18n";
 import { useWebId, useLDflexList } from  "@solid/react";
 import axios from "axios"; 
 
-//import "./friendsMap.css"
+import "./friendsMap.css"
 
 const notificado = new Map();
+var i = 0;
 
 const Marker = (props) => (
   <div style={{
@@ -149,11 +151,18 @@ function FriendsMap( props ) {
     }
 
     useEffect(() => {
-      setTimeout(prueba, 1000);
+      if (i < 1) {
+        prueba();
+        i++;
+      }
+      setTimeout(prueba, 10000);
     });
 
-   return (
-    <div style={{ height: "90vh", width: "100%" }}>
+  return (
+    <div style={{ height: "88vh", width: "100%" }}>
+    
+      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >Actualizar ubicación</Button>
+
       <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyD5pqaqaLZ5TkO79T9J6SWIoqo4UqQVx7Y" }}
       center={{lat: latitude, lng: longitude}}
@@ -191,8 +200,8 @@ function FriendsMap( props ) {
           }
        })}
       
-       
     </GoogleMapReact> 
+
     </div>
   );
 }

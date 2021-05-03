@@ -2,6 +2,7 @@
 package es.uniovi.eii.radarines4a.model.api_pojo;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

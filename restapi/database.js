@@ -47,9 +47,7 @@ async function userList() {
 async function findByWebId(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    return users.findOne({
-        "webid" : webid
-    });
+    return users.findOne({ "webid" : webid });
 }
 
 async function getAdmin() {
@@ -61,18 +59,14 @@ async function getAdmin() {
 async function banUser(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    const user = {
-        "webid" : webid
-    };
+    const user = { "webid" : webid };
     await bans.insertOne(user);
 }
 
 async function unbanUser(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    await bans.deleteOne({
-        "webid" : webid
-    });
+    await bans.deleteOne({ "webid" : webid });
 }
 
 async function userListBanned() {
@@ -84,51 +78,26 @@ async function userListBanned() {
 async function isBanned(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const bans = database.collection("baneados");
-    return bans.findOne({
-        "webid": webid
-    });
-3 conflicting files
-LoginActivity.java
-...es4a/ui/activities/LoginActivity.java
-api.js
-restapi/api.js
-database.js
-restapi/database.js
-restapi/database.js Resolved
-
+    return bans.findOne({ "webid": webid });
 }
 
 async function updateUser(webid, data) {
     const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    users.updateOne(
-        {
-            "webid" : webid
-        },
-        {
-            $set: {
-                "data" : data
-            }
-        }
-    );
+    users.updateOne({ "webid" : webid }, { $set: { "data" : data } });
 }
 
 async function addUser(webid, data) {
     const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    const user = {
-        "webid": webid,
-        "data": data
-    };
+    const user = { "webid": webid, "data": data };
     await users.insertOne(user);
 }
 
 async function removeUser(webid) {
     const database = mongoClient.db("baseDatosRadarin");
     const users = database.collection("usuarios");
-    const user = {
-        "webid": webid
-    };
+    const user = { "webid": webid };
     await users.deleteOne(user);
 }
 

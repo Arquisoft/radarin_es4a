@@ -194,4 +194,15 @@ participant "Base de datos"
 ----
 
 === Notificaciones
-Nuestra aplicación dispondrá de un sistema de notificaciones que nos avise de las novedades que nos incumban dentro de la aplicación.
+Nuestra aplicación dispondrá de un sistema de notificaciones que nos avise de las novedades que nos incumban dentro de la aplicación, entre estas novedades se encuentran notificaciones enviadas por nuestros amigos para quedar o para avisar de que son positivo en covid-19.
+
+[plantuml,"ver_amigos_mapa",png]
+----
+actor Pablo
+participant  "Radarín"
+participant "NotificationHelper"
+participant "POD"
+"NotificationHelper" -> "Radarín": crea un botón para mandar notificaciones
+"Radarín" -> "NotificationHelper": al pulsar el botón manda una petición para crear la notificación
+"NotificationHelper" -> "POD": crea la notificación y la añade en el pod del usuario al que se la enviamos
+----

@@ -6,13 +6,15 @@
 * El programa tiene que poder ser utilizado en móviles.
 
 .Problemas
-* Decisión sobre las librerías a usar. 
+* Decisión sobre las librerías a usar. A lo largo del desarrollo se produjeron bastantes cambios, como por ejemplo, la librería con la que acceder a las localizaciones.
 * Tecnologías que miembros del equipo no sabían usar.
 
 .Consecuencias
-* Aprendizaje de nuevas tecnologías, por lo que parte del tiempo de desarrollo se basará en el aprendizaje de dichas tecnologías.
+* Aprendizaje de nuevas tecnologías, por lo que parte del tiempo de desarrollo se basó en el aprendizaje de dichas tecnologías, así como en intentar conseguir un buen funcionamiento de las mismas.
 
 .Decisiones
 * Uso de React como framework debido a la facilidad de uso y la cantidad de documentación disponible.
 * Uso de la API de Google Maps para ver la ubicación de los amigos por su extendido uso.
-* Usar LDflex para los listados de amigos.
+* Uso de LDflex para los listados de amigos.
+* Uso de una base de datos MongoDB
+* Desarrollo de la aplicación móvil con Android Studio, además de su posible uso en la web desde el móvil.

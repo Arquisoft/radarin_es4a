@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const db = require("./database");
-const { default: data } = require("@solid/query-ldflex");
-const auth = require("solid-auth-cli");
+const { default: data } = require('@solid/query-ldflex')
+const auth = require('solid-auth-cli');
+const client = require("async-redis").createClient();
+
 
 async function getUserProfilePicture(userWebid) {
     const user = data[userWebid];
@@ -18,10 +20,7 @@ async function getUserFriends(userWebid) {
         let friendPhoto = await data[name.toString()].vcard$hasPhoto;
         friendPhoto = (friendPhoto === undefined) ? "empty" : friendPhoto;
 
-        //console.log(name.toString());
-        //console.log(friendPhoto.toString());
-
-        responseFriends.push({
+        response_friends.push({
             "webid": name.toString(),
             "photo": friendPhoto.toString()
         });
@@ -33,11 +32,20 @@ async function getUserFriends(userWebid) {
  * Obtiene los amigos de un usuario.
  */
 router.post("/user/friends", async (req, res) => {
-    let userWebid = req.body.user_webid;
+    let response_friends = await getUserFriends( user_webid );
+    res.type( "json" ).status( 200 ).send({ "friends": response_friends });
+});
 
-    let responseFriends = await getUserFriends( userWebid );
-
-    res.type( "json" ).status( 200 ).send({"friends": responseFriends });
+router.post("/user/friends/add", async (req, res) => {
+    /*
+    .fetch("https://your.pod/resource", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/sparql-update",
+        },
+        body: "INSERT DATA { <user_webid> <http://xmlns.com/foaf/0.1/knows> <friend_webid> . }",
+    });
+    */
 });
 
 /**
@@ -50,40 +58,91 @@ router.post("/user/login", async (req, res) => {
     let password   = req.body.password;
     let friends;
     let session;
-    let profilePicture;
+    let profile_picture;
+    let error = {status: false, msg: ""}
 
-    //console.log("User login triggered: " + username);
+    // Is the user logged in?
+    // TODO: verify signature here, don't trust the username
+    let cached_session = (await client.get(username.toString()) == "") ? null : JSON.parse(await client.get(username));
 
-    await auth.login({ idp: ident_prov, username: username, password: password })
-        .then( (gSession) =>  {
-            session = gSession;
-            session.sessionKey = JSON.parse(gSession.sessionKey);
-            //console.log("Got session:" + session.toString());
-        })
-        .catch( (error) => { // Ups! Something happened, maybe password mismatch?
-            res.type( "json" ).status( 401 ).send( { "res": "KO", "error": error } );
-        });
+    // Check if the user is re-login
+    if ( cached_session == null ) {
+        // No cached session, log the user in.
+        await auth
+            .login({idp: ident_prov, username: username, password: password})
+            .then( async g_session => { // Got session
+                session = g_session;
+                session.sessionKey = JSON.parse(g_session.sessionKey);
 
-    friends = await getUserFriends( session.webId );
-    //console.log("Friends: " + friends);
+                // Save user credentials in redis cache
+                await client.set(username.toString(), JSON.stringify(session));
+            })
+            .catch(err => { /* Ups! Something happened, maybe password mismatch? */
+                error.status = true;
+                error.msg = err.toString();
+            });
+    }
+    // There is a previous session!
+    else {
+        console.log( await client.get(username) );
+        console.log( "Restoring session..." );
+        session = JSON.parse(await client.get(username));
+        console.log(session);
+    }
 
-    profilePicture = await getUserProfilePicture( session.webId );
-    //console.log("Profile picture: " + profilePicture);
+    // No errors
+    if ( !error.status ) {
+        let user = await db.findByWebId( session.webId );
 
-    res.type( "json" ).status( 200 ).send(
-        {
-            "res": "OK",
-            "msg": "User login successful!",
-            "user": {
-                "webid": session.webId,
-                "username": username,
-                "photo": profilePicture,
-                "ident_prov": identProv,
-                "session": session,
-                "friends": friends
+        if (user) {
+            // User is registered on Radarin
+            friends = await getUserFriends( session.webId );
+            profile_picture = await getUserProfilePicture( session.webId );
+
+            let temp_friends = [];
+
+            // Loop friends and find their last location to sent it to the client.
+            for (let friend of friends) {
+                console.log(friend);
+                let friend_record = await db.findByWebId( friend.webid );
+
+                // Process only those friends who have an account in Radarin
+                if (friend_record != null) {
+                    console.log("FRIEND_RECORD: ");
+                    console.log(friend_record);
+
+                    temp_friends.push({ "webid": friend.webid, "photo": friend.photo, "location": friend_record.data });
+                }
             }
+
+            // Swap temp_friends and friends
+            friends = temp_friends;
+
+            /* TODO:
+                JWT sign a key to identify the user and use that as the key in a sessions HashMap. */
+
+            return res.type( "json" ).status( 200 ).send(
+                {
+                    "res": "OK",
+                    "msg": "User login successful!",
+                    "user": {
+                        "webid": session.webId,
+                        "username": username,
+                        "photo": profile_picture.toString(),
+                        "ident_prov": ident_prov,
+                        "session": session,
+                        "friends": friends
+                    }
+                }
+            );
+
+        } else {
+            return res.type( "json" ).status( 401 ).send( { "res": "KO", "msg": "User " + username + " is not registered!" } );
         }
-    );
+    }
+    else {
+        return res.type( "json" ).status( 401 ).send( { "res": "KO", "msg": error.msg  } );
+    }
 });
 
 /**
@@ -93,34 +152,23 @@ router.post("/users/update", async (req, res) => {
     let webid = req.body.webid;
     let friends = req.body.data.friends;
     let lastLocation = req.body.data.last_location;
-
     let friendsLocation = new Map();
 
     try { // Guardar la ubicación del usuario en la base de datos
-        //console.log("Actualizando la ubicación del usuario: " + webid);
-        db.updateUser( webid, lastLocation );
-
+        db.updateUser( webid, last_location );
+      
     } catch (error) {
         // Si hay un error, notificar al front
         res.type( "json" ).status( 500 ).send( {"code": 500, "message": "Error updating user location."} );
     }
 
-    //console.log("Recorriendo la lista de amigos...");
-    //console.log("Amigos: [" + friends + "]");
-
     // Recorrer la lista de amigos ([<webid1>, <webid2>, ...])
     for( let i = 0; i < friends.length; i++ ) {
-        let friendWebid = friends[i];
-        //console.log("Buscando a: " + friend_webid);
-
-        let friend = await db.findByWebId( friendWebid ).then( (result) => { 
-            //console.log("Encontrado!. Datos:");
-            //console.log(result.data);
+        let friend_webid = friends[i];
+        let friend = await db.findByWebId( friend_webid ).then( (result) => {
             return result;
         } );
-
-        //console.log("Añadiendo amigo al Map...");
-        friendsLocation.set( friendWebid, friend.data );
+        friends_location.set( friend_webid, friend.data );
     }
 
     // https://stackoverflow.com/questions/37437805/convert-map-to-json-object-in-javascript
@@ -136,11 +184,9 @@ router.post("/users/update", async (req, res) => {
         return obj;
     };
 
-    var responseObject = autoConvertMapToObject( friendsLocation );
-
+    let response_object = autoConvertMapToObject( friends_location );
     res.type( "json" ).status( 200 ).send( responseObject );
 });
-
 
 /**
  * Registra a un usuario en el sistema.
@@ -174,7 +220,7 @@ router.get("/users/list", async(req, res) => {
     let usuarios = await db.userList();
     
     if(usuarios !== null && usuarios !== undefined) {
-        res.type("json").status(200).send(usuarios);
+        res.type("json").status(200).send( usuarios );
     }
 });
 
@@ -207,9 +253,7 @@ router.get("/users/currently", async(req, res) => {
             }
         }
     }
-
-    res.type( "json" ).status( 200 ).send( usuariosActivos );
-    
+    res.type( "json" ).status( 200 ).send( usuarios_activos );
 });
 
 router.get("/users/system", async(req, res) => {

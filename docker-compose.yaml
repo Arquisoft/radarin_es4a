@@ -16,13 +16,14 @@ services:
       - "5000:5000"
     depends_on:
       - mongoserver
+
   webapp:
     build: ./webapp
     ports:
       - "3000:3000"
-    depends_on: 
+    depends_on:
       - restapi
-  
+
   prometheus:
     image: prom/prometheus
     volumes:

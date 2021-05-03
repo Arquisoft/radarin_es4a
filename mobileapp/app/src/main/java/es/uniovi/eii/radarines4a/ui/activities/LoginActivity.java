@@ -12,10 +12,6 @@ import es.uniovi.eii.radarines4a.helper.SharedPreferencesHelper;
 import es.uniovi.eii.radarines4a.helper.remote.APIService;
 import es.uniovi.eii.radarines4a.helper.remote.APIUtils;
 import es.uniovi.eii.radarines4a.model.User;
-//import es.uniovi.eii.radarines4a.model.api_pojo.LoginResponse;
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,10 +48,10 @@ public class LoginActivity extends AppCompatActivity {
             String password = password_input_edit.getText().toString();
 
             // Query the user's pod for the information we need
-            User logged_in_user = userServerLogin(login_provider, username, password);
+            User logged_in_user = userServerLogin( login_provider, username, password );
 
             // Save to shared preferences with Gson
-            userHelper.saveUser("usuario", logged_in_user);
+            userHelper.saveUser( "usuario", logged_in_user );
 
             // Notify the user with a toast
             Toast.makeText(getApplicationContext(), R.string.logged_in, Toast.LENGTH_SHORT);
@@ -64,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private User userServerLogin(String login_provider, String username, String password) {
         User current_user;
-        
+
         /*
         mAPIService.login(login_provider, username, password).enqueue(new Callback<LoginResponse>() {
 

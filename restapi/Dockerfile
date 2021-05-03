@@ -1,7 +1,18 @@
-FROM node:12.14.1
+FROM node:fermium
+
+RUN wget http://download.redis.io/redis-stable.tar.gz && \
+    tar xvzf redis-stable.tar.gz && \
+    cd redis-stable && \
+    make && \
+    mv src/redis-server /usr/bin/ && \
+    cd .. && \
+    rm -r redis-stable && \
+    npm install -g concurrently
+
+EXPOSE 6379
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -17,7 +28,6 @@ ENV MONGO_URI=$MONGO_URI
 
 # Bundle app source
 # Copy every .js file on the root.
-COPY *.js ./
-ADD models ./models
+COPY api.js database.js server.js ./
 
-CMD [ "node", "server.js" ]
+CMD concurrently "/usr/bin/redis-server --bind '0.0.0.0'" "sleep 5s; node /app/server.js"

@@ -16,6 +16,8 @@
   "dependencies": {
     "@comunica/actor-init-sparql": "^1.21.1",
     "@solid/query-ldflex": "^2.11.3",
+    "async-redis": "^1.1.7",
+    "connect-redis": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-prom-bundle": "^6.3.6",

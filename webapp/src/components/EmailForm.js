@@ -1,60 +1,67 @@
-import React from 'react';
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {addUser,getUsers} from '../api/api'
+import {addUser,getUsers} from "../api/api";
 
 class EmailForm extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {email: '', enabled: false, welcomeMsg: ''}
+    this.state = {email: "", enabled: false, welcomeMsg: ""};
   }
 
   componentDidMount(){
-    this.fetchUsers()
+    this.fetchUsers();
   }
 
   changeEmail(e) {
     const email = e.target.value ;
-    this.setState({email: email});
+    this.setState({
+      email: email
+    });
   }
 
   changeUserName(e) {
     const username = e.target.value ;
-    this.setState({username: username});
+    this.setState({
+      username: username
+    });
   }
 
   async registerUser(){
-      let response = await addUser(this.state.username,this.state.email)
-      console.log(response)
-      if (response.error)
-        this.setState({welcomeMsg:response.error})
-      else if (response.name===this.state.username)
-        this.setState({welcomeMsg:"Welcome to ASW"})
-      else
-        this.setState({welcomeMsg:"Unexpected error, maybe the restapi is still sleeping..."})
+      let response = await addUser(this.state.username,this.state.email);
+      //console.log(response);
+      if (response.error) {
+        this.setState({welcomeMsg:response.error});
+      }
+      else if (response.name===this.state.username) {
+        this.setState({welcomeMsg:"Welcome to ASW"});
+      }
+      else {
+        this.setState({welcomeMsg:"Unexpected error, maybe the restapi is still sleeping..."});
+      }
       //Refresh the users
-      this.fetchUsers()
+      this.fetchUsers();
   }
 
   async fetchUsers(){
     try{
-      let users = await getUsers()
-      this.props.refreshUsers(users)
+      let users = await getUsers();
+      this.props.refreshUsers(users);
     }
     catch(error)
     {
-      console.log("Error fetching user list from restapi. Is it on?")
+      console.log("Error fetching user list from restapi. Is it on?");
     }
   }
 
   async handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     //Add the user to the database
     if (this.state.username && this.state.email){
-      this.registerUser()
+      this.registerUser();
     }
     else
-        this.setState({welcomeMsg:'ERROR: You must fill both fields!'})
+        this.setState({welcomeMsg:"ERROR: You must fill both fields!"});
   }
 
   render(){
@@ -76,11 +83,11 @@ class EmailForm extends React.Component{
               Submit
             </Button>
             <div>
-              <span hidden={this.state.welcomeMsg===''}>{this.state.welcomeMsg}</span>
+              <span hidden={this.state.welcomeMsg===""}>{this.state.welcomeMsg}</span>
             </div>
           </Form>
-    )
+    );
   }
 }
 
-export default EmailForm
+export default EmailForm;

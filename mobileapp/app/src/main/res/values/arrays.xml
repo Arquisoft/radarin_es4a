@@ -1,0 +1,9 @@
+<resources>
+    <!-- Proveedores de pods solid -->
+    <string-array name="provider_options">
+        <item>Selecciona un proveedor</item>
+        <item>https://inrupt.net</item>
+        <item>https://solidcommunity.net</item>
+        <item>https://solidweb.org</item>
+    </string-array>
+</resources>

@@ -3,17 +3,18 @@ import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
 import { successToaster } from "@utils";
 import { getText } from "../../i18n";
+import  {Button} from "@material-ui/core";
 //import Notifications from "../../containers/Notifications/NotificationHelper";
 
 //import solid from "@solid/query-ldflex";
 
-import { useWebId } from  "@solid/react";
-import { useLDflexList } from "@solid/react";
+import { useWebId, useLDflexList } from  "@solid/react";
 import axios from "axios"; 
 
-//import "./friendsMap.css"
+import "./friendsMap.css"
 
 const notificado = new Map();
+var i = 0;
 
 const Marker = (props) => (
   <div style={{
@@ -77,7 +78,7 @@ async function getFriends( friends ) {
 // Auxiliar method to convert coords to radians.
 var toRadianes = function (valor) {
   return (Math.PI / 180) * valor;
-}
+};
 // Calculates the distance between two coordinates according to Haversine Formule.
 var distanceFilter = function (lat2, lng2, userLat, userLon) {
   var RadioTierraKm = 6378.0;
@@ -114,7 +115,10 @@ function FriendsMap( props ) {
   const { latitude, longitude } = usePosition( false );
 
   getFriends(useLDflexList( "[" + webID + "].friends" ))
-        .then( (friendsList) => { if (friendsList!==userFriendsList) setUserFriendsList( friendsList ) });
+        .then( (friendsList) => { if (friendsList!==userFriendsList) {
+          setUserFriendsList( friendsList );
+        }
+      });
 
 
     //Metemos esto en una función para que no se ejecute todo el rato
@@ -142,19 +146,25 @@ function FriendsMap( props ) {
         const apiEndPoint = process.env.REACT_APP_API_URI || "http://localhost:5000/api";
 
         axios.post( apiEndPoint + "/users/update", userInfo )
-            .then((res) => { setLista(res.data) }); //Usamos el setState y metemos la lista que luego usaremos con setList
+            .then((res) => { setLista(res.data); }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }
     }
 
     useEffect(() => {
-      setTimeout(prueba, 1000);
+      if (i < 1) {
+        prueba();
+        i++;
+      }
+      setTimeout(prueba, 10000);
     });
 
-
   return (
-    <div style={{ height: "90vh", width: "100%" }}>
+    <div style={{ height: "88vh", width: "100%" }}>
+    
+      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >{getText("map.button")}</Button>
+
       <GoogleMapReact
-      bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
+      bootstrapURLKeys={{ key: "AIzaSyD5pqaqaLZ5TkO79T9J6SWIoqo4UqQVx7Y" }}
       center={{lat: latitude, lng: longitude}}
       defaultZoom={(radius()<=8) ? Math.round(15-(radius()*0.4)) : (radius()<20) ? Math.round(15-(radius()*0.3)) : Math.round(15-(radius()*0.18)) }
       yesIWantToUseGoogleMapApiInternals={true}
@@ -177,7 +187,7 @@ function FriendsMap( props ) {
        { Object.keys(lista).map( (amigo) => {
           if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude)) {
             if (!notificado.get(amigo)) {
-              successToaster(amigo.split("/")[2].split(".")[0] + getText("map.near"), "SUCCESS");
+              successToaster(amigo.split("/")[2].split(".")[0] + getText("map.near"), getText("notifications.success"));
               notificado.set(amigo, true);
             }
             return (
@@ -190,8 +200,8 @@ function FriendsMap( props ) {
           }
        })}
       
-       
     </GoogleMapReact> 
+
     </div>
   );
 }

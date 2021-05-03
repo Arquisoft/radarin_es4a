@@ -11,6 +11,8 @@
     "listEmpty": "No notifications to show",
     "success": "Success",
     "error": "Error",
+    "sent":"Notification sent successfully",
+    "notSent":"Notification not sent",
     "unknownError": "An unknown error has occurred",
     "404": "Editing a new document.",
     "errorLoading": "There was an error loading your file, please try again.",
@@ -262,6 +264,7 @@
     "add":"Add friend:",
     "webId":"Enter webId",
     "send": "Send",
+    "delete": "Delete",
     "list": "Friends list:",
     "hang":{
       "hang":"Hang out",
@@ -275,11 +278,23 @@
     }
   },
   "map":{
+    "button":"Update ubication",
     "you":"You",
     "near": " is near you",
     "radius":{
       "text":"Radius in km around the user to load on the map:",
       "button":"Apply"
+    }
+  },
+  "admin":{
+    "panel": "Administrator panel",
+    "system": "System users",
+    "active": "Active users",
+    "banned": "Banned users",
+    "button":{
+      "ban":"Ban user",
+      "unban":"Unban user",
+      "remove":"Remove user"
     }
   }
 }

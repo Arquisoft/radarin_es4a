@@ -5,6 +5,8 @@
 # Radarin project structure
 Link to the deployed sample application: [radarinES4A](https://radarines4awebapp.herokuapp.com/). Note that sometimes **it can take a while to load** because Heroku in the free plan, takes the containers to sleep when they are not used for some time and taking them up takes time.
 
+Link to the documentation: [docs](https://arquisoft.github.io/radarin_es4a/docs/)
+
 ## Quick start guide
 If you want to execute the project you will need [git](https://git-scm.com/downloads), [Node.js and npm](https://www.npmjs.com/get-npm) and [Docker](https://docs.docker.com/get-docker/). Make sure the three of them are installed in your system. Download the project with `git clone https://github.com/pglez82/radarin_0`. The fastest way to launch everything is with docker:
 ```bash

@@ -92,13 +92,13 @@ router.post("/user/login", async (req, res) => {
 router.post("/users/update", async (req, res) => {
     let webid = req.body.webid;
     let friends = req.body.data.friends;
-    let last_location = req.body.data.last_location;
+    let lastLocation = req.body.data.last_location;
 
-    let friends_location = new Map();
+    let friendsLocation = new Map();
 
     try { // Guardar la ubicación del usuario en la base de datos
         //console.log("Actualizando la ubicación del usuario: " + webid);
-        db.updateUser( webid, last_location );
+        db.updateUser( webid, lastLocation );
 
     } catch (error) {
         // Si hay un error, notificar al front
@@ -110,17 +110,17 @@ router.post("/users/update", async (req, res) => {
 
     // Recorrer la lista de amigos ([<webid1>, <webid2>, ...])
     for( let i = 0; i < friends.length; i++ ) {
-        let friend_webid = friends[i];
+        let friendWebid = friends[i];
         //console.log("Buscando a: " + friend_webid);
 
-        let friend = await db.findByWebId( friend_webid ).then( (result) => { 
+        let friend = await db.findByWebId( friendWebid ).then( (result) => { 
             //console.log("Encontrado!. Datos:");
             //console.log(result.data);
             return result;
         } );
 
         //console.log("Añadiendo amigo al Map...");
-        friends_location.set( friend_webid, friend.data );
+        friendsLocation.set( friendWebid, friend.data );
     }
 
     // https://stackoverflow.com/questions/37437805/convert-map-to-json-object-in-javascript
@@ -136,9 +136,9 @@ router.post("/users/update", async (req, res) => {
         return obj;
     };
 
-    var response_object = autoConvertMapToObject( friends_location );
+    var responseObject = autoConvertMapToObject( friendsLocation );
 
-    res.type( "json" ).status( 200 ).send( response_object );
+    res.type( "json" ).status( 200 ).send( responseObject );
 });
 
 
@@ -160,12 +160,10 @@ router.post("/users/register", async (req, res) => {
     else {
         // El usuario no existe, añadir a la BD.
         let user = db.addUser(webid, data);
-        let user_id = user._id;
+        let userId = user._id;
 
         // Notificar 
-        res.type( "json" )
-            .status( 200 )
-            .send( {"code": 200, "message": "User added. Everything is OK.", "id": user_id} );
+        res.type( "json" ).status( 200 ).send( {"code": 200, "message": "User added. Everything is OK.", "id": userId } );
     }
 });
 
@@ -187,7 +185,7 @@ router.get("/users/currently", async(req, res) => {
     let usuarios = await db.userList();
     
     var ahora = new Date(Date.now());
-    let usuarios_activos = [];
+    let usuariosActivos = [];
 
     for( let i = 0; i < usuarios.length; i++ ) {
 
@@ -200,43 +198,43 @@ router.get("/users/currently", async(req, res) => {
             && ultimaVezVisto.getDay() === ahora.getDay()){
                 if ( (ahora.getHours()-ultimaVezVisto.getHours()) === 1
                 && (ahora.getMinutes() + 60 -  ultimaVezVisto.getMinutes()) <= 15){
-                    usuarios_activos.push(usuarios[i].webid);
+                    usuariosActivos.push(usuarios[i].webid);
                 }
                 else if ( ahora.getHours() === ultimaVezVisto.getHours()
                 && (ahora.getMinutes() -  ultimaVezVisto.getMinutes()) <= 15){
-                    usuarios_activos.push(usuarios[i].webid);
+                    usuariosActivos.push(usuarios[i].webid);
                 }
             }
         }
     }
 
-    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    res.type( "json" ).status( 200 ).send( usuariosActivos );
     
 });
 
 router.get("/users/system", async(req, res) => {
     let usuarios = await db.userList();
     
-    let usuarios_activos = [];
+    let usuariosActivos = [];
 
     for( let i = 0; i < usuarios.length; i++ ) {
 
         var ban = await db.isBanned(usuarios[i].webid);
         
         if (ban === null){
-            usuarios_activos.push(usuarios[i]);
+            usuariosActivos.push(usuarios[i]);
         }
     }
 
-    res.type( "json" ).status( 200 ).send( usuarios_activos );
+    res.type( "json" ).status( 200 ).send( usuariosActivos );
     
 });
 
-router.get("/isBanned", async(req, res) => {
+router.post("/isBanned", async(req, res) => {
     var webid = req.body.webid;
 
     var ban = await db.isBanned(webid);
-
+    
     res.type( "json" ).status( 200 ).send( ban );
     
 });
@@ -261,8 +259,9 @@ router.post("/remove/user", async(req, res) => {
 router.get("/users/ban", async(req, res) => {
     let usuarios = await db.userListBanned();
     
-    if(usuarios !== null && usuarios !== undefined)
+    if(usuarios !== null && usuarios !== undefined) {
         res.type("json").status(200).send(usuarios);
+    }
 });
 
 router.post("/ban", async(req, res) => {

@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 import { usePosition } from "use-position";
 import { successToaster } from "@utils";
 import { getText } from "../../i18n";
+import  {Button} from "@material-ui/core";
 //import Notifications from "../../containers/Notifications/NotificationHelper";
 
 //import solid from "@solid/query-ldflex";
@@ -10,9 +11,11 @@ import { getText } from "../../i18n";
 import { useWebId, useLDflexList } from  "@solid/react";
 import axios from "axios"; 
 
-//import "./friendsMap.css"
+import "./friendsMap.css"
 
 const notificado = new Map();
+var i = 0;
+var flag = true;
 
 const Marker = (props) => (
   <div style={{
@@ -146,15 +149,27 @@ function FriendsMap( props ) {
         axios.post( apiEndPoint + "/users/update", userInfo )
             .then((res) => { setLista(res.data); }); //Usamos el setState y metemos la lista que luego usaremos con setList
       }
+      console.log("hola");
+      flag = true;
     }
 
     useEffect(() => {
-      setTimeout(prueba, 1000);
+      console.log("buenas");
+      if (i < 1) {
+        prueba();
+        i++;
+      }
+      if (flag) {
+        flag = false;
+        setTimeout(prueba, 10000);
+      }
     });
 
 
   return (
-    <div style={{ height: "90vh", width: "100%" }}>
+    <div style={{ height: "88vh", width: "100%" }}>
+      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >Actualizar ubicación</Button>
+
       <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyCoW1RuwmBwVJTgNm9u3ruBf_oMJGnLckY" }}
       center={{lat: latitude, lng: longitude}}
@@ -192,8 +207,8 @@ function FriendsMap( props ) {
           }
        })}
       
-       
     </GoogleMapReact> 
+
     </div>
   );
 }

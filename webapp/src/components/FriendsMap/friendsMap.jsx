@@ -161,7 +161,7 @@ function FriendsMap( props ) {
   return (
     <div style={{ height: "88vh", width: "100%" }}>
     
-      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >{getText("maps.button")}</Button>
+      <Button className="update" variant="contained" color="primary" onClick={ () => {window.location.reload()} } >{getText("map.button")}</Button>
 
       <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyD5pqaqaLZ5TkO79T9J6SWIoqo4UqQVx7Y" }}
@@ -187,7 +187,7 @@ function FriendsMap( props ) {
        { Object.keys(lista).map( (amigo) => {
           if(distanceFilter(lista[amigo].lat, lista[amigo].lon, latitude, longitude)) {
             if (!notificado.get(amigo)) {
-              successToaster(amigo.split("/")[2].split(".")[0] + getText("map.near"), getText("notificatios.success"));
+              successToaster(amigo.split("/")[2].split(".")[0] + getText("map.near"), getText("notifications.success"));
               notificado.set(amigo, true);
             }
             return (

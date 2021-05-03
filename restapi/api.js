@@ -4,11 +4,12 @@ const db = require("./database");
 const { default: data } = require('@solid/query-ldflex')
 const auth = require('solid-auth-cli');
 
-/**
- * Obtiene los amigos de un usuario.
- */
-router.post("/user/friends", async (req, res) => {
-    let user_webid = req.body.user_webid;
+async function getUserProfilePicture(user_webid) {
+    const user = data[user_webid];
+    return await user.vcard$hasPhoto;
+}
+
+async function getUserFriends(user_webid) {
     let response_friends = [];
 
     const user = data[user_webid];
@@ -25,8 +26,18 @@ router.post("/user/friends", async (req, res) => {
             "photo": friend_photo.toString()
         })
     }
+    return response_friends;
+}
 
-    res.type( "json" ).status( 200 ).send( response_friends );
+/**
+ * Obtiene los amigos de un usuario.
+ */
+router.post("/user/friends", async (req, res) => {
+    let user_webid = req.body.user_webid;
+
+    let response_friends = await getUserFriends( user_webid );
+
+    res.type( "json" ).status( 200 ).send({"friends": response_friends });
 });
 
 /**
@@ -37,28 +48,44 @@ router.post("/user/login", async (req, res) => {
     let ident_prov = req.body.ident_prov;
     let username   = req.body.username;
     let password   = req.body.password;
+    let friends;
+    let session;
+    let profile_picture;
 
-    auth.login({ idp: ident_prov, username: username, password: password })
-        .then( session =>  { // Got session from SOLID pod!
-            res.type( "json" ).status( 200 ).send( { "res": "KO", "msg": "Login successful!", "session": session } );
+    console.log("User login triggered: " + username);
+
+    await auth.login({ idp: ident_prov, username: username, password: password })
+        .then( g_session =>  {
+            session = g_session;
+            session.sessionKey = JSON.parse(g_session.sessionKey);
+            console.log("Got session:" + session.toString());
         })
         .catch( error => { // Ups! Something happened, maybe password mismatch?
             res.type( "json" ).status( 401 ).send( { "res": "KO", "error": error } );
-        })
+        });
+
+    friends = await getUserFriends( session.webId );
+    console.log("Friends: " + friends);
+
+    profile_picture = await getUserProfilePicture( session.webId );
+    console.log("Profile picture: " + profile_picture);
+
+    res.type( "json" ).status( 200 ).send(
+        {
+            "res": "OK",
+            "msg": "User login successful!",
+            "user": {
+                "webid": session.webId,
+                "username": username,
+                "photo": profile_picture,
+                "ident_prov": ident_prov,
+                "session": session,
+                "friends": friends
+            }
+        }
+    );
 });
 
-/* Ejemplo de datos a procesar: 
-{
-    "webid" : <webid>, 
-    "data" : { 
-        "friends" : [<webid1>, <webid2>, ...], 
-        "last_location": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        } 
-    } 
-} */
 /**
  * Actualiza el estado de un usuario.
  */
@@ -95,27 +122,6 @@ router.post("/users/update", async (req, res) => {
         //console.log("Añadiendo amigo al Map...");
         friends_location.set( friend_webid, friend.data );
     }
-
-    // Devolver la última ubicación de los amigos 
-    /* 
-    Ejemplo de respuesta: 
-    { 
-        "https://alvarofuente.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        },
-        "https://cuartasfabio.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        },
-        "https://ramonvilafer.inrupt.net/profile/card#me": {
-            "lat": 124, 
-            "lon": 123, 
-            "timestamp" : 917923719823
-        }
-    } */
 
     // https://stackoverflow.com/questions/37437805/convert-map-to-json-object-in-javascript
     const autoConvertMapToObject = (map) => {

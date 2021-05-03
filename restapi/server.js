@@ -2,7 +2,6 @@ const express = require("express");
 const promBundle = require("express-prom-bundle");
 const cors = require("cors");
 const api = require("./api");
-const mobile_api = require("./pod_api")
 const db = require("./database");
 
 function connect(){

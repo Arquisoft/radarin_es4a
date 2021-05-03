@@ -278,7 +278,7 @@
     }
   },
   "map":{
-    "button":"Update ubication",
+    "button":"Update location",
     "you":"You",
     "near": " is near you",
     "radius":{

@@ -27,7 +27,6 @@ function connect(){
     app.use(express.json());
 
     app.use("/api", api);
-    app.use("/api/mobile", mobile_api);
 
     app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port));
 }

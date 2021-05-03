@@ -1,6 +1,51 @@
 const express = require("express");
 const router = express.Router();
 const db = require("./database");
+const { default: data } = require('@solid/query-ldflex')
+const auth = require('solid-auth-cli');
+
+/**
+ * Obtiene los amigos de un usuario.
+ */
+router.post("/user/friends", async (req, res) => {
+    let user_webid = req.body.user_webid;
+    let response_friends = [];
+
+    const user = data[user_webid];
+
+    for await (const name of user.friends) {
+        let friend_photo = await data[name.toString()].vcard$hasPhoto;
+        friend_photo = (friend_photo == undefined) ? "empty" : friend_photo;
+
+        console.log(name.toString());
+        console.log(friend_photo.toString());
+
+        response_friends.push({
+            "webid": name.toString(),
+            "photo": friend_photo.toString()
+        })
+    }
+
+    res.type( "json" ).status( 200 ).send( response_friends );
+});
+
+/**
+ * Inicia sesión en el POD de un usuario y devuelve sus credenciales
+ * de sesión.
+ */
+router.post("/user/login", async (req, res) => {
+    let ident_prov = req.body.ident_prov;
+    let username   = req.body.username;
+    let password   = req.body.password;
+
+    auth.login({ idp: ident_prov, username: username, password: password })
+        .then( session =>  { // Got session from SOLID pod!
+            res.type( "json" ).status( 200 ).send( { "res": "KO", "msg": "Login successful!", "session": session } );
+        })
+        .catch( error => { // Ups! Something happened, maybe password mismatch?
+            res.type( "json" ).status( 401 ).send( { "res": "KO", "error": error } );
+        })
+});
 
 /* Ejemplo de datos a procesar: 
 {
@@ -14,6 +59,9 @@ const db = require("./database");
         } 
     } 
 } */
+/**
+ * Actualiza el estado de un usuario.
+ */
 router.post("/users/update", async (req, res) => {
     let webid = req.body.webid;
     let friends = req.body.data.friends;
@@ -84,14 +132,13 @@ router.post("/users/update", async (req, res) => {
 
     var response_object = autoConvertMapToObject( friends_location );
 
-    //console.log(friends_location);
-    //console.log(response_object);
-
     res.type( "json" ).status( 200 ).send( response_object );
 });
 
 
-// Registro de un usuario
+/**
+ * Registra a un usuario en el sistema.
+ */
 router.post("/users/register", async (req, res) => {
     let webid = req.body.webid;
     let data = req.body.data;
@@ -116,6 +163,9 @@ router.post("/users/register", async (req, res) => {
     }
 });
 
+/**
+ * Lista todos los usuarios de la base de datos.
+ */
 router.get("/users/list", async(req, res) => {
     let usuarios = await db.userList();
     
@@ -124,6 +174,9 @@ router.get("/users/list", async(req, res) => {
     }
 });
 
+/**
+ * Devuelve todos los usuarios activos.
+ */
 router.get("/users/currently", async(req, res) => {
     let usuarios = await db.userList();
     

@@ -17,12 +17,12 @@ services:
     depends_on:
       - mongoserver
 
-  #webapp:
-  #  build: ./webapp
-  #  ports:
-  #    - "3000:3000"
-  #  depends_on:
-  #    - restapi
+  webapp:
+    build: ./webapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - restapi
 
   prometheus:
     image: prom/prometheus

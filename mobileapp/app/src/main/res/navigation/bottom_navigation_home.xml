@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_home"
+    app:startDestination="@id/bottom_nav_my_profile">
+
+    <fragment
+        android:id="@+id/bottom_nav_my_profile"
+        android:name="es.uniovi.eii.radarines4a.ui.fragments.profile.ProfileFragment"
+        android:label="@string/my_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/bottom_nav_my_map"
+        android:name="es.uniovi.eii.radarines4a.ui.fragments.maps.MapsFragment"
+        android:label="@string/my_map"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:id="@+id/bottom_nav_my_notifications"
+        android:name="es.uniovi.eii.radarines4a.ui.fragments.notifications.NotificationsFragment"
+        android:label="@string/my_notifications"
+        tools:layout="@layout/fragment_notificaciones" />
+
+</navigation>

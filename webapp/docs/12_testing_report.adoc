@@ -8,8 +8,8 @@ Hemos utilizado el framework desarrolado por Facebook conocido como *_Jest_* y u
 image::../images/test_unitarios.png[]
 
 === Codecov
-El resultado que hemos obtenido de la cobertura de código ha sido del 48%.
-Nuestro objetivo era obtener un mínimo del 50% pero debido a los problemas con la funcionalidad y el despliegue en Heroku esto ha sido lo que hemos conseguido.
+El resultado que hemos obtenido de la cobertura de código ha sido del 50%.
+Nuestro objetivo era obtener un mínimo del 50% debido a los problemas con la funcionalidad y el despliegue en Heroku.
 
 === Code Quality
 El resultado obtenido de la calidad de código es de A. Esto se ha ido mejorando poco a poco según se ha implementado la funcionalidad siguiendo los convenios establecidos, hasta conseguir nuestro objetivo de tener una buena calidad de código.
@@ -27,6 +27,3 @@ image::../images/test_gatling_135.png[]
 
 ==== Con 244 Usuarios
 image::../images/test_gatling_244.png[]
-
-=== Pruebas de aceptación 
-

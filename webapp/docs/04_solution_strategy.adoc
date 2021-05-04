@@ -14,7 +14,7 @@
 
 - *LDFlex*: lo utilizamos para la comunicación entre usuarios mediante sus PODs.
 
-- *Solid-auth-li*: utilizamos esta librería para poder añadir amigos al POD.
+- *Solid-auth-cli*: utilizamos esta librería para poder añadir amigos al POD.
 
 - *Sparql*: se trata de un lenguaje estandarizado para la consulta de grafos.
 

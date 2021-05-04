@@ -18,6 +18,5 @@ ENV MONGO_URI=$MONGO_URI
 # Bundle app source
 # Copy every .js file on the root.
 COPY *.js ./
-ADD models ./models
 
 CMD [ "node", "server.js" ]

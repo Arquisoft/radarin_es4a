@@ -5,13 +5,13 @@ const api = require("./api");
 const db = require("./database");
 
 function connect(){
-    const mongoUri   = process.env.MONGO_URI || "mongodb://localhost:27017";
-    const serverPort = process.env.PORT || 5000;
+    const mongo_uri = process.env.MONGO_URI || "mongodb://localhost:27017";
+    const server_port = process.env.PORT || 5000;
 
     console.log("WELCOME TO SERVER.JS");
 
-    // Load database
-    db.init( mongoUri );
+    // Inicializar la BD
+    db.init( mongo_uri );
 
     const app = express();
     const metricsMiddleware = promBundle({includeMethod: true});
@@ -20,9 +20,10 @@ function connect(){
     app.use(cors());
     app.options("*", cors());
     app.use(express.json());
+
     app.use("/api", api);
 
-    app.listen(serverPort, () => console.log("Servidor iniciado. Escuchando en " + serverPort));
+    app.listen(server_port, () => console.log("Servidor iniciado. Escuchando en " + server_port));
 }
 
 setTimeout(connect, 5000);

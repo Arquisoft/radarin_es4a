@@ -22,3 +22,4 @@ Cosas mejorables en la aplicación:
 * Mejorar la interfaz en algunas vistas
 * Usar una caché entre el POD y la aplicación para mejorar el rendimiento
 * Otros bugs visuales menores
+* Nuestra aplicación solamente dispone de inicio de sesión mediante el proveedor *_Inrupt_*

@@ -1,0 +1,32 @@
+[[section-testing-report]]
+== Infrome de Tests
+
+=== Pruebas Unitarias
+Para realizar la cobertura de pruebas de nuestra aplicación web, hemos desarrollado unos test que comprueban el correcto renderizado y creación de las clases fundamentales del proyecyo.
+Hemos utilizado el framework desarrolado por Facebook conocido como *_Jest_* y una librería llamada *_"React Testing Library"_*.
+
+image::../images/test_unitarios.png[]
+
+=== Codecov
+El resultado que hemos obtenido de la cobertura de código ha sido del 48%.
+Nuestro objetivo era obtener un mínimo del 50% pero debido a los problemas con la funcionalidad y el despliegue en Heroku esto ha sido lo que hemos conseguido.
+
+=== Code Quality
+El resultado obtenido de la calidad de código es de A. Esto se ha ido mejorando poco a poco según se ha implementado la funcionalidad siguiendo los convenios establecidos, hasta conseguir nuestro objetivo de tener una buena calidad de código.
+
+=== Pruebas de carga
+Para desarrollar las pruebas de carga, decidimos usar Gatling, un marco de prueba de rendimiento y carga de código abierto, que automatiza la creación de test escritos en *_".scala"_*.
+
+Para realizar estos test hemos grabado el recorrido del uso normal de la aplicación mediante el proxy, y lo hemos replicado para la conexión de diferentes números de usuarios.
+
+==== Con 20 Usuarios
+image::../images/test_gatling_20.png[]
+
+==== Con 135 Usuarios
+image::../images/test_gatling_135.png[]
+
+==== Con 244 Usuarios
+image::../images/test_gatling_244.png[]
+
+=== Pruebas de aceptación 
+

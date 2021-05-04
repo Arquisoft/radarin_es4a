@@ -8,7 +8,7 @@ En esta sección se muestra un esquema de la infraestructura software y hardware
 image::../images/vista_despliegue.png["Diagrama de la vista de despliegue del proyecto"]
 
 .Motivación
-Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible desde los dispositivos de los usuarios, pudiendo ser estos dispositivos móviles o no (Radarín está enfocada al uso móvil). Ambos podrán acceder con un buscador web y conexión a internet. A su vez, la aplicación accederá al POD del usuario para obtener los datos necesarios y el resto de los datos se guardarán y recuperarán de la base de datos.
+Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible desde los dispositivos de los usuarios, tanto móviles como no. Ambos accederán a ella con un buscador web y conexión a internet (mediante protocolo HTTPS). A su vez, la aplicación accderá al POD del usuario para obtener los datos requeridos y demás datos se guardarán en una base de datos.
 
 === Nivel 1 de Infraestructura
 
@@ -19,3 +19,12 @@ Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible 
 - Usuarios: El dispositivo de cada usuario, ya sea un ordenador de sobremesa, un portatil, tablet o smarphone, con conexión a internet.
 - POD: Es un espacio de almacenamiento de datos personales, donde la visibilidad de estos datos está controlada por su propietario.
 
+=== Nivel 2 de Infraestructura
+
+Nuestra aplicación ha sido completamente desplegada mediante Docker. Cuando la aplicación se despliega en Heroku se crean 5 imágenes: 
+
+- Una para Webapp.
+- Una para Restapi.
+- Una para MongoServer.
+- Una para Prometeus.
+- Una para Grafana.

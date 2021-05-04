@@ -14,7 +14,7 @@
 |====================
 | Restricción | Explicación 
 | Límite de tiempo | La aplicación tendrá que estar terminada para el 4 de mayo de 2021
-| Presupuesto del proyecto | No disponemos de presupuesto, asi que los recursos son limitados.
+| Presupuesto del proyecto | No disponemos de presupuesto, asi que los recursos son limitados. Hemos encontrado problemas en el despliegue de Heroku debido a que el plan gratuito simplemente ofrece 512 Mb de RAM.
 | Testing | La aplicación será probada durante su desarrollo para asegurar su correcto funcionamiento
 | Organización del equipo | Los equipos serán de unas 6-7 personas
 |====================

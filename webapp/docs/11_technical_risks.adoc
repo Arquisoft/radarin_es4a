@@ -17,3 +17,11 @@ Cosas mejorables en la aplicación:
 
 * Penalización de rendimiento al acceder a los POD
 * Aplicación no adaptable al usar la API de Google Maps
+* Limpieza de código
+* Conseguir una mayor cobertura de código
+* Mejorar la interfaz en algunas vistas
+* Usar una caché entre el POD y la aplicación para mejorar el rendimiento
+* Otros bugs visuales menores
+* Eliminar amigos desde la aplicación móvil y recibir notificaciones.
+* Mejora de los Test e2e.
+* Nuestra aplicación solamente dispone de inicio de sesión mediante el proveedor *_Inrupt_*

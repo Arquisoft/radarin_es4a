@@ -5,10 +5,10 @@
 .Contenido
 En esta sección se muestra un esquema de la infraestructura software y hardware involucrada en el proyecto, las conexiones entre los dispositivos y el entorno de ejecución.
 
-image::../images/vista_despliegue.jpg["Diagrama de la vista de despliegue del proyecto"]
+image::../images/vista_despliegue.png["Diagrama de la vista de despliegue del proyecto"]
 
 .Motivación
-Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible desde los dispositivos de los usuarios, tanto móviles como no. Ambos accederán a ella con un buscador web y conexión a internet (mediante protocolo HTTP). A su vez, la aplicación accderá al POD del usuario para obtener los datos requeridos.
+Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible desde los dispositivos de los usuarios, tanto móviles como no. Ambos accederán a ella con un buscador web y conexión a internet (mediante protocolo HTTPS). A su vez, la aplicación accderá al POD del usuario para obtener los datos requeridos y demás datos se guardarán en una base de datos.
 
 === Nivel 1 de Infraestructura
 
@@ -19,3 +19,12 @@ Con este modelo de despliegue conseguimos que nuestra aplicación sea accesible 
 - Usuarios: El dispositivo de cada usuario, ya sea un ordenador de sobremesa, un portatil, tablet o smarphone, con conexión a internet.
 - POD: Es un espacio de almacenamiento de datos personales, donde la visibilidad de estos datos está controlada por su propietario.
 
+=== Nivel 2 de Infraestructura
+
+Nuestra aplicación ha sido completamente desplegada mediante Docker. Cuando la aplicación se despliega en Heroku se crean 5 imágenes: 
+
+- Una para Webapp.
+- Una para Restapi.
+- Una para MongoServer.
+- Una para Prometeus.
+- Una para Grafana.

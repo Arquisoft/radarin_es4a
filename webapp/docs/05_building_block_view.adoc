@@ -48,9 +48,9 @@ Nivel más bajo. Detalla la estructura interna del sistema especificando sus dis
 |===
  Componente | Responsabilidad |
  Base de datos | Proporciona la persistencia necesaria para almacenar y usar las credenciales de los usuarios. |
- Mongoose | Comunica la base de datos (MongoDB) con el Servidor HTTP, permite interactuar con la información almacenada en ella. |
+ MongoServer | Comunica la base de datos (MongoDB) con el Servidor HTTP, permite interactuar con la información almacenada en ella. |
  Servidor HTTP | Recibe las peticiones de la API REST y ejecuta los métodos adecuados en consecuencia. Permite la comunicación entre la vista y los datos. |
  Aplicación Web | Una de las variantes de la vista, basada en el framework de JS _React_ |
- Aplicación Móvil | Destinada a dispositivos móviles, basada en el framework _React Native_ |
- 
+ Aplicación Móvil | Destinada a dispositivos móviles, basada en el framework _Android Studio_ |
+ Redis | Control de la caché desde la aplicación móvil.
 |===

@@ -8,6 +8,10 @@
 | Solid | Un conjunto de funciones y procedimientos que permiten la creación de aplicaciones que acceden a las características o datos de un sistema operativo, aplicación u otro servicio. 
 | Heroku | Heroku es una plataforma como servicio que permite a los desarrolladores crear, ejecutar y operar aplicaciones completamente en la nube.
 | Pod | Los Pods de solid son donde tú almacenas tu información. Cualquier tipo de información puede ser guardada en un Pod de Solid. Una vez guardada tu controlas quien accede a tus datos.
-| Aplicación | 
-| Sistema | 
+| Timestamp | Marca de tiempo de la ubicación del usuario.
+| Amigo | Usuario de Radarín que mantiene una amistad con otro individuo de la aplicación
+| Usuario | Persona que inicia sesión en la aplicación. 
+| Administrador | Usuario de la aplicación con privilegios para editar los usuarios almacenados en la base de datos.
+| Gatling | Se trata de un framework para el desarrollo de test de carga de la aplicación.
+| Jest | Se trata de un framework para el desarrollo de test unitarios de la aplicación.
 |===

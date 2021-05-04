@@ -10,16 +10,16 @@ Se trata de un modelo conceptual que abarca todas las cuestiones del dominio del
 image::../images/dominio.png["Dominio del problema"]
 
 === Patrones de arquitectura y diseño
-Se estima que el patrón MVC será el utilizado para el desarrollo web de la aplicación, aunque por el momento se está discutiendo.
+Se utiliza el patrón MVC para el desarrollo de la aplicación.
 
-Por otro lado, el sistema móvil hará uso de la web y no se desarrollará una aplicación individual por el coste de tiempo que tendría.
+Por otro lado, el sistema móvil puede ser usado en la web, aunque existe una alternativa en una aplicación.
 
 === Experiencia de usuario
-La aplicación es un sistema de gestión de amigos y localizaciones, destinado a acercar a las personas. Mostrará un mapa donde se podrá observar los amigos que se encuentran cerca del usuario y permitirá añadir amigos para poder interactuar con ellos, entre otras funciones que se irán implementando como gestionar tus amistades, comunicarse con ellas, etc.
+La aplicación es un sistema de gestión de amigos y localizaciones, destinado a acercar a las personas. Mostrará un mapa donde se podrá observar los amigos que se encuentran cerca del usuario, permitirá añadir amigos para poder interactuar con ellos, permitirá eliminar amigos y mandarles notificaciones para quedar con ellos o como un aviso por positivo en covid-19.
 
-La interfaz desarrollada será amigable y accesible a cualquier persona, evitando que un cliente no pueda usar nuestra aplicación.
+La interfaz desarrollada será amigable y accesible a cualquier persona, consiguiendo que cualquier persona pueda tener acceso a la aplicación.
 
 === Seguridad y protección
 Es de vital importancia que la aplicación sea segura en todo momento, almacenando correctamente los datos necesarios del usuario final.
 
-Hará uso de pods siguiendo el proyecto SOLID donde cada usuario será el propietario del mismo, teniendo total control sobre sus datos. Los únicos datos que se tratará directamente la aplicación será la localización del cliente previa aprovación por su parte.
+Hará uso de pods siguiendo el proyecto SOLID donde cada usuario será el propietario del mismo, teniendo total control sobre sus datos. Los únicos datos que se tratará directamente la aplicación será la localización del cliente tras previa aprovación por su parte y una marca de tiempo con el momento en el que se ha actualizado la ubicación.

@@ -3,7 +3,7 @@
 
 El alcance del proyecto a desarrollar abarca un sitio web/móvil en el que los usuarios podrán geolocalizar a sus amigos y viceversa. Haciendo uso de SOLID para asegurar la privacidad de cada usuario (con sus respectivos PODs).
 
-La aplicación enviará un aviso cuando algún amigo se encuentre dentro de un determinado rango ("Tu amigo Pepito está a 1.7km de ti" ó "Tu amigo Pepito está a 10 minutos de ti")
+La aplicación enviará un aviso cuando algún amigo se encuentre dentro del rango elegido por el usuario, que se definirá entre 1 y 30 kilómetros.
 
 Se podrán gestionar amigos (listar, agregar, borrar).
 
@@ -11,19 +11,19 @@ Se podrán gestionar amigos (listar, agregar, borrar).
 
 === Contexto empresarial 
 
-El usuario puede guardar su información personal en su POD. El sistema podrá solamente acceder a su localización , pudiendo así la aplicación informar de los amigos que estén próximos.
+El usuario puede guardar su información personal en su POD. El sistema podrá acceder a su nombre, imagen, amigos y notificaciones pudiendo así la aplicación informar de los amigos que estén próximos.
 
-* Usuario: guarda a los amigos y recibe su ubicación
-* POD: registra los amigos, además de información personal del usuario
-* Servidor: recibe la localización del usuario
+* Usuario: da permiso de acceso a la ubicación y puede notificar al resto de usuarios.
+* POD: registra los amigos, además de información personal del usuario.
+* Servidor: recibe la localización del usuario.
 
 
 === Contexto Tecnológico
 
 Para este proyecto vamos a usar algunas tecnologías como son el caso de SOLID o de REACT. 
-La idea principal de nuestro proyecto es construir una aplicación que con la ayuda de alguna API de geolocalización
-nos permita establecer una clase de red que nos permita almacenar con que personas estuvo en contacto la persona que posee
-la aplicación, para realizar esto utilizamos SOLID para almacenar su localizacion y compartirla de forma segura.
-Utilizaremos REACT para desarrollar tanto la aplicación web como la aplicación móvil, mientras que dejamos a SOLID la parte de la comunicación.
+La idea principal de nuestro proyecto es construir una aplicación que con la ayuda de google-map-react facilite el encuentro con nuestros amigos. 
+
+El usuario almacena su ubicación con el timestamp de esta en la base de datos, mientras que el resto de datos se almacenan en el POD.
+Utilizamos REACT para desarrollar la aplicación web. La aplicación móvil se desarrolla con Android Studio, mientras que dejamos a SOLID la parte de la comunicación.
 
 image::../images/contexto_tecnologico_diagrama.png[]

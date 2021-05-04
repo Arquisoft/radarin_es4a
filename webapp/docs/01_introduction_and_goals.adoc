@@ -3,7 +3,7 @@
 
 Radarin es un sistema de geolocalización web/móvil descentralizado que pretende acercar a las personas a través de las nuevas tecnologías.
 
-El sistema provee al cliente la facilidad de localizar por posicionamiento y cercanía a los amigos que tenga agregados en la aplicación (previa aceptación por parte del otro usuario). Cuando la aplicación detecte que un amigo del usuario está dentro de cierto margen, el sistema lanzará una notificación. 
+El sistema provee al cliente la facilidad de localizar por posicionamiento y cercanía a los amigos que tenga agregados en la aplicación (previa aceptación por parte del otro usuario). Cuando la aplicación detecte que un amigo del usuario está dentro de un rango establecido por el usuario entre 1 y 30 kilómetros, el sistema lanzará una notificación. 
 
 Con esto, facilitamos el encuentro entre gente conocida priorizando la privacidad y la seguridad del sistema.
 
@@ -14,26 +14,24 @@ Radarin contempla unos requisitos mínimos de funcionamiento que pretenden ser l
 ==== Requisitos funcionales:
 - Un usuario será capaz de ver qué otros usuarios conocidos tiene cerca.
 
-- Un usuario podrá añadir a otros usuarios a su lista de amigos.
+- Un usuario podrá añadir y eliminar a otros usuarios a su lista de amigos.
 
-- El sistema ofrecerá al usuario notificaciones de amigos cerca.
+- El sistema ofrecerá al usuario notificaciones de amigos cercanos.
 
-- Cada cliente podrá gestionar y visualizar sus localizaciones.
-
-- El administrador del servicio tendrá opción de gestionar usuarios y monitorizar el estado del servidor.
+- El administrador del servicio tendrá opción de gestionar usuarios, pudiendo ver los usuarios del sistema, aquellos que estén activos (aquellos que hayan actualizado su ubicación en los últimos 15 minutos), así como banear, desbanear o eliminar usuarios del sistema y monitorizar el estado del servidor.
 
 ==== Requisitos no funcionales:
-- Soporte completo con el proyecto SOLID.
+- Soporte con el proyecto SOLID.
 
-- La aplicación estará alojada en un servidor web que únicamente almacenará localizaciones del usuario, con previa solicitud al mismo para acceder a la suya. 
+- Utilización de Inrupt cómo proveedor por defecto para la gestión del POD desde la aplicación.
 
-- Toda información que no sea una localización será almacenada en el pod del usuario.
+- La aplicación estará alojada en un servidor web que únicamente almacenará localizaciones del usuario con la marca de tiempo de la misma, con previa solicitud para acceder a la suya. 
+
+- En el POD se almacenará el nombre del usuario, su foto de perfil, la lista de sus amigos y las notificaciones que se envíen al usuario.
 
 - El servicio debe ser soportado por los dispositivos móviles de los usuarios, tomando los datos de geolocalización provenientes del smartphone.
 
-- El sistema se desplegará desde contenedores docker y utlizará el servicio en la nube heroku.
-
-- La aplicación móvil tendrá un sistema de monitorización.
+- El sistema se desplegará desde contenedores docker y utlizará el servicio en la nube Heroku.
 
 - Se deberá desarrollar pruebas unitarias, de aceptación y de carga para su ejecución automática en un servidor de integración continua.
 

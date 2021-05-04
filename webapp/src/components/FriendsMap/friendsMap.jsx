@@ -155,7 +155,7 @@ function FriendsMap( props ) {
         prueba();
         i++;
       }
-      setTimeout(prueba, 10000);
+      setTimeout(prueba, 1000);
     });
 
   return (

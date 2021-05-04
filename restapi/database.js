@@ -29,11 +29,11 @@ async function init( mongoUri ) {
     const user8 = { "webid": "https://vitusuarez.inrupt.net/profile/card#me", "data": { "lat": 43.35478446185927, "lon": -5.851294590408885, "timestamp": 1619699326 } };
 
     const userAdmin = { "webid": "https://uo271397.inrupt.net/profile/card#me" };
-    const pruebaBan = { "webid": "prueba" };
+    //const pruebaBan = { "webid": "prueba" };
     
     await users.insertMany([user1, user2, user4, user5, user6, user7, user8]);
     await admin.insertOne(userAdmin);
-    await bans.insertOne(pruebaBan);
+    //await bans.insertOne(pruebaBan);
 
     isConnected = true;
 }
@@ -87,15 +87,6 @@ async function isBanned(webid) {
     return bans.findOne({
         "webid": webid
     });
-3 conflicting files
-LoginActivity.java
-...es4a/ui/activities/LoginActivity.java
-api.js
-restapi/api.js
-database.js
-restapi/database.js
-restapi/database.js Resolved
-
 }
 
 async function updateUser(webid, data) {

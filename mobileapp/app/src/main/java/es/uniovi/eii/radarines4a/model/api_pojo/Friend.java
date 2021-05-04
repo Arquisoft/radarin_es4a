@@ -12,9 +12,6 @@ public class Friend {
     @SerializedName("photo")
     @Expose
     private String photo;
-    @SerializedName("location")
-    @Expose
-    private Location location;
 
     public String getWebid() {
         return webid;
@@ -30,14 +27,6 @@ public class Friend {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
 }

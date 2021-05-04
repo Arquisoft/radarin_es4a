@@ -13,9 +13,6 @@ public class User {
     @SerializedName("username")
     @Expose
     private String username;
-    @SerializedName("photo")
-    @Expose
-    private String photo;
     @SerializedName("ident_prov")
     @Expose
     private String identProv;
@@ -42,14 +39,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getIdentProv() {
         return identProv;
     }
@@ -73,4 +62,5 @@ public class User {
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
     }
+
 }
